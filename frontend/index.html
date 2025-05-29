@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Model Updates Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Color System - Neutral tones with accent colors */
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --border-light: rgba(0, 0, 0, 0.06);
+            
+            /* Company accent colors */
+            --accent-openai: #74aa9c;
+            --accent-anthropic: #d4a574;
+            --accent-google: #4285f4;
+            --accent-meta: #0084ff;
+            --accent-microsoft: #00bcf2;
+            --accent-deepseek: #9b59b6;
+            --accent-cohere: #FF6B6B;
+            --accent-stability: #A8E6CF;
+            --accent-deepmind: #34495e;
+            
+            /* Spacing System */
+            --space-4: 4px;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --space-40: 40px;
+            --space-48: 48px;
+            --space-64: 64px;
+            
+            /* Typography */
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'SF Mono', Monaco, 'Inconsolata', 'Fira Code', monospace;
+            
+            /* Font sizes */
+            --text-xs: 12px;
+            --text-sm: 14px;
+            --text-base: 16px;
+            --text-lg: 20px;
+            --text-xl: 24px;
+            --text-2xl: 32px;
+            --text-3xl: 48px;
+            
+            /* Line heights */
+            --leading-tight: 1.25;
+            --leading-normal: 1.5;
+            --leading-relaxed: 1.75;
+            
+            /* Layout */
+            --sidebar-width: 320px;
+            --navbar-height: 80px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.04), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.04), 0 10px 10px rgba(0, 0, 0, 0.04);
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 200ms ease;
+            --transition-slow: 300ms ease;
+        }
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --bg-tertiary: #2a2a2a;
+                --text-primary: #ffffff;
+                --text-secondary: #a0a0a0;
+                --text-tertiary: #707070;
+                --border-light: rgba(255, 255, 255, 0.08);
+                --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.3);
+                --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.3);
+                --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.25);
+                --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        /* Manual dark mode override */
+        body.dark-mode {
+            --bg-primary: #0a0a0a !important;
+            --bg-secondary: #1a1a1a !important;
+            --bg-tertiary: #2a2a2a !important;
+            --text-primary: #ffffff !important;
+            --text-secondary: #a0a0a0 !important;
+            --text-tertiary: #707070 !important;
+            --border-light: rgba(255, 255, 255, 0.08) !important;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.25) !important;
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        body:not(.dark-mode) {
+            --bg-primary: #fafafa !important;
+            --bg-secondary: #ffffff !important;
+            --bg-tertiary: #f5f5f5 !important;
+            --text-primary: #1a1a1a !important;
+            --text-secondary: #666666 !important;
+            --text-tertiary: #999999 !important;
+            --border-light: rgba(0, 0, 0, 0.06) !important;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: var(--text-base);
+            line-height: var(--leading-normal);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: var(--leading-tight);
+        }
+
+        h1 { font-size: var(--text-3xl); }
+        h2 { font-size: var(--text-2xl); }
+        h3 { font-size: var(--text-xl); }
+        h4 { font-size: var(--text-lg); }
+
+        p {
+            line-height: var(--leading-relaxed);
+            max-width: 100ch;
+        }
+
+        /* Navigation bar */
+        .navbar {
+            height: var(--navbar-height);
+            background: var(--bg-secondary);
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 var(--space-32);
+        }
+
+        .nav-brand {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        /* Search field */
+        .search-wrapper {
+            margin-left: auto;
+            position: relative;
+            margin-right: var(--space-16);
+        }
+
+        .search-input {
+            width: 320px;
+            height: 44px;
+            padding: 0 var(--space-16) 0 var(--space-48);
+            background: var(--bg-tertiary);
+            border: none;
+            border-radius: 22px;
+            font-size: var(--text-sm);
+            transition: var(--transition-base);
+            outline: none;
+        }
+
+        .search-input:focus {
+            box-shadow: 0 0 0 4px rgba(116, 170, 156, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: var(--space-16);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: var(--text-tertiary);
+        }
+
+        /* Buttons */
+        .refresh-btn, .theme-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-base);
+            margin-right: var(--space-16);
+        }
+
+        .refresh-btn:hover, .theme-toggle:hover {
+            background: var(--accent-openai);
+            color: white;
+        }
+
+        .refresh-btn:hover {
+            transform: rotate(180deg);
+        }
+
+        .refresh-btn.loading {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Layout */
+        .app-container {
+            display: flex;
+            height: 100vh;
+            padding-top: var(--navbar-height);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-secondary);
+            padding: var(--space-32);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar-section {
+            margin-bottom: var(--space-48);
+        }
+
+        .sidebar-title {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-20);
+        }
+
+        /* Navigation list */
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: var(--space-8);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-12);
+            padding: var(--space-12) var(--space-16);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: var(--transition-base);
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .nav-link.active {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .company-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .company-indicator.openai { background: var(--accent-openai); }
+        .company-indicator.anthropic { background: var(--accent-anthropic); }
+        .company-indicator.google, .company-indicator.googleresearch { background: var(--accent-google); }
+        .company-indicator.meta, .company-indicator.metaairesearch { background: var(--accent-meta); }
+        .company-indicator.microsoft, .company-indicator.awsmachinelearning { background: var(--accent-microsoft); }
+        .company-indicator.deepseek { background: var(--accent-deepseek); }
+        .company-indicator.cohere { background: var(--accent-cohere); }
+        .company-indicator.stabilityai { background: var(--accent-stability); }
+        .company-indicator.deepmind { background: var(--accent-deepmind); }
+
+        .nav-count {
+            margin-left: auto;
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
+        }
+
+        /* Date filter */
+        .date-filter {
+            margin-top: var(--space-48);
+            padding-top: var(--space-32);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .slider {
+            width: 100%;
+            height: 4px;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+            margin: var(--space-24) 0;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .date-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            padding: var(--space-48);
+            overflow-y: auto;
+            background: var(--bg-primary);
+        }
+
+        /* Cards grid */
+        .cards-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-24);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Update card */
+        .update-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: var(--space-24);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-base);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-12);
+            border-left: 4px solid transparent;
+        }
+
+        .update-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        /* Add colored left border based on company */
+        .update-card[data-company="openai"] { border-left-color: var(--accent-openai); }
+        .update-card[data-company="anthropic"] { border-left-color: var(--accent-anthropic); }
+        .update-card[data-company="google"], .update-card[data-company="googleresearch"] { border-left-color: var(--accent-google); }
+        .update-card[data-company="meta"], .update-card[data-company="metaairesearch"] { border-left-color: var(--accent-meta); }
+        .update-card[data-company="microsoft"], .update-card[data-company="awsmachinelearning"] { border-left-color: var(--accent-microsoft); }
+        .update-card[data-company="deepseek"] { border-left-color: var(--accent-deepseek); }
+        .update-card[data-company="cohere"] { border-left-color: var(--accent-cohere); }
+        .update-card[data-company="stabilityai"] { border-left-color: var(--accent-stability); }
+        .update-card[data-company="deepmind"] { border-left-color: var(--accent-deepmind); }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-16);
+        }
+
+        .company-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+            padding: var(--space-8) var(--space-12);
+            background: var(--bg-tertiary);
+            border-radius: 20px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: capitalize;
+            letter-spacing: 0.05em;
+        }
+
+        .update-date {
+            font-size: var(--text-sm);
+            color: var(--text-tertiary);
+        }
+
+        .update-title {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            line-height: var(--leading-tight);
+            margin: var(--space-8) 0;
+        }
+
+        .update-description {
+            color: var(--text-secondary);
+            line-height: var(--leading-relaxed);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            padding-top: var(--space-20);
+            display: flex;
+            gap: var(--space-16);
+        }
+
+        .card-action {
+            padding: var(--space-12) var(--space-20);
+            background: var(--bg-tertiary);
+            border: none;
+            border-radius: 8px;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-base);
+            color: var(--text-primary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-8);
+        }
+
+        .card-action:hover {
+            background: var(--text-primary);
+            color: var(--bg-secondary);
+        }
+
+        /* Type badge */
+        .type-badge {
+            padding: var(--space-4) var(--space-8);
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+        }
+
+        .type-badge.research {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .type-badge.blog {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        /* Loading state */
+        .loading-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--bg-tertiary);
+            border-top-color: var(--accent-openai);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: var(--space-64);
+            color: var(--text-tertiary);
+        }
+
+        .empty-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto var(--space-24);
+            opacity: 0.2;
+        }
+
+        /* Detail modal */
+        .detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-48);
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-base);
+        }
+
+        .detail-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .detail-content {
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: var(--space-48);
+            box-shadow: var(--shadow-xl);
+            transform: scale(0.9);
+            transition: var(--transition-base);
+        }
+
+        .detail-modal.active .detail-content {
+            transform: scale(1);
+        }
+
+        .detail-close {
+            position: absolute;
+            top: var(--space-24);
+            right: var(--space-24);
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: var(--bg-tertiary);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-base);
+        }
+
+        .detail-close:hover {
+            background: var(--text-primary);
+            color: var(--bg-secondary);
+        }
+
+        /* Technical details */
+        .tech-details {
+            margin-top: var(--space-32);
+            padding: var(--space-24);
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+        }
+
+        .tech-row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .tech-row:last-child {
+            border-bottom: none;
+        }
+
+        .tech-label {
+            font-size: var(--text-sm);
+            color: var(--text-tertiary);
+        }
+
+        .tech-value {
+            font-size: var(--text-sm);
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                top: var(--navbar-height);
+                bottom: 0;
+                z-index: 90;
+                transition: var(--transition-base);
+                box-shadow: var(--shadow-xl);
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .main-content {
+                padding: var(--space-24);
+            }
+
+            .cards-grid {
+                max-width: 100%;
+                gap: var(--space-16);
+            }
+            
+            .update-card {
+                padding: var(--space-20);
+            }
+        }
+
+        /* Toast notifications */
+        .toast-container {
+            position: fixed;
+            bottom: var(--space-24);
+            right: var(--space-24);
+            z-index: 300;
+        }
+
+        .toast {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: var(--space-16) var(--space-24);
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: var(--space-12);
+            min-width: 250px;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            gap: var(--space-12);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.error {
+            border-left: 4px solid #EF4444;
+        }
+
+        .toast.success {
+            border-left: 4px solid var(--accent-openai);
+        }
+
+        .toast.info {
+            border-left: 4px solid var(--accent-google);
+        }
+
+        .theme-icon {
+            transition: var(--transition-base);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">AI Updates Tracker</div>
+        
+        <div class="search-wrapper">
+            <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+            </svg>
+            <input type="text" class="search-input" placeholder="Search updates..." id="searchInput">
+        </div>
+        
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+            <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+        </button>
+        
+        <button class="refresh-btn" id="refreshBtn" title="Fetch new updates">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+            </svg>
+        </button>
+    </nav>
+
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">Companies</h2>
+                <nav>
+                    <ul class="nav-list" id="companyNav">
+                        <li class="nav-item">
+                            <button class="nav-link active" data-company="all">
+                                All Updates
+                                <span class="nav-count" id="count-all">0</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="date-filter">
+                <h3 class="sidebar-title">Date Range</h3>
+                <input type="range" class="slider" id="dateSlider" min="1" max="30" value="30">
+                <div class="date-labels">
+                    <span>Today</span>
+                    <span id="dateRangeLabel">30 days</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="loading-container" id="loadingState">
+                <div class="spinner"></div>
+            </div>
+            
+            <div class="cards-grid" id="cardsGrid" style="display: none;">
+                <!-- Cards will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <svg class="empty-icon" viewBox="0 0 64 64" fill="currentColor">
+                    <path d="M32 8C18.745 8 8 18.745 8 32s10.745 24 24 24 24-10.745 24-24S45.255 8 32 8zm-4 36h8v-8h-8v8zm0-12h8V20h-8v12z"/>
+                </svg>
+                <p>No updates found matching your criteria</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="detail-modal" id="detailModal">
+        <div class="detail-content">
+            <button class="detail-close" id="closeModal">×</button>
+            <div id="modalContent">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // Configuration
+        const API_BASE_URL = 'http://localhost:3000/api';  // Updated to backend port
+        
+        // Data storage
+        let updates = [];
+        let isLoading = false;
+        let stats = {};
+
+        // Company metadata with display names
+        const companyMeta = {
+            'openai': { name: 'OpenAI', color: 'openai' },
+            'anthropic': { name: 'Anthropic', color: 'anthropic' },
+            'google': { name: 'Google', color: 'google' },
+            'googleresearch': { name: 'Google Research', color: 'google' },
+            'meta': { name: 'Meta', color: 'meta' },
+            'metaairesearch': { name: 'Meta AI Research', color: 'meta' },
+            'microsoft': { name: 'Microsoft', color: 'microsoft' },
+            'awsmachinelearning': { name: 'AWS Machine Learning', color: 'microsoft' },
+            'deepseek': { name: 'DeepSeek', color: 'deepseek' },
+            'cohere': { name: 'Cohere', color: 'cohere' },
+            'stabilityai': { name: 'Stability AI', color: 'stability' },
+            'deepmind': { name: 'DeepMind', color: 'deepmind' }
+        };
+
+        // State
+        let currentFilter = 'all';
+        let searchQuery = '';
+        let dateRange = 30;
+        let filteredUpdates = [...updates];
+
+        // Fetch updates from API
+        async function fetchUpdates() {
+            try {
+                showLoading(true);
+                const params = new URLSearchParams({
+                    company: currentFilter,
+                    dateRange: dateRange,
+                    search: searchQuery
+                });
+                
+                const response = await fetch(`${API_BASE_URL}/updates?${params}`);
+                if (!response.ok) throw new Error('Failed to fetch updates');
+                
+                const data = await response.json();
+                updates = data.updates || [];
+                
+                // Sort by date (newest first)
+                updates.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                filterUpdates();
+                await fetchStats();
+            } catch (error) {
+                console.error('Error fetching updates:', error);
+                showToast('Failed to fetch updates', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Fetch statistics
+        async function fetchStats() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/stats`);
+                if (!response.ok) throw new Error('Failed to fetch stats');
+                
+                const data = await response.json();
+                stats = data.stats || {};
+                updateSidebar();
+            } catch (error) {
+                console.error('Error fetching stats:', error);
+            }
+        }
+
+        // Trigger manual update fetch
+        async function triggerFetch() {
+            try {
+                const btn = document.getElementById('refreshBtn');
+                btn.classList.add('loading');
+                showToast('Fetching new updates...', 'info');
+                
+                const response = await fetch(`${API_BASE_URL}/fetch-updates`, {
+                    method: 'POST'
+                });
+                
+                if (!response.ok) throw new Error('Failed to trigger fetch');
+                
+                const result = await response.json();
+                showToast(`Fetched ${result.saved} new updates!`, 'success');
+                
+                // Refresh the display
+                await fetchUpdates();
+            } catch (error) {
+                console.error('Error triggering fetch:', error);
+                showToast('Failed to fetch new updates', 'error');
+            } finally {
+                document.getElementById('refreshBtn').classList.remove('loading');
+            }
+        }
+
+        // Update sidebar with company counts
+        function updateSidebar() {
+            const nav = document.getElementById('companyNav');
+            const allButton = nav.querySelector('[data-company="all"]');
+            nav.querySelectorAll('.nav-item:not(:first-child)').forEach(item => item.remove());
+            
+            // Update total count
+            document.getElementById('count-all').textContent = stats.total || 0;
+            
+            // Group companies by their base name
+            const companies = {};
+            Object.entries(stats).forEach(([key, count]) => {
+                if (key !== 'total' && count > 0) {
+                    const meta = companyMeta[key] || { name: key, color: 'openai' };
+                    if (!companies[meta.name]) {
+                        companies[meta.name] = { key, count, meta };
+                    } else {
+                        companies[meta.name].count += count;
+                    }
+                }
+            });
+            
+            // Sort companies by count
+            const sortedCompanies = Object.values(companies).sort((a, b) => b.count - a.count);
+            
+            sortedCompanies.forEach(({ key, count, meta }) => {
+                const li = document.createElement('li');
+                li.className = 'nav-item';
+                li.innerHTML = `
+                    <button class="nav-link" data-company="${key}">
+                        <span class="company-indicator ${meta.color}"></span>
+                        ${meta.name}
+                        <span class="nav-count">${count}</span>
+                    </button>
+                `;
+                nav.appendChild(li);
+            });
+        }
+
+        // Filter updates
+        function filterUpdates() {
+            filteredUpdates = updates;
+            renderCards();
+        }
+
+        // Render cards
+        function renderCards() {
+            const grid = document.getElementById('cardsGrid');
+            const empty = document.getElementById('emptyState');
+            
+            if (filteredUpdates.length === 0) {
+                grid.style.display = 'none';
+                empty.style.display = 'block';
+                return;
+            }
+            
+            grid.style.display = 'flex';
+            empty.style.display = 'none';
+            
+            grid.innerHTML = filteredUpdates.map(update => {
+                const meta = companyMeta[update.company] || { name: update.company, color: 'openai' };
+                return `
+                    <article class="update-card" data-id="${update.id}" data-company="${update.company}">
+                        <div class="card-header">
+                            <div style="display: flex; align-items: center; gap: var(--space-12);">
+                                <div class="company-badge">
+                                    <span class="company-indicator ${meta.color}"></span>
+                                    ${meta.name}
+                                </div>
+                                <span class="type-badge ${update.type}">${update.type}</span>
+                            </div>
+                            <time class="update-date">${formatDate(update.date)}</time>
+                        </div>
+                        
+                        <h3 class="update-title">${update.title}</h3>
+                        <p class="update-description">${update.description}</p>
+                        
+                        <div class="card-footer">
+                            <a href="${update.link}" target="_blank" class="card-action">
+                                View Article
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        // Show loading state
+        function showLoading(show) {
+            isLoading = show;
+            document.getElementById('loadingState').style.display = show ? 'flex' : 'none';
+            document.getElementById('cardsGrid').style.display = show ? 'none' : 'flex';
+        }
+
+        // Format date
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const now = new Date();
+            const diff = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+            
+            if (diff === 0) return 'Today';
+            if (diff === 1) return 'Yesterday';
+            if (diff < 7) return `${diff} days ago`;
+            
+            return date.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric',
+                year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
+            });
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Company filter
+            document.addEventListener('click', (e) => {
+                if (e.target.matches('.nav-link')) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    e.target.classList.add('active');
+                    currentFilter = e.target.dataset.company;
+                    fetchUpdates();
+                }
+                
+                if (e.target.matches('#closeModal') || e.target.matches('.detail-modal')) {
+                    document.getElementById('detailModal').classList.remove('active');
+                }
+            });
+            
+            // Search
+            let searchTimeout;
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    searchQuery = e.target.value;
+                    fetchUpdates();
+                }, 300);
+            });
+            
+            // Date range
+            const slider = document.getElementById('dateSlider');
+            const label = document.getElementById('dateRangeLabel');
+            slider.addEventListener('input', (e) => {
+                dateRange = parseInt(e.target.value);
+                label.textContent = dateRange === 1 ? '1 day' : `${dateRange} days`;
+                fetchUpdates();
+            });
+            
+            // Refresh button
+            document.getElementById('refreshBtn').addEventListener('click', triggerFetch);
+        }
+
+        // Theme toggle functionality
+        function initTheme() {
+            const themeToggle = document.getElementById('themeToggle');
+            const moonIcon = document.querySelector('.moon-icon');
+            const sunIcon = document.querySelector('.sun-icon');
+            
+            // Check for saved theme preference or default to system preference
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            let isDarkMode = savedTheme ? savedTheme === 'dark' : systemPrefersDark;
+            
+            // Apply initial theme
+            updateTheme(isDarkMode);
+            
+            // Toggle event listener
+            themeToggle.addEventListener('click', () => {
+                isDarkMode = !isDarkMode;
+                updateTheme(isDarkMode);
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            });
+            
+            // Update theme function
+            function updateTheme(dark) {
+                if (dark) {
+                    document.body.classList.add('dark-mode');
+                    moonIcon.style.display = 'none';
+                    sunIcon.style.display = 'block';
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    moonIcon.style.display = 'block';
+                    sunIcon.style.display = 'none';
+                }
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    isDarkMode = e.matches;
+                    updateTheme(isDarkMode);
+                }
+            });
+        }
+
+        // Initialize
+        function init() {
+            setupEventListeners();
+            initTheme();
+            fetchUpdates();
+        }
+
+        // Start app when DOM is ready
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html> 

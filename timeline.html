@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Model Updates Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">AI Updates</div>
+        
+        <div class="search-wrapper">
+            <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+            </svg>
+            <input type="text" class="search-input" placeholder="Search updates..." id="searchInput">
+        </div>
+        
+        <button class="refresh-btn" id="refreshBtn" title="Fetch new updates">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+            </svg>
+        </button>
+    </nav>
+
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">Companies</h2>
+                <nav>
+                    <ul class="nav-list" id="companyNav">
+                        <li class="nav-item">
+                            <button class="nav-link active" data-company="all">
+                                All Updates
+                                <span class="nav-count" id="count-all">0</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="date-filter">
+                <h3 class="sidebar-title">Date Range</h3>
+                <input type="range" class="slider" id="dateSlider" min="1" max="30" value="30">
+                <div class="date-labels">
+                    <span>Today</span>
+                    <span id="dateRangeLabel">30 days</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="loading-container" id="loadingState">
+                <div class="spinner"></div>
+            </div>
+            
+            <div class="cards-grid" id="cardsGrid" style="display: none;">
+                <!-- Cards will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <svg class="empty-icon" viewBox="0 0 64 64" fill="currentColor">
+                    <path d="M32 8C18.745 8 8 18.745 8 32s10.745 24 24 24 24-10.745 24-24S45.255 8 32 8zm-4 36h8v-8h-8v8zm0-12h8V20h-8v12z"/>
+                </svg>
+                <p>No updates found matching your criteria</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="detail-modal" id="detailModal">
+        <div class="detail-content">
+            <button class="detail-close" id="closeModal">×</button>
+            <div id="modalContent">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // Data storage
+        let updates = [];
+        let isLoading = false;
+
+        // Company metadata
+        const companies = {
+            'openai': { name: 'OpenAI', count: 0 },
+            'anthropic': { name: 'Anthropic', count: 0 },
+            'google': { name: 'Google', count: 0 },
+            'meta': { name: 'Meta', count: 0 },
+            'microsoft': { name: 'Microsoft', count: 0 },
+            'deepseek': { name: 'DeepSeek', count: 0 }
+        };
+
+        // State
+        let currentFilter = 'all';
+        let searchQuery = '';
+        let dateRange = 30;
+        let filteredUpdates = [...updates];
+
+        // Demo data
+        function getDemoData() {
+            return [
+                {
+                    id: '1',
+                    company: 'anthropic',
+                    date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    title: 'Claude 3.5 Sonnet Released',
+                    description: 'Anthropic announces Claude 3.5 Sonnet with significant improvements in reasoning capabilities and extended context windows up to 200K tokens.',
+                    content: 'Anthropic has released Claude 3.5 Sonnet, the latest iteration of their flagship AI model.',
+                    link: 'https://anthropic.com/claude-3-5-sonnet',
+                    details: {
+                        'Model Size': '175B parameters',
+                        'Context Window': '200,000 tokens'
+                    }
+                },
+                {
+                    id: '2',
+                    company: 'openai',
+                    date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    title: 'GPT-4 Turbo with Vision Now Available',
+                    description: 'OpenAI has released GPT-4 Turbo with enhanced vision capabilities, allowing users to analyze images and generate detailed descriptions with improved accuracy.',
+                    content: 'OpenAI has begun rolling out GPT-4 Turbo with Vision to all users.',
+                    link: 'https://openai.com/gpt-4-turbo-vision',
+                    details: {
+                        'Architecture': 'Transformer++',
+                        'Status': 'Generally Available'
+                    }
+                },
+                {
+                    id: '3',
+                    company: 'google',
+                    date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    title: 'Google Gemini Pro API Updates',
+                    description: 'Google has updated the Gemini Pro API with new multimodal capabilities and improved performance for enterprise applications.',
+                    content: 'Google releases major updates to Gemini Pro API.',
+                    link: 'https://ai.google.dev/gemini-api',
+                    details: {
+                        'API Version': '2.0',
+                        'Multimodal': 'Text, Images, Audio'
+                    }
+                },
+                {
+                    id: '4',
+                    company: 'microsoft',
+                    date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    title: 'Microsoft Copilot Enterprise Launch',
+                    description: 'Microsoft launches Copilot for Enterprise with enhanced security features and integration across Microsoft 365 applications.',
+                    content: 'Microsoft officially launches Copilot Enterprise.',
+                    link: 'https://microsoft.com/copilot-enterprise',
+                    details: {
+                        'Enterprise Features': 'Advanced Security',
+                        'Integration': 'Office 365 Suite'
+                    }
+                }
+            ];
+        }
+
+        // Initialize with demo data
+        function initializeData() {
+            updates = getDemoData();
+        }
+
+        // Count updates per company
+        function countUpdates() {
+            Object.keys(companies).forEach(key => {
+                companies[key].count = 0;
+            });
+
+            updates.forEach(update => {
+                if (companies[update.company]) {
+                    companies[update.company].count++;
+                }
+            });
+            document.getElementById('count-all').textContent = updates.length;
+        }
+
+        // Render sidebar
+        function renderSidebar() {
+            const nav = document.getElementById('companyNav');
+            const allButton = nav.querySelector('[data-company="all"]');
+            nav.querySelectorAll('.nav-item:not(:first-child)').forEach(item => item.remove());
+            
+            Object.entries(companies).forEach(([key, company]) => {
+                const li = document.createElement('li');
+                li.className = 'nav-item';
+                li.innerHTML = `
+                    <button class="nav-link" data-company="${key}">
+                        <span class="company-indicator ${key}"></span>
+                        ${company.name}
+                        <span class="nav-count">${company.count || 0}</span>
+                    </button>
+                `;
+                nav.appendChild(li);
+            });
+        }
+
+        // Filter updates
+        function filterUpdates() {
+            filteredUpdates = updates.filter(update => {
+                if (currentFilter !== 'all' && update.company !== currentFilter) return false;
+                
+                if (searchQuery) {
+                    const query = searchQuery.toLowerCase();
+                    if (!update.title.toLowerCase().includes(query) &&
+                        !update.description.toLowerCase().includes(query)) return false;
+                }
+                
+                const updateDate = new Date(update.date);
+                const cutoff = new Date();
+                cutoff.setDate(cutoff.getDate() - dateRange);
+                if (updateDate < cutoff) return false;
+                
+                return true;
+            });
+            
+            renderCards();
+        }
+
+        // Render cards
+        function renderCards() {
+            const grid = document.getElementById('cardsGrid');
+            const empty = document.getElementById('emptyState');
+            
+            if (filteredUpdates.length === 0) {
+                grid.style.display = 'none';
+                empty.style.display = 'block';
+                return;
+            }
+            
+            grid.style.display = 'grid';
+            empty.style.display = 'none';
+            
+            grid.innerHTML = filteredUpdates.map(update => `
+                <article class="update-card" data-id="${update.id}">
+                    <div class="card-header">
+                        <div class="company-badge">
+                            <span class="company-indicator ${update.company}"></span>
+                            ${companies[update.company]?.name || update.company}
+                        </div>
+                        <time class="update-date">${formatDate(update.date)}</time>
+                    </div>
+                    
+                    <h3 class="update-title">${update.title}</h3>
+                    <p class="update-description">${update.description}</p>
+                    
+                    <div class="card-footer">
+                        <button class="card-action" data-id="${update.id}">
+                            View Details
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // Show detail modal
+        function showDetail(id) {
+            const update = updates.find(u => u.id === id);
+            if (!update) return;
+            
+            const modal = document.getElementById('detailModal');
+            const content = document.getElementById('modalContent');
+            
+            let detailsHtml = '';
+            if (update.details && Object.keys(update.details).length > 0) {
+                detailsHtml = Object.entries(update.details)
+                    .map(([label, value]) => `
+                        <div class="tech-row">
+                            <span class="tech-label">${label}</span>
+                            <span class="tech-value">${value}</span>
+                        </div>
+                    `).join('');
+            }
+            
+            content.innerHTML = `
+                <div class="card-header">
+                    <div class="company-badge">
+                        <span class="company-indicator ${update.company}"></span>
+                        ${companies[update.company]?.name || update.company}
+                    </div>
+                    <time class="update-date">${formatDate(update.date)}</time>
+                </div>
+                
+                <h2 style="margin: var(--space-24) 0;">${update.title}</h2>
+                <p style="color: var(--text-secondary); line-height: var(--leading-relaxed);">
+                    ${update.content || update.description}
+                </p>
+                
+                ${detailsHtml ? `
+                    <div class="tech-details">
+                        <h3 class="sidebar-title" style="margin-bottom: var(--space-16);">Technical Details</h3>
+                        ${detailsHtml}
+                    </div>
+                ` : ''}
+                
+                <div style="margin-top: var(--space-32); display: flex; gap: var(--space-16);">
+                    <a href="${update.link}" target="_blank" class="card-action" style="text-decoration: none;">
+                        Read Full Article
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M10.604 1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.75.75 0 01-1.06-1.06l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1zM3.75 2A1.75 1.75 0 002 3.75v8.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 12.25v-3.5a.75.75 0 00-1.5 0v3.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-8.5a.25.25 0 01.25-.25h3.5a.75.75 0 000-1.5h-3.5z"/>
+                        </svg>
+                    </a>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+        }
+
+        // Format date
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const now = new Date();
+            const diff = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+            
+            if (diff === 0) return 'Today';
+            if (diff === 1) return 'Yesterday';
+            if (diff < 7) return `${diff} days ago`;
+            
+            return date.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric',
+                year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            document.addEventListener('click', (e) => {
+                if (e.target.matches('.nav-link')) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    e.target.classList.add('active');
+                    currentFilter = e.target.dataset.company;
+                    filterUpdates();
+                }
+                
+                if (e.target.matches('.card-action')) {
+                    showDetail(e.target.dataset.id);
+                }
+                
+                if (e.target.matches('#closeModal') || e.target.matches('.detail-modal')) {
+                    document.getElementById('detailModal').classList.remove('active');
+                }
+            });
+            
+            document.querySelector('.detail-content').addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+            
+            let searchTimeout;
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    searchQuery = e.target.value;
+                    filterUpdates();
+                }, 300);
+            });
+            
+            const slider = document.getElementById('dateSlider');
+            const label = document.getElementById('dateRangeLabel');
+            slider.addEventListener('input', (e) => {
+                dateRange = parseInt(e.target.value);
+                label.textContent = dateRange === 1 ? '1 day' : `${dateRange} days`;
+                filterUpdates();
+            });
+            
+            document.getElementById('refreshBtn').addEventListener('click', () => {
+                currentFilter = 'all';
+                searchQuery = '';
+                dateRange = 30;
+                document.getElementById('searchInput').value = '';
+                document.getElementById('dateSlider').value = '30';
+                document.getElementById('dateRangeLabel').textContent = '30 days';
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                document.querySelector('[data-company="all"]').classList.add('active');
+                filterUpdates();
+            });
+        }
+
+        // Initialize
+        function init() {
+            try {
+                initializeData();
+                countUpdates();
+                renderSidebar();
+                setupEventListeners();
+                filterUpdates();
+            } catch (error) {
+                console.error('Initialization error:', error);
+            } finally {
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('cardsGrid').style.display = 'grid';
+            }
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html> 

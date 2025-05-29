@@ -1,0 +1,82 @@
+{
+  "rss_feeds": {
+    "cohere": {
+      "url": "https://txt.cohere.ai/rss/",
+      "name": "Cohere",
+      "active": true
+    },
+    "stability": {
+      "url": "https://stability.ai/blog?format=rss",
+      "name": "Stability AI",
+      "active": true
+    },
+    "google_research": {
+      "url": "https://research.google/blog/rss",
+      "name": "Google Research",
+      "active": true
+    },
+    "meta_research": {
+      "url": "https://research.fb.com/feed",
+      "name": "Meta AI Research",
+      "active": true
+    },
+    "aws_ml": {
+      "url": "https://aws.amazon.com/blogs/machine-learning/feed",
+      "name": "AWS Machine Learning",
+      "active": true
+    }
+  },
+  "scraping_targets": {
+    "anthropic": {
+      "url": "https://www.anthropic.com/news",
+      "name": "Anthropic",
+      "selectors": {
+        "container": "article, div[class*='card'], div[class*='post']",
+        "title": "h2, h3",
+        "date": "time, span[class*='date']",
+        "link": "a[href*='/news/']"
+      }
+    },
+    "openai": {
+      "url": "https://openai.com/blog",
+      "name": "OpenAI",
+      "selectors": {
+        "container": "article, div[class*='post']",
+        "title": "h2, h3",
+        "date": "time",
+        "link": "a[href*='/blog/']"
+      }
+    },
+    "deepmind": {
+      "url": "https://deepmind.google/discover/blog/",
+      "name": "DeepMind",
+      "selectors": {
+        "container": "article",
+        "title": "h2",
+        "date": "time",
+        "link": "a"
+      }
+    }
+  },
+  "arxiv_queries": {
+    "companies": {
+      "openai": ["OpenAI", "GPT", "ChatGPT"],
+      "anthropic": ["Anthropic", "Claude"],
+      "deepmind": ["DeepMind", "Google DeepMind"],
+      "google": ["Google Research", "Google Brain"],
+      "meta": ["Meta AI", "Facebook AI Research", "FAIR"],
+      "microsoft": ["Microsoft Research"]
+    },
+    "categories": ["cs.AI", "cs.LG", "cs.CL"]
+  },
+  "social_media": {
+    "twitter_handles": {
+      "sama": "Sam Altman",
+      "DarioAmodei": "Dario Amodei",
+      "sundarpichai": "Sundar Pichai",
+      "satyanadella": "Satya Nadella",
+      "ylecun": "Yann LeCun",
+      "demishassabis": "Demis Hassabis"
+    }
+  }
+} 
