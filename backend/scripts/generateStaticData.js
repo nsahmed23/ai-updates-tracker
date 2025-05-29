@@ -1,7 +1,8 @@
-import { writeFile } from 'fs/promises';
+import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { triggerFetch } from './fetchUpdates.js';
+import { initializeDatabase, getUpdates, getStats } from './utils/database.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,21 +11,29 @@ async function generateStaticData() {
   console.log('🔄 Generating static data...');
   
   try {
+    // Initialize database first
+    await initializeDatabase();
+    
     // Fetch fresh data
-    const updates = await triggerFetch();
+    await triggerFetch();
+    
+    // Get all updates from database
+    const updates = await getUpdates();
+    const stats = await getStats();
     
     // Create data structure
     const data = {
       updates: updates || [],
-      lastUpdated: new Date().toISOString(),
-      stats: {
-        totalUpdates: updates?.length || 0,
-        companies: [...new Set(updates?.map(u => u.company) || [])].length
-      }
+      stats: stats || { total: 0 },
+      lastUpdated: new Date().toISOString()
     };
     
-    // Write to frontend data directory
-    const outputPath = path.join(__dirname, '../../_data/liveUpdates.json');
+    // Ensure _data directory exists
+    const dataDir = path.join(__dirname, '../../_data');
+    await mkdir(dataDir, { recursive: true });
+    
+    // Write to _data directory for Eleventy
+    const outputPath = path.join(dataDir, 'liveUpdates.json');
     await writeFile(outputPath, JSON.stringify(data, null, 2));
     
     console.log(`✅ Generated static data: ${data.updates.length} updates`);
@@ -34,25 +43,16 @@ async function generateStaticData() {
   } catch (error) {
     console.error('❌ Error generating static data:', error);
     
-    // Fallback to sample data
+    // Fallback to empty data
     const fallbackData = {
-      updates: [
-        {
-          id: "sample-1",
-          title: "Sample AI Update 1",
-          description: "This is sample data. Deploy the backend to get real updates.",
-          link: "#",
-          date: new Date().toISOString(),
-          company: "sample",
-          source: "Static Generation",
-          type: "sample"
-        }
-      ],
-      lastUpdated: new Date().toISOString(),
-      stats: { totalUpdates: 1, companies: 1 }
+      updates: [],
+      stats: { total: 0 },
+      lastUpdated: new Date().toISOString()
     };
     
-    const outputPath = path.join(__dirname, '../../_data/liveUpdates.json');
+    const dataDir = path.join(__dirname, '../../_data');
+    await mkdir(dataDir, { recursive: true });
+    const outputPath = path.join(dataDir, 'liveUpdates.json');
     await writeFile(outputPath, JSON.stringify(fallbackData, null, 2));
     
     return fallbackData;
@@ -61,7 +61,12 @@ async function generateStaticData() {
 
 // Run if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
-  generateStaticData();
+  generateStaticData()
+    .then(() => process.exit(0))
+    .catch(error => {
+      console.error(error);
+      process.exit(1);
+    });
 }
 
 export { generateStaticData }; 

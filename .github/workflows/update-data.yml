@@ -1,0 +1,47 @@
+name: Update AI News Data
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'  # Every 4 hours
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: |
+        cd backend
+        npm install
+    
+    - name: Fetch updates
+      run: |
+        cd backend
+        node scripts/fetchUpdates.js
+    
+    - name: Generate static data
+      run: |
+        cd backend
+        node scripts/generateStaticData.js
+    
+    - name: Commit data
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        git add _data/liveUpdates.json || echo "No data file yet"
+        git add backend/ai_updates.db || echo "No database yet"
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Update AI news data - $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
+        fi 
