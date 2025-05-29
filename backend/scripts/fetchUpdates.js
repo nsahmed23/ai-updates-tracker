@@ -4,13 +4,16 @@ import path from 'path';
 import { RSSTracker } from './trackers/rss.js';
 import { UniversalScraper } from './scrapers/universal.js';
 import { ArxivTracker } from './trackers/arxiv.js';
-import { saveUpdates } from './utils/database.js';
+import { saveUpdates, initializeDatabase } from './utils/database.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export async function triggerFetch() {
   console.log('Starting fetch process...');
+  
+  // Initialize database
+  await initializeDatabase();
   
   // Load configuration
   const configPath = path.join(__dirname, '../config/sources.json');
