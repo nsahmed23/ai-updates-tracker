@@ -77,7 +77,7 @@
                 <div class="spinner"></div>
             </div>
             
-            <div class="cards-grid" id="cardsGrid" style="display: none;">
+            <div class="cards-grid" id="updates-grid" style="display: none;">
                 <!-- Cards will be inserted here by JavaScript -->
             </div>
             
@@ -104,18 +104,107 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
+        // Configuration
+        const API_BASE_URL = 'https://your-backend-url.vercel.app/api'; // Will be updated after deployment
+        const FALLBACK_TO_SAMPLE = true; // Set to false when backend is deployed
+        
+        // Sample data (fallback)
+        const sampleUpdates = [
+            {
+                id: 'claude-3-5-haiku-20241201',
+                title: 'Claude 3.5 Haiku Now Available',
+                description: 'Anthropic releases Claude 3.5 Haiku, a faster and more affordable model that outperforms Claude 3 Opus on many benchmarks while being significantly more cost-effective.',
+                link: 'https://anthropic.com/news/claude-3-5-haiku',
+                date: '2024-12-01',
+                company: 'anthropic',
+                source: 'Anthropic Blog',
+                type: 'model-release'
+            },
+            {
+                id: 'openai-o1-thinking-20241130',
+                title: 'OpenAI o1 with Enhanced Reasoning',
+                description: 'OpenAI unveils improvements to o1 model with enhanced step-by-step reasoning capabilities and better performance on complex problem-solving tasks.',
+                link: 'https://openai.com/blog/o1-enhanced-reasoning',
+                date: '2024-11-30',
+                company: 'openai',
+                source: 'OpenAI Blog',
+                type: 'model-update'
+            },
+            {
+                id: 'google-gemini-2-flash-20241129',
+                title: 'Gemini 2.0 Flash Experimental Release',
+                description: 'Google releases Gemini 2.0 Flash with multimodal capabilities, native tool use, and improved performance across coding and reasoning tasks.',
+                link: 'https://deepmind.google/technologies/gemini/flash/',
+                date: '2024-11-29',
+                company: 'google',
+                source: 'Google DeepMind',
+                type: 'model-release'
+            },
+            {
+                id: 'deepseek-v3-20241128',
+                title: 'DeepSeek V3 Achieves New Benchmarks',
+                description: 'DeepSeek releases V3 model showing competitive performance with GPT-4 and Claude 3.5 Sonnet across multiple evaluation benchmarks.',
+                link: 'https://deepseek.com/v3',
+                date: '2024-11-28',
+                company: 'deepseek',
+                source: 'DeepSeek',
+                type: 'model-release'
+            },
+            {
+                id: 'meta-llama-3-3-20241127',
+                title: 'Meta Llama 3.3 70B Release',
+                description: 'Meta releases Llama 3.3 70B with improved instruction following and multilingual capabilities, available for commercial use.',
+                link: 'https://ai.meta.com/blog/llama-3-3-70b/',
+                date: '2024-11-27',
+                company: 'meta',
+                source: 'Meta AI',
+                type: 'model-release'
+            },
+            {
+                id: 'microsoft-phi-4-20241126',
+                title: 'Microsoft Phi-4 Technical Preview',
+                description: 'Microsoft releases Phi-4, a 14B parameter model that demonstrates strong performance on STEM reasoning and coding tasks.',
+                link: 'https://azure.microsoft.com/blog/phi-4-technical-preview',
+                date: '2024-11-26',
+                company: 'microsoft',
+                source: 'Microsoft Azure',
+                type: 'model-release'
+            }
+        ];
+
+        // Try to fetch live data, fallback to sample data
+        async function fetchUpdates() {
+            if (FALLBACK_TO_SAMPLE) {
+                return sampleUpdates;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/updates`);
+                if (!response.ok) throw new Error('API unavailable');
+                
+                const data = await response.json();
+                return data.updates || sampleUpdates;
+            } catch (error) {
+                console.warn('Failed to fetch live data, using sample data:', error);
+                return sampleUpdates;
+            }
+        }
+
         // Data storage
         let updates = [];
         let isLoading = false;
 
         // Company metadata
         const companies = {
-            'openai': { name: 'OpenAI', count: 0 },
-            'anthropic': { name: 'Anthropic', count: 0 },
-            'google': { name: 'Google', count: 0 },
-            'meta': { name: 'Meta', count: 0 },
-            'microsoft': { name: 'Microsoft', count: 0 },
-            'deepseek': { name: 'DeepSeek', count: 0 }
+            all: { name: 'All Companies', count: 0 },
+            openai: { name: 'OpenAI', count: 0 },
+            anthropic: { name: 'Anthropic', count: 0 },
+            google: { name: 'Google DeepMind', count: 0 },
+            meta: { name: 'Meta AI', count: 0 },
+            microsoft: { name: 'Microsoft', count: 0 },
+            deepseek: { name: 'DeepSeek', count: 0 },
+            cohere: { name: 'Cohere', count: 0 },
+            stability: { name: 'Stability AI', count: 0 }
         };
 
         // State
@@ -123,83 +212,6 @@
         let searchQuery = '';
         let dateRange = 30;
         let filteredUpdates = [...updates];
-
-        // Demo data
-        function getDemoData() {
-            return [
-                {
-                    id: '1',
-                    company: 'anthropic',
-                    date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                    title: 'Claude 3.5 Sonnet Released',
-                    description: 'Anthropic announces Claude 3.5 Sonnet with significant improvements in reasoning capabilities and extended context windows up to 200K tokens.',
-                    content: 'Anthropic has released Claude 3.5 Sonnet, the latest iteration of their flagship AI model.',
-                    link: 'https://anthropic.com/claude-3-5-sonnet',
-                    details: {
-                        'Model Size': '175B parameters',
-                        'Context Window': '200,000 tokens'
-                    }
-                },
-                {
-                    id: '2',
-                    company: 'openai',
-                    date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                    title: 'GPT-4 Turbo with Vision Now Available',
-                    description: 'OpenAI has released GPT-4 Turbo with enhanced vision capabilities, allowing users to analyze images and generate detailed descriptions with improved accuracy.',
-                    content: 'OpenAI has begun rolling out GPT-4 Turbo with Vision to all users.',
-                    link: 'https://openai.com/gpt-4-turbo-vision',
-                    details: {
-                        'Architecture': 'Transformer++',
-                        'Status': 'Generally Available'
-                    }
-                },
-                {
-                    id: '3',
-                    company: 'google',
-                    date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                    title: 'Google Gemini Pro API Updates',
-                    description: 'Google has updated the Gemini Pro API with new multimodal capabilities and improved performance for enterprise applications.',
-                    content: 'Google releases major updates to Gemini Pro API.',
-                    link: 'https://ai.google.dev/gemini-api',
-                    details: {
-                        'API Version': '2.0',
-                        'Multimodal': 'Text, Images, Audio'
-                    }
-                },
-                {
-                    id: '4',
-                    company: 'microsoft',
-                    date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                    title: 'Microsoft Copilot Enterprise Launch',
-                    description: 'Microsoft launches Copilot for Enterprise with enhanced security features and integration across Microsoft 365 applications.',
-                    content: 'Microsoft officially launches Copilot Enterprise.',
-                    link: 'https://microsoft.com/copilot-enterprise',
-                    details: {
-                        'Enterprise Features': 'Advanced Security',
-                        'Integration': 'Office 365 Suite'
-                    }
-                }
-            ];
-        }
-
-        // Initialize with demo data
-        function initializeData() {
-            updates = getDemoData();
-        }
-
-        // Count updates per company
-        function countUpdates() {
-            Object.keys(companies).forEach(key => {
-                companies[key].count = 0;
-            });
-
-            updates.forEach(update => {
-                if (companies[update.company]) {
-                    companies[update.company].count++;
-                }
-            });
-            document.getElementById('count-all').textContent = updates.length;
-        }
 
         // Render sidebar
         function renderSidebar() {
@@ -248,17 +260,17 @@
 
         // Render cards
         function renderCards() {
-            const grid = document.getElementById('cardsGrid');
+            const grid = document.getElementById('updates-grid');
             const empty = document.getElementById('emptyState');
             
             if (filteredUpdates.length === 0) {
                 grid.style.display = 'none';
-                empty.style.display = 'block';
+                if (empty) empty.style.display = 'block';
                 return;
             }
             
-            grid.style.display = 'grid';
-            empty.style.display = 'none';
+            grid.style.display = 'flex';
+            if (empty) empty.style.display = 'none';
             
             grid.innerHTML = filteredUpdates.map(update => `
                 <article class="update-card" data-id="${update.id}" data-company="${update.company}">
@@ -274,12 +286,12 @@
                     <p class="update-description">${update.description}</p>
                     
                     <div class="card-footer">
-                        <button class="card-action" data-id="${update.id}">
-                            View Details
+                        <a href="${update.link}" target="_blank" class="card-action">
+                            Read More
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                <path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/>
+                                <path d="M10.604 1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.75.75 0 01-1.06-1.06l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/>
                             </svg>
-                        </button>
+                        </a>
                     </div>
                 </article>
             `).join('');
@@ -412,20 +424,38 @@
             });
         }
 
-        // Initialize
-        function init() {
+        // Initialize the application
+        async function init() {
+            showLoadingState();
+            
             try {
-                initializeData();
-                countUpdates();
-                renderSidebar();
-                setupEventListeners();
-                filterUpdates();
+                updates = await fetchUpdates();
+                console.log(`Loaded ${updates.length} updates`);
+                
+                hideLoadingState();
+                renderUpdates();
+                updateStats();
             } catch (error) {
-                console.error('Initialization error:', error);
-            } finally {
-                document.getElementById('loadingState').style.display = 'none';
-                document.getElementById('cardsGrid').style.display = 'grid';
+                console.error('Failed to initialize:', error);
+                updates = sampleUpdates;
+                hideLoadingState();
+                renderUpdates();
+                updateStats();
             }
+        }
+        
+        function showLoadingState() {
+            const grid = document.getElementById('updates-grid');
+            grid.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                    <div style="font-size: 24px; margin-bottom: 16px;">🔄</div>
+                    <p>Loading AI updates...</p>
+                </div>
+            `;
+        }
+        
+        function hideLoadingState() {
+            // Loading state will be replaced by renderUpdates()
         }
 
         // Theme toggle functionality
@@ -477,6 +507,25 @@
             init();
             initTheme();
         });
+
+        function renderUpdates() {
+            renderSidebar();
+            setupEventListeners();
+            filterUpdates();
+        }
+        
+        function updateStats() {
+            // Reset counts
+            Object.keys(companies).forEach(key => companies[key].count = 0);
+            
+            // Count updates by company
+            updates.forEach(update => {
+                if (companies[update.company]) {
+                    companies[update.company].count++;
+                }
+                companies.all.count++;
+            });
+        }
     </script>
 </body>
 </html> 
