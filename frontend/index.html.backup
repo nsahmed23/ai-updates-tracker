@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="theme-color" content="#fafafa">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Model Updates Tracker</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
@@ -36,9 +34,7 @@
             
             /* Spacing System */
             --space-4: 4px;
-            --space-6: 6px;
             --space-8: 8px;
-            --space-10: 10px;
             --space-12: 12px;
             --space-16: 16px;
             --space-20: 20px;
@@ -68,8 +64,7 @@
             
             /* Layout */
             --sidebar-width: 320px;
-            --navbar-height: 60px;
-            --navbar-height-mobile: 56px;
+            --navbar-height: 80px;
             
             /* Shadows */
             --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
@@ -109,6 +104,20 @@
             --text-secondary: #a0a0a0 !important;
             --text-tertiary: #707070 !important;
             --border-light: rgba(255, 255, 255, 0.08) !important;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.25) !important;
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        body:not(.dark-mode) {
+            --bg-primary: #fafafa !important;
+            --bg-secondary: #ffffff !important;
+            --bg-tertiary: #f5f5f5 !important;
+            --text-primary: #1a1a1a !important;
+            --text-secondary: #666666 !important;
+            --text-tertiary: #999999 !important;
+            --border-light: rgba(0, 0, 0, 0.06) !important;
         }
 
         body {
@@ -119,7 +128,6 @@
             line-height: var(--leading-normal);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
         }
 
         /* Typography */
@@ -150,28 +158,13 @@
             z-index: 100;
             display: flex;
             align-items: center;
-            padding: 0 var(--space-24);
-        }
-
-        /* Mobile menu button */
-        .mobile-menu-btn {
-            display: none;
-            width: 44px;
-            height: 44px;
-            border: none;
-            background: transparent;
-            color: var(--text-primary);
-            cursor: pointer;
-            align-items: center;
-            justify-content: center;
-            margin-right: var(--space-12);
+            padding: 0 var(--space-32);
         }
 
         .nav-brand {
             font-size: var(--text-xl);
             font-weight: 600;
             letter-spacing: -0.02em;
-            white-space: nowrap;
         }
 
         /* Search field */
@@ -179,17 +172,15 @@
             margin-left: auto;
             position: relative;
             margin-right: var(--space-16);
-            max-width: 400px;
-            flex: 1;
         }
 
         .search-input {
-            width: 100%;
-            height: 40px;
-            padding: 0 var(--space-16) 0 var(--space-40);
+            width: 320px;
+            height: 44px;
+            padding: 0 var(--space-16) 0 var(--space-48);
             background: var(--bg-tertiary);
             border: none;
-            border-radius: 20px;
+            border-radius: 22px;
             font-size: var(--text-sm);
             transition: var(--transition-base);
             outline: none;
@@ -201,20 +192,18 @@
 
         .search-icon {
             position: absolute;
-            left: var(--space-12);
+            left: var(--space-16);
             top: 50%;
             transform: translateY(-50%);
             width: 20px;
             height: 20px;
             color: var(--text-tertiary);
-            pointer-events: none;
         }
 
         /* Buttons */
         .refresh-btn, .theme-toggle {
             width: 44px;
             height: 44px;
-            min-width: 44px;
             border-radius: 50%;
             border: none;
             background: var(--bg-tertiary);
@@ -224,15 +213,16 @@
             align-items: center;
             justify-content: center;
             transition: var(--transition-base);
-        }
-
-        .refresh-btn {
-            margin-right: var(--space-12);
+            margin-right: var(--space-16);
         }
 
         .refresh-btn:hover, .theme-toggle:hover {
             background: var(--accent-openai);
             color: white;
+        }
+
+        .refresh-btn:hover {
+            transform: rotate(180deg);
         }
 
         .refresh-btn.loading {
@@ -253,25 +243,6 @@
             padding: var(--space-32);
             overflow-y: auto;
             flex-shrink: 0;
-            transition: transform var(--transition-base);
-        }
-
-        /* Mobile overlay */
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 89;
-            opacity: 0;
-            transition: opacity var(--transition-base);
-        }
-
-        .sidebar-overlay.active {
-            opacity: 1;
         }
 
         .sidebar-section {
@@ -312,7 +283,6 @@
             background: transparent;
             width: 100%;
             text-align: left;
-            min-height: 44px;
         }
 
         .nav-link:hover {
@@ -347,9 +317,6 @@
             margin-left: auto;
             font-size: var(--text-xs);
             color: var(--text-tertiary);
-            background: var(--bg-tertiary);
-            padding: 2px 8px;
-            border-radius: 12px;
         }
 
         /* Date filter */
@@ -379,16 +346,6 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            background: var(--text-primary);
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            border: none;
-        }
-
         .date-labels {
             display: flex;
             justify-content: space-between;
@@ -399,18 +356,17 @@
         /* Main content */
         .main-content {
             flex: 1;
-            padding: var(--space-32);
+            padding: var(--space-48);
             overflow-y: auto;
             background: var(--bg-primary);
-            min-width: 0;
         }
 
         /* Cards grid */
         .cards-grid {
             display: flex;
             flex-direction: column;
-            gap: var(--space-20);
-            max-width: 900px;
+            gap: var(--space-24);
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -448,15 +404,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: var(--space-12);
-            flex-wrap: wrap;
-        }
-
-        .card-header-left {
-            display: flex;
-            align-items: center;
-            gap: var(--space-12);
-            flex-wrap: wrap;
+            gap: var(--space-16);
         }
 
         .company-badge {
@@ -470,13 +418,11 @@
             font-weight: 600;
             text-transform: capitalize;
             letter-spacing: 0.05em;
-            white-space: nowrap;
         }
 
         .update-date {
             font-size: var(--text-sm);
             color: var(--text-tertiary);
-            white-space: nowrap;
         }
 
         .update-title {
@@ -500,7 +446,6 @@
             padding-top: var(--space-20);
             display: flex;
             gap: var(--space-16);
-            flex-wrap: wrap;
         }
 
         .card-action {
@@ -517,7 +462,6 @@
             display: inline-flex;
             align-items: center;
             gap: var(--space-8);
-            min-height: 44px;
         }
 
         .card-action:hover {
@@ -535,7 +479,6 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: var(--text-tertiary);
-            white-space: nowrap;
         }
 
         .type-badge.research {
@@ -594,7 +537,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: var(--space-24);
+            padding: var(--space-48);
             z-index: 200;
             opacity: 0;
             visibility: hidden;
@@ -613,11 +556,10 @@
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
-            padding: var(--space-32);
+            padding: var(--space-48);
             box-shadow: var(--shadow-xl);
             transform: scale(0.9);
             transition: var(--transition-base);
-            position: relative;
         }
 
         .detail-modal.active .detail-content {
@@ -626,10 +568,10 @@
 
         .detail-close {
             position: absolute;
-            top: var(--space-16);
-            right: var(--space-16);
-            width: 40px;
-            height: 40px;
+            top: var(--space-24);
+            right: var(--space-24);
+            width: 32px;
+            height: 32px;
             border: none;
             background: var(--bg-tertiary);
             border-radius: 50%;
@@ -638,8 +580,6 @@
             align-items: center;
             justify-content: center;
             transition: var(--transition-base);
-            font-size: 24px;
-            line-height: 1;
         }
 
         .detail-close:hover {
@@ -647,17 +587,72 @@
             color: var(--bg-secondary);
         }
 
+        /* Technical details */
+        .tech-details {
+            margin-top: var(--space-32);
+            padding: var(--space-24);
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+        }
+
+        .tech-row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .tech-row:last-child {
+            border-bottom: none;
+        }
+
+        .tech-label {
+            font-size: var(--text-sm);
+            color: var(--text-tertiary);
+        }
+
+        .tech-value {
+            font-size: var(--text-sm);
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                top: var(--navbar-height);
+                bottom: 0;
+                z-index: 90;
+                transition: var(--transition-base);
+                box-shadow: var(--shadow-xl);
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .main-content {
+                padding: var(--space-24);
+            }
+
+            .cards-grid {
+                max-width: 100%;
+                gap: var(--space-16);
+            }
+            
+            .update-card {
+                padding: var(--space-20);
+            }
+        }
+
         /* Toast notifications */
         .toast-container {
             position: fixed;
             bottom: var(--space-24);
             right: var(--space-24);
-            left: var(--space-24);
             z-index: 300;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            pointer-events: none;
         }
 
         .toast {
@@ -673,7 +668,6 @@
             align-items: center;
             gap: var(--space-12);
             animation: slideIn 0.3s ease;
-            pointer-events: auto;
         }
 
         @keyframes slideIn {
@@ -699,279 +693,25 @@
             border-left: 4px solid var(--accent-google);
         }
 
-        /* Mobile Responsive Styles */
-        @media (max-width: 768px) {
-            :root {
-                --navbar-height: var(--navbar-height-mobile);
-            }
-
-            .navbar {
-                padding: 0 var(--space-16);
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            .nav-brand {
-                font-size: var(--text-lg);
-            }
-
-            .search-wrapper {
-                margin-right: var(--space-8);
-            }
-
-            .search-input {
-                height: 36px;
-                font-size: var(--text-sm);
-            }
-
-            .refresh-btn {
-                display: none;
-            }
-
-            .theme-toggle {
-                width: 40px;
-                height: 40px;
-                min-width: 40px;
-            }
-
-            .sidebar {
-                position: fixed;
-                left: 0;
-                top: 0;
-                bottom: 0;
-                z-index: 90;
-                transform: translateX(-100%);
-                width: 85%;
-                max-width: var(--sidebar-width);
-                padding: var(--space-24);
-                padding-top: calc(var(--navbar-height) + var(--space-24));
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .sidebar-overlay {
-                display: block;
-            }
-
-            .main-content {
-                padding: var(--space-16);
-            }
-
-            .cards-grid {
-                gap: var(--space-16);
-            }
-
-            .update-card {
-                padding: var(--space-20);
-                gap: var(--space-12);
-            }
-
-            .update-title {
-                font-size: var(--text-base);
-            }
-
-            .update-description {
-                font-size: var(--text-sm);
-                -webkit-line-clamp: 2;
-            }
-
-            .card-action {
-                padding: var(--space-10) var(--space-16);
-                font-size: var(--text-sm);
-                flex: 1;
-                justify-content: center;
-            }
-
-            .detail-content {
-                padding: var(--space-24);
-                margin: var(--space-16);
-            }
-
-            .toast-container {
-                right: var(--space-16);
-                left: var(--space-16);
-                bottom: var(--space-16);
-            }
-
-            .toast {
-                min-width: auto;
-                max-width: 100%;
-            }
-
-            .empty-state {
-                padding: var(--space-32) var(--space-16);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-brand {
-                font-size: var(--text-base);
-            }
-
-            .search-wrapper {
-                margin-left: var(--space-8);
-            }
-
-            .search-input {
-                padding-left: var(--space-32);
-            }
-
-            .update-card {
-                padding: var(--space-16);
-            }
-
-            .card-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: var(--space-8);
-            }
-
-            .card-header-left {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .company-badge {
-                font-size: 11px;
-                padding: var(--space-6) var(--space-10);
-            }
-
-            .update-date {
-                font-size: var(--text-xs);
-            }
-        }
-
-        /* Accessibility improvements */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation: none !important;
-                transition: none !important;
-            }
-        }
-
-        /* Touch target improvements */
-        @media (hover: none) {
-            .nav-link, .card-action, .refresh-btn, .theme-toggle {
-                min-height: 44px;
-                min-width: 44px;
-            }
-        }
-
-        /* High contrast mode support */
-        @media (prefers-contrast: high) {
-            :root {
-                --shadow-sm: 0 0 0 1px currentColor;
-                --shadow-md: 0 0 0 1px currentColor;
-                --shadow-lg: 0 0 0 2px currentColor;
-                --shadow-xl: 0 0 0 2px currentColor;
-            }
-        }
-
-        /* Paper card styles */
-        .paper-card {
-            border-left-color: #9b59b6 !important;
-        }
-
-        .paper-authors {
-            font-size: var(--text-sm);
-            color: var(--text-secondary);
-            font-style: italic;
-            margin: var(--space-8) 0;
-        }
-
-        .ai-summary {
-            background: var(--bg-tertiary);
-            border-radius: 8px;
-            padding: var(--space-16);
-            margin: var(--space-16) 0;
-        }
-
-        .summary-header {
-            display: flex;
-            align-items: center;
-            gap: var(--space-8);
-            margin-bottom: var(--space-12);
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .model-badge {
-            font-size: var(--text-xs);
-            background: var(--accent-deepseek);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            margin-left: auto;
-        }
-
-        .summary-text {
-            color: var(--text-secondary);
-            line-height: var(--leading-relaxed);
-        }
-
-        .summary-details {
-            margin-top: var(--space-12);
-        }
-
-        .summary-details summary {
-            cursor: pointer;
-            color: var(--accent-deepseek);
-            font-weight: 500;
-            padding: var(--space-8) 0;
-        }
-
-        .summary-content {
-            margin-top: var(--space-16);
-        }
-
-        .summary-content section {
-            margin-bottom: var(--space-16);
-        }
-
-        .summary-content h4 {
-            font-size: var(--text-sm);
-            font-weight: 600;
-            margin-bottom: var(--space-8);
-            color: var(--text-primary);
-        }
-
-        .summary-content ul {
-            list-style: disc;
-            padding-left: var(--space-24);
-            color: var(--text-secondary);
-        }
-
-        .summary-content li {
-            margin-bottom: var(--space-4);
+        .theme-icon {
+            transition: var(--transition-base);
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="3" y1="6" x2="21" y2="6"/>
-                <line x1="3" y1="12" x2="21" y2="12"/>
-                <line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
-        </button>
-        
-        <div class="nav-brand">AI Updates</div>
+        <div class="nav-brand">AI Updates Tracker</div>
         
         <div class="search-wrapper">
             <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
             </svg>
-            <input type="text" class="search-input" placeholder="Search..." id="searchInput" aria-label="Search updates">
+            <input type="text" class="search-input" placeholder="Search updates..." id="searchInput">
         </div>
         
         <!-- Theme Toggle -->
-        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" aria-label="Toggle theme">
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
             <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>
@@ -988,15 +728,12 @@
             </svg>
         </button>
         
-        <button class="refresh-btn" id="refreshBtn" title="Fetch new updates" aria-label="Refresh">
+        <button class="refresh-btn" id="refreshBtn" title="Fetch new updates">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
             </svg>
         </button>
     </nav>
-
-    <!-- Sidebar overlay for mobile -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- App Container -->
     <div class="app-container">
@@ -1004,10 +741,10 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-section">
                 <h2 class="sidebar-title">Companies</h2>
-                <nav role="navigation" aria-label="Company filter">
+                <nav>
                     <ul class="nav-list" id="companyNav">
                         <li class="nav-item">
-                            <button class="nav-link active" data-company="all" aria-current="page">
+                            <button class="nav-link active" data-company="all">
                                 All Updates
                                 <span class="nav-count" id="count-all">0</span>
                             </button>
@@ -1018,7 +755,7 @@
             
             <div class="date-filter">
                 <h3 class="sidebar-title">Date Range</h3>
-                <input type="range" class="slider" id="dateSlider" min="1" max="30" value="30" aria-label="Date range slider">
+                <input type="range" class="slider" id="dateSlider" min="1" max="30" value="30">
                 <div class="date-labels">
                     <span>Today</span>
                     <span id="dateRangeLabel">30 days</span>
@@ -1027,17 +764,17 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="main-content" role="main">
-            <div class="loading-container" id="loadingState" aria-live="polite" aria-label="Loading">
+        <main class="main-content">
+            <div class="loading-container" id="loadingState">
                 <div class="spinner"></div>
             </div>
             
-            <div class="cards-grid" id="cardsGrid" style="display: none;" role="list">
+            <div class="cards-grid" id="cardsGrid" style="display: none;">
                 <!-- Cards will be inserted here by JavaScript -->
             </div>
             
-            <div class="empty-state" id="emptyState" style="display: none;" role="status">
-                <svg class="empty-icon" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <svg class="empty-icon" viewBox="0 0 64 64" fill="currentColor">
                     <path d="M32 8C18.745 8 8 18.745 8 32s10.745 24 24 24 24-10.745 24-24S45.255 8 32 8zm-4 36h8v-8h-8v8zm0-12h8V20h-8v12z"/>
                 </svg>
                 <p>No updates found matching your criteria</p>
@@ -1046,9 +783,9 @@
     </div>
 
     <!-- Detail Modal -->
-    <div class="detail-modal" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="detail-modal" id="detailModal">
         <div class="detail-content">
-            <button class="detail-close" id="closeModal" aria-label="Close modal">×</button>
+            <button class="detail-close" id="closeModal">×</button>
             <div id="modalContent">
                 <!-- Modal content will be inserted here -->
             </div>
@@ -1056,7 +793,7 @@
     </div>
 
     <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer" role="alert" aria-live="polite"></div>
+    <div class="toast-container" id="toastContainer"></div>
 
     <script>
         // Configuration
@@ -1080,8 +817,7 @@
             'deepseek': { name: 'DeepSeek', color: 'deepseek' },
             'cohere': { name: 'Cohere', color: 'cohere' },
             'stabilityai': { name: 'Stability AI', color: 'stability' },
-            'deepmind': { name: 'DeepMind', color: 'deepmind' },
-            'arxiv': { name: 'arXiv', color: 'deepseek' }
+            'deepmind': { name: 'DeepMind', color: 'deepmind' }
         };
 
         // State
@@ -1128,8 +864,29 @@
                             updates: localData.updates || []
                         };
                         
-                        // DON'T pre-filter local data - let filterUpdates handle it
-                        console.log(`Loaded ${data.updates.length} total updates from data.json`);
+                        // Apply client-side filtering for local data
+                        if (currentFilter !== 'all') {
+                            data.updates = data.updates.filter(update => 
+                                update.company === currentFilter
+                            );
+                        }
+                        
+                        if (searchQuery) {
+                            const query = searchQuery.toLowerCase();
+                            data.updates = data.updates.filter(update =>
+                                update.title.toLowerCase().includes(query) ||
+                                update.description.toLowerCase().includes(query) ||
+                                (update.tags && update.tags.some(tag => tag.toLowerCase().includes(query)))
+                            );
+                        }
+                        
+                        if (dateRange !== 'all') {
+                            const cutoffDate = new Date();
+                            cutoffDate.setDate(cutoffDate.getDate() - parseInt(dateRange));
+                            data.updates = data.updates.filter(update =>
+                                new Date(update.date) >= cutoffDate
+                            );
+                        }
                         
                         console.log('Successfully loaded data from local data.json');
                         showToast('Updates loaded from local cache (API unavailable)', 'info');
@@ -1267,61 +1024,9 @@
 
         // Filter updates
         function filterUpdates() {
-            console.log(`Starting filter with currentFilter: "${currentFilter}"`);
-            let filtered = [...updates];
-            
-            // Apply company filter FIRST
-            if (currentFilter !== 'all') {
-                filtered = filtered.filter(update => {
-                    const updateCompany = (update.company || '').toLowerCase();
-                    const filterCompany = currentFilter.toLowerCase();
-                    const normalizedUpdate = updateCompany.replace(/[\s-_]/g, '');
-                    const normalizedFilter = filterCompany.replace(/[\s-_]/g, '');
-                    
-                    return updateCompany === filterCompany || normalizedUpdate === normalizedFilter;
-                });
-                console.log(`Company filter "${currentFilter}" matched ${filtered.length} updates`);
-            }
-            
-            // Apply search filter
-            if (searchQuery) {
-                const query = searchQuery.toLowerCase();
-                filtered = filtered.filter(update =>
-                    update.title.toLowerCase().includes(query) ||
-                    update.description.toLowerCase().includes(query)
-                );
-            }
-            
-            // Apply date range filter
-            if (dateRange < 365) {
-                const cutoffDate = new Date();
-                cutoffDate.setDate(cutoffDate.getDate() - dateRange);
-                filtered = filtered.filter(update =>
-                    new Date(update.date) >= cutoffDate
-                );
-            }
-            
-            filteredUpdates = filtered;
-            console.log(`Total filtered results: ${filteredUpdates.length} out of ${updates.length} total updates`);
+            filteredUpdates = updates;
             renderCards();
         }
-
-        // Debug company names
-        function debugCompanyNames() {
-            const companyCounts = {};
-            updates.forEach(update => {
-                companyCounts[update.company] = (companyCounts[update.company] || 0) + 1;
-            });
-            
-            console.log('=== Company Names Debug ===');
-            console.log('Total updates:', updates.length);
-            console.log('Unique companies and counts:');
-            Object.entries(companyCounts).forEach(([company, count]) => {
-                console.log(`  "${company}": ${count}`);
-            });
-            return companyCounts;
-        }
-        window.debugCompanyNames = debugCompanyNames;
 
         // Render cards
         function renderCards() {
@@ -1339,82 +1044,10 @@
             
             grid.innerHTML = filteredUpdates.map(update => {
                 const meta = companyMeta[update.company] || { name: update.company, color: 'openai' };
-                
-                // Special handling for arXiv papers
-                if (update.type === 'paper') {
-                    return `
-                        <article class="update-card paper-card" data-id="${update.id}" data-company="${update.company}" role="listitem">
-                            <div class="card-header">
-                                <div class="card-header-left">
-                                    <div class="company-badge">
-                                        <span class="company-indicator ${meta.color}"></span>
-                                        ${update.source || meta.name}
-                                    </div>
-                                    <span class="type-badge research">PAPER</span>
-                                </div>
-                                <time class="update-date">${formatDate(update.date)}</time>
-                            </div>
-                            
-                            <h3 class="update-title">${update.title}</h3>
-                            ${update.authors ? `<p class="paper-authors">Authors: ${update.authors}</p>` : ''}
-                            
-                            ${update.hasSummary && update.summary ? `
-                                <div class="ai-summary">
-                                    <div class="summary-header">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                                        </svg>
-                                        <span>AI Summary</span>
-                                        <span class="model-badge">${update.summary.modelMetadata.buildNumber}</span>
-                                    </div>
-                                    <p class="summary-text">${update.summary.summary}</p>
-                                    <details class="summary-details">
-                                        <summary>View detailed analysis</summary>
-                                        <div class="summary-content">
-                                            <section>
-                                                <h4>Key Findings</h4>
-                                                <ul>${update.summary.keyFindings.map(f => `<li>${f}</li>`).join('')}</ul>
-                                            </section>
-                                            <section>
-                                                <h4>Methodology</h4>
-                                                <p>${update.summary.methodology}</p>
-                                            </section>
-                                            <section>
-                                                <h4>Limitations</h4>
-                                                <ul>${update.summary.limitations.map(l => `<li>${l}</li>`).join('')}</ul>
-                                            </section>
-                                        </div>
-                                    </details>
-                                </div>
-                            ` : `
-                                <p class="update-description">${update.description.substring(0, 300)}...</p>
-                            `}
-                            
-                            <div class="card-footer">
-                                <a href="${update.link}" target="_blank" rel="noopener noreferrer" class="card-action">
-                                    View Paper
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                        <path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/>
-                                    </svg>
-                                </a>
-                                ${update.pdfUrl ? `
-                                    <a href="${update.pdfUrl}" target="_blank" rel="noopener noreferrer" class="card-action">
-                                        PDF
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                            <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
-                                        </svg>
-                                    </a>
-                                ` : ''}
-                            </div>
-                        </article>
-                    `;
-                }
-                
-                // Original card rendering for non-papers
                 return `
-                    <article class="update-card" data-id="${update.id}" data-company="${update.company}" role="listitem">
+                    <article class="update-card" data-id="${update.id}" data-company="${update.company}">
                         <div class="card-header">
-                            <div class="card-header-left">
+                            <div style="display: flex; align-items: center; gap: var(--space-12);">
                                 <div class="company-badge">
                                     <span class="company-indicator ${meta.color}"></span>
                                     ${meta.name}
@@ -1428,7 +1061,7 @@
                         <p class="update-description">${update.description}</p>
                         
                         <div class="card-footer">
-                            <a href="${update.link}" target="_blank" rel="noopener noreferrer" class="card-action">
+                            <a href="${update.link}" target="_blank" class="card-action">
                                 View Article
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                                     <path d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"/>
@@ -1479,157 +1112,17 @@
             }, 3000);
         }
 
-        // Mobile menu functionality
-        function initMobileMenu() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const sidebar = document.getElementById('sidebar');
-            const sidebarOverlay = document.getElementById('sidebarOverlay');
-            
-            function toggleSidebar() {
-                const isOpen = sidebar.classList.contains('open');
-                if (isOpen) {
-                    closeSidebar();
-                } else {
-                    openSidebar();
-                }
-            }
-            
-            function openSidebar() {
-                sidebar.classList.add('open');
-                sidebarOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-            
-            function closeSidebar() {
-                sidebar.classList.remove('open');
-                sidebarOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-            
-            mobileMenuBtn.addEventListener('click', toggleSidebar);
-            sidebarOverlay.addEventListener('click', closeSidebar);
-            
-            // Close sidebar when selecting a filter on mobile
-            document.addEventListener('click', (e) => {
-                if (e.target.matches('.nav-link') && window.innerWidth <= 768) {
-                    setTimeout(closeSidebar, 300);
-                }
-            });
-            
-            // Handle window resize
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => {
-                    if (window.innerWidth > 768) {
-                        closeSidebar();
-                    }
-                }, 250);
-            });
-        }
-        
-        // Touch-friendly card interactions
-        function initTouchInteractions() {
-            let touchStartX = 0;
-            let touchStartY = 0;
-            
-            document.addEventListener('touchstart', (e) => {
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-            }, { passive: true });
-            
-            document.addEventListener('touchend', (e) => {
-                const touchEndX = e.changedTouches[0].clientX;
-                const touchEndY = e.changedTouches[0].clientY;
-                
-                const deltaX = Math.abs(touchEndX - touchStartX);
-                const deltaY = Math.abs(touchEndY - touchStartY);
-                
-                // Prevent accidental taps when scrolling
-                if (deltaX > 10 || deltaY > 10) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-        }
-        
-        // Improve modal for mobile
-        function improveModalForMobile() {
-            const modal = document.getElementById('detailModal');
-            const modalContent = modal.querySelector('.detail-content');
-            
-            // Prevent body scroll when modal is open
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    document.getElementById('detailModal').classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-            
-            // Add swipe down to close on mobile
-            let touchStartY = 0;
-            let currentY = 0;
-            
-            modalContent.addEventListener('touchstart', (e) => {
-                touchStartY = e.touches[0].clientY;
-                currentY = touchStartY;
-            }, { passive: true });
-            
-            modalContent.addEventListener('touchmove', (e) => {
-                currentY = e.touches[0].clientY;
-                const deltaY = currentY - touchStartY;
-                
-                if (deltaY > 0 && modalContent.scrollTop === 0) {
-                    modalContent.style.transform = `translateY(${deltaY * 0.5}px)`;
-                }
-            }, { passive: true });
-            
-            modalContent.addEventListener('touchend', () => {
-                const deltaY = currentY - touchStartY;
-                
-                if (deltaY > 100 && modalContent.scrollTop === 0) {
-                    document.getElementById('detailModal').classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-                
-                modalContent.style.transform = '';
-            });
-        }
-
         // Setup event listeners
         function setupEventListeners() {
             // Company filter
             document.addEventListener('click', (e) => {
                 if (e.target.matches('.nav-link')) {
-                    e.preventDefault();
-                    
-                    // Remove active class from all links
                     document.querySelectorAll('.nav-link').forEach(link => {
                         link.classList.remove('active');
                     });
-                    
-                    // Add active class to clicked link
                     e.target.classList.add('active');
-                    
-                    // Update current filter
-                    const newFilter = e.target.dataset.company;
-                    console.log(`Switching from '${currentFilter}' to '${newFilter}' filter`);
-                    currentFilter = newFilter;
-                    
-                    // Apply filters immediately
-                    filterUpdates();
-                    
-                    // Close mobile menu if open
-                    if (window.innerWidth <= 768) {
-                        const sidebar = document.getElementById('sidebar');
-                        const overlay = document.getElementById('sidebarOverlay');
-                        if (sidebar && overlay) {
-                            setTimeout(() => {
-                                sidebar.classList.remove('open');
-                                overlay.classList.remove('active');
-                                document.body.style.overflow = '';
-                            }, 300);
-                        }
-                    }
+                    currentFilter = e.target.dataset.company;
+                    fetchUpdates();
                 }
                 
                 if (e.target.matches('#closeModal') || e.target.matches('.detail-modal')) {
@@ -1708,40 +1201,11 @@
         function init() {
             setupEventListeners();
             initTheme();
-            initMobileMenu();
-            initTouchInteractions();
-            improveModalForMobile();
             fetchUpdates();
         }
-
-        // Debug helper
-        function debugFiltering() {
-            console.group('Filter Debug Information');
-            console.log('Current filter:', currentFilter);
-            console.log('Total updates:', updates.length);
-            console.log('Filtered updates:', filteredUpdates.length);
-            
-            const companyCounts = {};
-            updates.forEach(update => {
-                companyCounts[update.company] = (companyCounts[update.company] || 0) + 1;
-            });
-            console.log('Updates per company:', companyCounts);
-            
-            if (currentFilter !== 'all') {
-                const matchingUpdates = updates.filter(u => u.company === currentFilter);
-                console.log(`Updates matching filter '${currentFilter}':`, matchingUpdates.length);
-                if (matchingUpdates.length === 0) {
-                    console.warn(`No updates found for company '${currentFilter}'. Check if company name matches exactly.`);
-                }
-            }
-            console.groupEnd();
-        }
-
-        // Add to window for easy access in console
-        window.debugFiltering = debugFiltering;
 
         // Start app when DOM is ready
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
-</html>
+</html> 
