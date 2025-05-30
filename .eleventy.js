@@ -8,6 +8,9 @@ module.exports = function(eleventyConfig) {
   // Copy any other static assets you might have
   eleventyConfig.addPassthroughCopy("assets");
   
+  // Copy the frontend directory with the enhanced tracker
+  eleventyConfig.addPassthroughCopy("frontend/data.json");
+  
   return {
     dir: {
       input: ".",

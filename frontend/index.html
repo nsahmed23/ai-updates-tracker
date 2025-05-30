@@ -1269,21 +1269,67 @@
         function filterUpdates() {
             console.log(`Starting filter with currentFilter: "${currentFilter}"`);
             let filtered = [...updates];
-            
-            // Apply company filter FIRST
+
             if (currentFilter !== 'all') {
                 filtered = filtered.filter(update => {
-                    const updateCompany = (update.company || '').toLowerCase();
-                    const filterCompany = currentFilter.toLowerCase();
-                    const normalizedUpdate = updateCompany.replace(/[\s-_]/g, '');
-                    const normalizedFilter = filterCompany.replace(/[\s-_]/g, '');
+                    const updateCompany = (update.company || '').toLowerCase().trim();
+                    const filterCompany = currentFilter.toLowerCase().trim();
                     
-                    return updateCompany === filterCompany || normalizedUpdate === normalizedFilter;
+                    // Create a comprehensive mapping of filter names to possible data names
+                    const companyMappings = {
+                        'openai': ['openai', 'open ai', 'open-ai'],
+                        'anthropic': ['anthropic'],
+                        'google': ['google', 'alphabet', 'deepmind', 'googleresearch'],
+                        'googleresearch': ['googleresearch', 'google research', 'google-research'],
+                        'microsoft': ['microsoft', 'msft', 'ms', 'awsmachinelearning'],
+                        'awsmachinelearning': ['awsmachinelearning', 'aws machine learning', 'aws'],
+                        'meta': ['meta', 'facebook', 'meta platforms', 'metaairesearch'],
+                        'metaairesearch': ['metaairesearch', 'meta ai research', 'meta-ai-research'],
+                        'amazon': ['amazon', 'aws', 'awsmachinelearning'],
+                        'arxiv': ['arxiv', 'arxiv.org'],
+                        'deepseek': ['deepseek', 'deep-seek'],
+                        'cohere': ['cohere'],
+                        'stabilityai': ['stability ai', 'stabilityai', 'stability'],
+                        'deepmind': ['deepmind', 'google deepmind']
+                    };
+                    
+                    // Direct match first
+                    if (updateCompany === filterCompany) {
+                        return true;
+                    }
+                    
+                    // Check mappings
+                    const possibleNames = companyMappings[filterCompany] || [filterCompany];
+                    const isMatch = possibleNames.some(name => {
+                        const nameNormalized = name.toLowerCase().trim();
+                        return updateCompany === nameNormalized || 
+                               updateCompany.includes(nameNormalized) || 
+                               nameNormalized.includes(updateCompany);
+                    });
+                    
+                    return isMatch;
                 });
+                
                 console.log(`Company filter "${currentFilter}" matched ${filtered.length} updates`);
+                
+                // Enhanced debugging
+                if (filtered.length === 0) {
+                    const companiesInData = [...new Set(updates.map(u => u.company))];
+                    console.warn(`❌ No matches for "${currentFilter}"`);
+                    console.log('📊 Available companies in data:', companiesInData);
+                    
+                    // Show potential matches
+                    const potentialMatches = companiesInData.filter(company => 
+                        company.toLowerCase().includes(currentFilter.toLowerCase()) ||
+                        currentFilter.toLowerCase().includes(company.toLowerCase())
+                    );
+                    if (potentialMatches.length > 0) {
+                        console.log('🔍 Potential matches found:', potentialMatches);
+                    }
+                }
             }
-            
-            // Apply search filter
+
+            // Apply other filters (search, date range) - keep existing logic
             if (searchQuery) {
                 const query = searchQuery.toLowerCase();
                 filtered = filtered.filter(update =>
@@ -1291,8 +1337,7 @@
                     update.description.toLowerCase().includes(query)
                 );
             }
-            
-            // Apply date range filter
+
             if (dateRange < 365) {
                 const cutoffDate = new Date();
                 cutoffDate.setDate(cutoffDate.getDate() - dateRange);
@@ -1300,7 +1345,7 @@
                     new Date(update.date) >= cutoffDate
                 );
             }
-            
+
             filteredUpdates = filtered;
             console.log(`Total filtered results: ${filteredUpdates.length} out of ${updates.length} total updates`);
             renderCards();
@@ -1319,6 +1364,65 @@
             Object.entries(companyCounts).forEach(([company, count]) => {
                 console.log(`  "${company}": ${count}`);
             });
+            
+            // Check which filter buttons would map to actual data
+            console.log('\n=== Filter Button Mapping Check ===');
+            const filterButtons = ['openai', 'anthropic', 'google', 'microsoft', 'meta', 'arxiv'];
+            
+            filterButtons.forEach(filterName => {
+                console.log(`\nFilter button: "${filterName}"`);
+                const matchingUpdates = updates.filter(update => {
+                    const updateCompany = (update.company || '').toLowerCase().trim();
+                    const filterCompany = filterName.toLowerCase().trim();
+                    
+                    // Use the same mapping logic as filterUpdates
+                    const companyMappings = {
+                        'openai': ['openai', 'open ai', 'open-ai'],
+                        'anthropic': ['anthropic'],
+                        'google': ['google', 'alphabet', 'deepmind', 'googleresearch'],
+                        'googleresearch': ['googleresearch', 'google research', 'google-research'],
+                        'microsoft': ['microsoft', 'msft', 'ms', 'awsmachinelearning'],
+                        'awsmachinelearning': ['awsmachinelearning', 'aws machine learning', 'aws'],
+                        'meta': ['meta', 'facebook', 'meta platforms', 'metaairesearch'],
+                        'metaairesearch': ['metaairesearch', 'meta ai research', 'meta-ai-research'],
+                        'amazon': ['amazon', 'aws', 'awsmachinelearning'],
+                        'arxiv': ['arxiv', 'arxiv.org'],
+                        'deepseek': ['deepseek', 'deep-seek'],
+                        'cohere': ['cohere'],
+                        'stabilityai': ['stability ai', 'stabilityai', 'stability'],
+                        'deepmind': ['deepmind', 'google deepmind']
+                    };
+                    
+                    // Direct match first
+                    if (updateCompany === filterCompany) {
+                        return true;
+                    }
+                    
+                    // Check mappings
+                    const possibleNames = companyMappings[filterCompany] || [filterCompany];
+                    return possibleNames.some(name => {
+                        const nameNormalized = name.toLowerCase().trim();
+                        return updateCompany === nameNormalized || 
+                               updateCompany.includes(nameNormalized) || 
+                               nameNormalized.includes(updateCompany);
+                    });
+                });
+                
+                console.log(`  Matches: ${matchingUpdates.length} updates`);
+                if (matchingUpdates.length > 0) {
+                    const companies = [...new Set(matchingUpdates.map(u => u.company))];
+                    console.log(`  Maps to companies: ${companies.join(', ')}`);
+                } else {
+                    console.log(`  ❌ NO MATCHES - This filter won't show any results!`);
+                }
+            });
+            
+            console.log('\n=== Recommendation ===');
+            console.log('Based on your data, these companies exist:');
+            Object.entries(companyCounts).forEach(([company, count]) => {
+                console.log(`  - ${company} (${count} updates)`);
+            });
+            
             return companyCounts;
         }
         window.debugCompanyNames = debugCompanyNames;
