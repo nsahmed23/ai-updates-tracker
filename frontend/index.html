@@ -1704,14 +1704,135 @@
             });
         }
 
+        // User Preferences
+        function saveUserPreferences() {
+            const prefs = {
+                favoriteCompanies: currentFilter !== 'all' ? [currentFilter] : [],
+                preferredCategories: Array.from(document.querySelectorAll('.nav-link.active')).map(el => el.dataset.company),
+                lastSearch: searchQuery,
+                dateRange: dateRange,
+                theme: document.body.classList.contains('dark-mode') ? 'dark' : 'light',
+                lastVisit: new Date().toISOString()
+            };
+            localStorage.setItem('aiTrackerPrefs', JSON.stringify(prefs));
+            console.log('Preferences saved:', prefs);
+        }
+
+        function loadUserPreferences() {
+            const prefs = JSON.parse(localStorage.getItem('aiTrackerPrefs') || '{}');
+            console.log('Loading preferences:', prefs);
+            
+            if (prefs.lastSearch) {
+                searchQuery = prefs.lastSearch;
+                document.getElementById('searchInput').value = searchQuery;
+            }
+            
+            if (prefs.dateRange) {
+                dateRange = prefs.dateRange;
+                document.getElementById('dateSlider').value = dateRange;
+                document.getElementById('dateRangeLabel').textContent = dateRange === 1 ? '1 day' : `${dateRange} days`;
+            }
+            
+            if (prefs.theme === 'dark' && !document.body.classList.contains('dark-mode')) {
+                document.body.classList.add('dark-mode');
+            }
+            
+            return prefs;
+        }
+
+        // Export Functionality
+        function exportUpdates(format = 'json') {
+            const data = {
+                exported: new Date().toISOString(),
+                source: 'AI Updates Tracker',
+                filters: { 
+                    currentFilter, 
+                    searchQuery, 
+                    dateRange,
+                    totalResults: filteredUpdates.length
+                },
+                updates: filteredUpdates
+            };
+            
+            if (format === 'json') {
+                downloadFile(JSON.stringify(data, null, 2), 'ai-updates.json', 'application/json');
+            } else if (format === 'csv') {
+                const csv = convertToCSV(data.updates);
+                downloadFile(csv, 'ai-updates.csv', 'text/csv');
+            }
+            
+            showToast(`Exported ${filteredUpdates.length} updates as ${format.toUpperCase()}`, 'success');
+        }
+
+        function convertToCSV(updates) {
+            const headers = ['Date', 'Company', 'Title', 'Type', 'Link', 'Description'];
+            const rows = updates.map(update => [
+                new Date(update.date).toLocaleDateString(),
+                companyMeta[update.company]?.name || update.company,
+                update.title.replace(/"/g, '""'),
+                update.type,
+                update.link,
+                update.description.replace(/"/g, '""').substring(0, 200) + '...'
+            ]);
+            
+            const csvContent = [
+                headers.join(','),
+                ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+            ].join('\n');
+            
+            return csvContent;
+        }
+
+        function downloadFile(content, filename, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Add export button handler
+        function addExportButtons() {
+            const navbar = document.querySelector('.navbar');
+            const exportBtn = document.createElement('button');
+            exportBtn.className = 'refresh-btn';
+            exportBtn.title = 'Export data';
+            exportBtn.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z"/>
+                </svg>
+            `;
+            exportBtn.onclick = () => {
+                const format = confirm('Export as CSV? (Cancel for JSON)') ? 'csv' : 'json';
+                exportUpdates(format);
+            };
+            navbar.insertBefore(exportBtn, document.getElementById('refreshBtn'));
+        }
+
         // Initialize
         function init() {
+            const prefs = loadUserPreferences();
             setupEventListeners();
             initTheme();
             initMobileMenu();
             initTouchInteractions();
             improveModalForMobile();
+            addExportButtons();
             fetchUpdates();
+            
+            // Save preferences on changes
+            document.addEventListener('click', (e) => {
+                if (e.target.matches('.nav-link')) {
+                    setTimeout(saveUserPreferences, 100);
+                }
+            });
+            
+            // Save preferences periodically
+            setInterval(saveUserPreferences, 30000); // Every 30 seconds
         }
 
         // Debug helper
@@ -1739,6 +1860,9 @@
 
         // Add to window for easy access in console
         window.debugFiltering = debugFiltering;
+        window.exportUpdates = exportUpdates;
+        window.saveUserPreferences = saveUserPreferences;
+        window.loadUserPreferences = loadUserPreferences;
 
         // Start app when DOM is ready
         document.addEventListener('DOMContentLoaded', init);
