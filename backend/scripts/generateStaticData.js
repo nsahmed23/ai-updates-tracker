@@ -28,12 +28,12 @@ async function generateStaticData() {
       lastUpdated: new Date().toISOString()
     };
     
-    // Ensure _data directory exists
-    const dataDir = path.join(__dirname, '../../_data');
+    // Ensure frontend directory exists
+    const dataDir = path.join(__dirname, '../../frontend');
     await mkdir(dataDir, { recursive: true });
     
-    // Write to _data directory for Eleventy
-    const outputPath = path.join(dataDir, 'liveUpdates.json');
+    // Write to frontend directory
+    const outputPath = path.join(dataDir, 'data.json');
     await writeFile(outputPath, JSON.stringify(data, null, 2));
     
     console.log(`✅ Generated static data: ${data.updates.length} updates`);
@@ -50,9 +50,9 @@ async function generateStaticData() {
       lastUpdated: new Date().toISOString()
     };
     
-    const dataDir = path.join(__dirname, '../../_data');
+    const dataDir = path.join(__dirname, '../../frontend');
     await mkdir(dataDir, { recursive: true });
-    const outputPath = path.join(dataDir, 'liveUpdates.json');
+    const outputPath = path.join(dataDir, 'data.json');
     await writeFile(outputPath, JSON.stringify(fallbackData, null, 2));
     
     return fallbackData;

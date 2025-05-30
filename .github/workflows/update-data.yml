@@ -5,6 +5,9 @@ on:
     - cron: '0 */4 * * *'  # Every 4 hours
   workflow_dispatch:  # Allow manual trigger
 
+permissions:
+  contents: write
+
 jobs:
   update-data:
     runs-on: ubuntu-latest
@@ -37,8 +40,7 @@ jobs:
       run: |
         git config --local user.email "actions@github.com"
         git config --local user.name "GitHub Actions"
-        git add _data/liveUpdates.json || echo "No data file yet"
-        git add backend/ai_updates.db || echo "No database yet"
+        git add frontend/data.json || echo "No data file yet"
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
