@@ -826,33 +826,121 @@
         let dateRange = 30;
         let filteredUpdates = [...updates];
 
-        // Fetch updates from API
+        // Fetch updates from API with fallback to local data.json
         async function fetchUpdates() {
             try {
                 showLoading(true);
-                const params = new URLSearchParams({
-                    company: currentFilter,
-                    dateRange: dateRange,
-                    search: searchQuery
-                });
+                let dataSource = 'api';
+                let data;
                 
-                const response = await fetch(`${API_BASE_URL}/updates?${params}`);
-                if (!response.ok) throw new Error('Failed to fetch updates');
+                try {
+                    // First try to fetch from Vercel API
+                    const params = new URLSearchParams({
+                        company: currentFilter,
+                        dateRange: dateRange,
+                        search: searchQuery
+                    });
+                    
+                    const response = await fetch(`${API_BASE_URL}/updates?${params}`);
+                    if (!response.ok) throw new Error('API returned non-OK status');
+                    
+                    data = await response.json();
+                    console.log('Successfully fetched data from Vercel API');
+                    showToast('Updates loaded from live API', 'success');
+                    
+                } catch (apiError) {
+                    // If API fails (CORS, network error, etc.), fall back to local data.json
+                    console.warn('API fetch failed, falling back to local data.json:', apiError);
+                    dataSource = 'local';
+                    
+                    try {
+                        const localResponse = await fetch('./data.json');
+                        if (!localResponse.ok) throw new Error('Failed to fetch local data');
+                        
+                        const localData = await localResponse.json();
+                        
+                        // Transform local data to match API response format
+                        data = {
+                            updates: localData.updates || []
+                        };
+                        
+                        // Apply client-side filtering for local data
+                        if (currentFilter !== 'all') {
+                            data.updates = data.updates.filter(update => 
+                                update.company === currentFilter
+                            );
+                        }
+                        
+                        if (searchQuery) {
+                            const query = searchQuery.toLowerCase();
+                            data.updates = data.updates.filter(update =>
+                                update.title.toLowerCase().includes(query) ||
+                                update.description.toLowerCase().includes(query) ||
+                                (update.tags && update.tags.some(tag => tag.toLowerCase().includes(query)))
+                            );
+                        }
+                        
+                        if (dateRange !== 'all') {
+                            const cutoffDate = new Date();
+                            cutoffDate.setDate(cutoffDate.getDate() - parseInt(dateRange));
+                            data.updates = data.updates.filter(update =>
+                                new Date(update.date) >= cutoffDate
+                            );
+                        }
+                        
+                        console.log('Successfully loaded data from local data.json');
+                        showToast('Updates loaded from local cache (API unavailable)', 'info');
+                        
+                    } catch (localError) {
+                        console.error('Failed to load local data:', localError);
+                        throw new Error('Failed to load data from both API and local source');
+                    }
+                }
                 
-                const data = await response.json();
+                // Process the data regardless of source
                 updates = data.updates || [];
                 
                 // Sort by date (newest first)
                 updates.sort((a, b) => new Date(b.date) - new Date(a.date));
                 
+                // Log which source was used
+                console.log(`Data source used: ${dataSource}, loaded ${updates.length} updates`);
+                
                 filterUpdates();
-                await fetchStats();
+                
+                // Only fetch stats from API if we're using the API data source
+                if (dataSource === 'api') {
+                    await fetchStats();
+                } else {
+                    // Calculate stats locally when using local data
+                    calculateLocalStats();
+                }
+                
             } catch (error) {
-                console.error('Error fetching updates:', error);
-                showToast('Failed to fetch updates', 'error');
+                console.error('Error in fetchUpdates:', error);
+                showToast('Failed to load updates from any source', 'error');
             } finally {
                 showLoading(false);
             }
+        }
+
+        // Helper function to calculate stats from local data
+        function calculateLocalStats() {
+            stats = { total: 0 };
+            
+            // If we have the full dataset in memory, calculate stats
+            if (updates && updates.length > 0) {
+                stats.total = updates.length;
+                
+                // Count by company
+                updates.forEach(update => {
+                    if (update.company) {
+                        stats[update.company] = (stats[update.company] || 0) + 1;
+                    }
+                });
+            }
+            
+            updateSidebar();
         }
 
         // Fetch statistics
