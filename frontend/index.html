@@ -1049,29 +1049,8 @@
                             updates: localData.updates || []
                         };
                         
-                        // Apply client-side filtering for local data
-                        if (currentFilter !== 'all') {
-                            data.updates = data.updates.filter(update => 
-                                update.company === currentFilter
-                            );
-                        }
-                        
-                        if (searchQuery) {
-                            const query = searchQuery.toLowerCase();
-                            data.updates = data.updates.filter(update =>
-                                update.title.toLowerCase().includes(query) ||
-                                update.description.toLowerCase().includes(query) ||
-                                (update.tags && update.tags.some(tag => tag.toLowerCase().includes(query)))
-                            );
-                        }
-                        
-                        if (dateRange !== 'all') {
-                            const cutoffDate = new Date();
-                            cutoffDate.setDate(cutoffDate.getDate() - parseInt(dateRange));
-                            data.updates = data.updates.filter(update =>
-                                new Date(update.date) >= cutoffDate
-                            );
-                        }
+                        // DON'T pre-filter local data - let filterUpdates handle it
+                        console.log(`Loaded ${data.updates.length} total updates from data.json`);
                         
                         console.log('Successfully loaded data from local data.json');
                         showToast('Updates loaded from local cache (API unavailable)', 'info');
@@ -1209,7 +1188,37 @@
 
         // Filter updates
         function filterUpdates() {
-            filteredUpdates = updates;
+            // Start with all updates
+            let filtered = [...updates];
+            
+            // Apply company filter FIRST
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(update => 
+                    update.company === currentFilter
+                );
+                console.log(`Filtering by company: ${currentFilter}, found ${filtered.length} matches`);
+            }
+            
+            // Apply search filter
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                filtered = filtered.filter(update =>
+                    update.title.toLowerCase().includes(query) ||
+                    update.description.toLowerCase().includes(query)
+                );
+            }
+            
+            // Apply date range filter
+            if (dateRange < 365) {
+                const cutoffDate = new Date();
+                cutoffDate.setDate(cutoffDate.getDate() - dateRange);
+                filtered = filtered.filter(update =>
+                    new Date(update.date) >= cutoffDate
+                );
+            }
+            
+            filteredUpdates = filtered;
+            console.log(`Total filtered results: ${filteredUpdates.length} out of ${updates.length} total updates`);
             renderCards();
         }
 
@@ -1418,12 +1427,36 @@
             // Company filter
             document.addEventListener('click', (e) => {
                 if (e.target.matches('.nav-link')) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
                     document.querySelectorAll('.nav-link').forEach(link => {
                         link.classList.remove('active');
                     });
+                    
+                    // Add active class to clicked link
                     e.target.classList.add('active');
-                    currentFilter = e.target.dataset.company;
-                    fetchUpdates();
+                    
+                    // Update current filter
+                    const newFilter = e.target.dataset.company;
+                    console.log(`Switching from '${currentFilter}' to '${newFilter}' filter`);
+                    currentFilter = newFilter;
+                    
+                    // Apply filters immediately
+                    filterUpdates();
+                    
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        const sidebar = document.getElementById('sidebar');
+                        const overlay = document.getElementById('sidebarOverlay');
+                        if (sidebar && overlay) {
+                            setTimeout(() => {
+                                sidebar.classList.remove('open');
+                                overlay.classList.remove('active');
+                                document.body.style.overflow = '';
+                            }, 300);
+                        }
+                    }
                 }
                 
                 if (e.target.matches('#closeModal') || e.target.matches('.detail-modal')) {
@@ -1507,6 +1540,32 @@
             improveModalForMobile();
             fetchUpdates();
         }
+
+        // Debug helper
+        function debugFiltering() {
+            console.group('Filter Debug Information');
+            console.log('Current filter:', currentFilter);
+            console.log('Total updates:', updates.length);
+            console.log('Filtered updates:', filteredUpdates.length);
+            
+            const companyCounts = {};
+            updates.forEach(update => {
+                companyCounts[update.company] = (companyCounts[update.company] || 0) + 1;
+            });
+            console.log('Updates per company:', companyCounts);
+            
+            if (currentFilter !== 'all') {
+                const matchingUpdates = updates.filter(u => u.company === currentFilter);
+                console.log(`Updates matching filter '${currentFilter}':`, matchingUpdates.length);
+                if (matchingUpdates.length === 0) {
+                    console.warn(`No updates found for company '${currentFilter}'. Check if company name matches exactly.`);
+                }
+            }
+            console.groupEnd();
+        }
+
+        // Add to window for easy access in console
+        window.debugFiltering = debugFiltering;
 
         // Start app when DOM is ready
         document.addEventListener('DOMContentLoaded', init);
