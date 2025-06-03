@@ -1,15 +1,180 @@
 {
   "updates": [
     {
+      "id": "c615e0f14d617a4d7209edded918fe73",
+      "title": "Reinforcement learning with prediction-based rewards",
+      "description": "We’ve developed Random Network Distillation (RND), a prediction-based method for encouraging reinforcement learning agents to explore their environments through curiosity, which for the first time exceeds average human performance on Montezuma’s Revenge.",
+      "link": "https://openai.com/index/reinforcement-learning-with-prediction-based-rewards",
+      "date": "Wed, 31 Oct 2018 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "269c5a7ce9296c35c352296d89b78854",
+      "title": "Improving mathematical reasoning with process supervision",
+      "description": "We've trained a model to achieve a new state-of-the-art in mathematical problem solving by rewarding each correct step of reasoning (“process supervision”) instead of simply rewarding the correct final answer (“outcome supervision”). In addition to boosting performance relative to outcome supervision, process supervision also has an important alignment benefit: it directly trains the model to produce a chain-of-thought that is endorsed by humans.",
+      "link": "https://openai.com/index/improving-mathematical-reasoning-with-process-supervision",
+      "date": "Wed, 31 May 2023 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "49e2b25907bebe1127d0fe6813bec78b",
+      "title": "Building an early warning system for LLM-aided biological threat creation",
+      "description": "We’re developing a blueprint for evaluating the risk that a large language model (LLM) could aid someone in creating a biological threat. In an evaluation involving both biology experts and students, we found that GPT-4 provides at most a mild uplift in biological threat creation accuracy. While this uplift is not large enough to be conclusive, our finding is a starting point for continued research and community deliberation.",
+      "link": "https://openai.com/index/building-an-early-warning-system-for-llm-aided-biological-threat-creation",
+      "date": "Wed, 31 Jan 2024 08:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "943c0f2a7c707724cb9203cf0bc1b661",
+      "title": "Requests for Research 2.0",
+      "description": "We’re releasing a new batch of seven unsolved problems which have come up in the course of our research at OpenAI.",
+      "link": "https://openai.com/index/requests-for-research-2",
+      "date": "Wed, 31 Jan 2018 08:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "ed8d9facc63beb342e664c88c99a72f0",
+      "title": "DALL·E: Introducing outpainting",
+      "description": "Extend creativity and tell a bigger story with DALL·E images of any size.",
+      "link": "https://openai.com/index/dall-e-introducing-outpainting",
+      "date": "Wed, 31 Aug 2022 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "58348a7b718350492910beaadf99c3eb",
+      "title": "Introducing SimpleQA",
+      "description": "A factuality benchmark called SimpleQA that measures the ability for language models to answer short, fact-seeking questions.",
+      "link": "https://openai.com/index/introducing-simpleqa",
+      "date": "Wed, 30 Oct 2024 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
+    },
+    {
+      "id": "0752c16f37b1e8aa11761153bfcf835b",
+      "title": "Introducing ChatGPT",
+      "description": "We’ve trained a model called ChatGPT which interacts in a conversational way. The dialogue format makes it possible for ChatGPT to answer followup questions, admit its mistakes, challenge incorrect premises, and reject inappropriate requests.",
+      "link": "https://openai.com/index/chatgpt",
+      "date": "Wed, 30 Nov 2022 08:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "c306a11a70d8777d8a9519d4d5ae072b",
+      "title": "OpenAI Fellows Fall 2018",
+      "description": "We’re now accepting applications for the next cohort of OpenAI Fellows, a program which offers a compensated 6-month apprenticeship in AI research at OpenAI.",
+      "link": "https://openai.com/index/openai-fellows",
+      "date": "Wed, 30 May 2018 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
       "id": "c12b33dc93cc0439463876826c801775",
       "title": "Benchmarking LLMs for global health",
       "description": "Generative AI",
       "link": "https://research.google/blog/benchmarking-llms-for-global-health/",
       "date": "Wed, 30 Apr 2025 10:33:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "53f2a5bd00a56fe8c1aed7aa7d3d914d",
+      "title": "Sub-processor list",
+      "description": "Sub-processor list. This page provides information about the Sub-processors OpenAI has engaged to provide processing activities on Customer Data as defined in the OpenAI Data Processing Agreement.",
+      "link": "https://openai.com/policies/sub-processor-list",
+      "date": "Wed, 30 Apr 2025 00:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
+    },
+    {
+      "id": "924d731c7f202e229334c222f49e963e",
+      "title": "Sub-processor list—April 2025 update",
+      "description": "This page provides information about the Sub-processors OpenAI has engaged to provide processing activities on Customer Data as defined in the OpenAI Data Processing Agreement.",
+      "link": "https://openai.com/policies/sub-processor-list-april-2025-update",
+      "date": "Wed, 30 Apr 2025 00:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
+    },
+    {
+      "id": "9522a6f05d61dda784d9c61ae4ceb156",
+      "title": "Sam Altman returns as CEO, OpenAI has a new initial board",
+      "description": "Mira Murati as CTO, Greg Brockman returns as President. Read messages from CEO Sam Altman and board chair Bret Taylor.",
+      "link": "https://openai.com/index/sam-altman-returns-as-ceo-openai-has-a-new-initial-board",
+      "date": "Wed, 29 Nov 2023 08:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "b7b217d40d928c24a384c61798a487f3",
+      "title": "Automating customer support agents",
+      "description": "MavenAGI is a new software company for the AI era. They recently launched an AI customer service agent, built on the flexibility of GPT-4, which a number of companies like Tripadvisor, Clickup and Rho are already using to save time and better serve their customers.",
+      "link": "https://openai.com/index/mavenagi-launches-automated-customer-support-agents-powered-by-openai",
+      "date": "Wed, 29 May 2024 09:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "2bd83cecdbf872cc330d84ecf7ebeecf",
+      "title": "The Newsroom AI Catalyst: a global program with WAN-IFRA",
+      "description": "We’re collaborating with WAN-IFRA, the World Association of News Publishers, to launch a global accelerator program that will assist over 100 news publishers to explore and integrate AI in their newsroom.",
+      "link": "https://openai.com/index/newsroom-ai-catalyst-global-program-with-wan-ifra",
+      "date": "Wed, 29 May 2024 08:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "183206df665dc826cc2c1f732f187dc1",
+      "title": "Enhancing news in ChatGPT with The Atlantic ",
+      "description": "The Atlantic is announcing a strategic content and product partnership with OpenAI, which positions The Atlantic as a premium news source within OpenAI. The Atlantic’s articles will be discoverable within OpenAI’s products, including ChatGPT, and as a partner, The Atlantic will help to shape how news is surfaced and presented in future real-time discovery products.",
+      "link": "https://openai.com/index/enhancing-news-in-chatgpt-with-the-atlantic",
+      "date": "Wed, 29 May 2024 07:30:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "bef7c0537befd86c3df019909c061d48",
+      "title": "A Content and Product Partnership with Vox Media",
+      "description": "In a multi-faceted agreement, Vox Media’s content will enhance the output of OpenAI’s ChatGPT, and the company will build on OpenAI’s technology to develop products to better serve its audiences and advertisers.",
+      "link": "https://openai.com/index/a-content-and-product-partnership-with-vox-media",
+      "date": "Wed, 29 May 2024 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
     },
     {
       "id": "ff7775c876b6a72771c4460259fa8b85",
@@ -17,10 +182,21 @@
       "description": "Human-Computer Interaction and Visualization",
       "link": "https://research.google/blog/chatdirector-enhancing-video-conferencing-with-space-aware-scene-rendering-and-speech-driven-layout-transition/",
       "date": "Wed, 29 May 2024 00:26:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "fa64b294c1b7deea3b94c636f6f6ac46",
+      "title": "DALL·E now available without waitlist",
+      "description": "New users can start creating straight away. Lessons learned from deployment and improvements to our safety systems make wider availability possible.",
+      "link": "https://openai.com/index/dall-e-now-available-without-waitlist",
+      "date": "Wed, 28 Sep 2022 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
     },
     {
       "id": "299afe32df43300ac8a497cd52c11597",
@@ -28,10 +204,10 @@
       "description": "In this post, we walk through how to build a multi-agent investment research assistant using the multi-agent collaboration capability of Amazon Bedrock. Our solution demonstrates how a team of specialized AI agents can work together to analyze financial news, evaluate stock performance, optimize portfolio allocations, and deliver comprehensive investment insights—all orchestrated through a unified, natural language interface.",
       "link": "https://aws.amazon.com/blogs/machine-learning/part-3-building-an-ai-powered-assistant-for-investment-research-with-multi-agent-collaboration-in-amazon-bedrock-and-amazon-bedrock-data-automation/",
       "date": "Wed, 28 May 2025 18:39:06 +0000",
-      "company": "awsmachinelearning",
+      "company": "aws",
       "source": "AWS Machine Learning",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:04"
     },
     {
       "id": "455789fb7da52eaca3283abefb3bdacb",
@@ -39,10 +215,10 @@
       "description": "This post explores deploying a text-to-SQL pipeline using generative AI models and Amazon Bedrock to ask natural language questions to a genomics database. We demonstrate how to implement an AI assistant web interface with AWS Amplify and explain the prompt engineering strategies adopted to generate the SQL queries. Finally, we present instructions to deploy the service in your own AWS account.",
       "link": "https://aws.amazon.com/blogs/machine-learning/a-generative-ai-prototype-with-amazon-bedrock-transforms-life-sciences-and-the-genome-analysis-process/",
       "date": "Wed, 28 May 2025 18:36:14 +0000",
-      "company": "awsmachinelearning",
+      "company": "aws",
       "source": "AWS Machine Learning",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:04"
     },
     {
       "id": "467509315a0895f4570d974682eaa0f9",
@@ -50,10 +226,10 @@
       "description": "We are excited to announce the availability of Gemma 3 27B Instruct models through Amazon Bedrock Marketplace and Amazon SageMaker JumpStart. In this post, we show you how to get started with Gemma 3 27B Instruct on both Amazon Bedrock Marketplace and SageMaker JumpStart, and how to use the model’s powerful instruction-following capabilities in your applications.",
       "link": "https://aws.amazon.com/blogs/machine-learning/gemma-3-27b-model-now-available-on-amazon-bedrock-marketplace-and-amazon-sagemaker-jumpstart/",
       "date": "Wed, 28 May 2025 18:30:05 +0000",
-      "company": "awsmachinelearning",
+      "company": "aws",
       "source": "AWS Machine Learning",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:04"
     },
     {
       "id": "3f57a48e9f04af4f323f1734da63d14c",
@@ -61,10 +237,10 @@
       "description": "In this post, we walk through building a full-stack application that processes multimodal content using Amazon Bedrock Data Automation, stores the extracted information in an Amazon Bedrock knowledge base, and enables natural language querying through a RAG-based Q&A interface.",
       "link": "https://aws.amazon.com/blogs/machine-learning/building-a-multimodal-rag-based-application-using-amazon-bedrock-data-automation-and-amazon-bedrock-knowledge-bases/",
       "date": "Wed, 28 May 2025 16:53:27 +0000",
-      "company": "awsmachinelearning",
+      "company": "aws",
       "source": "AWS Machine Learning",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:04"
     },
     {
       "id": "7b7f10b999f23066c42f8559a8179ae0",
@@ -72,10 +248,10 @@
       "description": "In this post, we show you how to implement and evaluate three powerful techniques for tailoring FMs to your business needs: RAG, fine-tuning, and a hybrid approach combining both methods. We provid ready-to-use code to help you experiment with these approaches and make informed decisions based on your specific use case and dataset.",
       "link": "https://aws.amazon.com/blogs/machine-learning/tailoring-foundation-models-for-your-business-needs-a-comprehensive-guide-to-rag-fine-tuning-and-hybrid-approaches/",
       "date": "Wed, 28 May 2025 16:50:20 +0000",
-      "company": "awsmachinelearning",
+      "company": "aws",
       "source": "AWS Machine Learning",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:04"
     },
     {
       "id": "4b92846bf4de93a18bb32898f97a5d83",
@@ -83,10 +259,76 @@
       "description": "Rufus, an AI-powered shopping assistant, relies on many components to deliver its customer experience including a foundation LLM (for response generation) and a query planner (QP) model for query classification and retrieval enhancement. This post focuses on how the QP model used draft centric speculative decoding (SD)—also called parallel decoding—with AWS AI chips to meet the demands of Prime Day. By combining parallel decoding with AWS Trainium and Inferentia chips, Rufus achieved two times faster response times, a 50% reduction in inference costs, and seamless scalability during peak traffic.",
       "link": "https://aws.amazon.com/blogs/machine-learning/how-rufus-doubled-their-inference-speed-and-handled-prime-day-traffic-with-aws-ai-chips-and-parallel-decoding/",
       "date": "Wed, 28 May 2025 13:00:09 +0000",
-      "company": "awsmachinelearning",
+      "company": "aws",
       "source": "AWS Machine Learning",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:04"
+    },
+    {
+      "id": "d0b4a24c1a1b3703cfb5c5e7a41b478f",
+      "title": "Introducing OpenAI London",
+      "description": "We are excited to announce OpenAI’s first international expansion with a new office in London, United Kingdom.",
+      "link": "https://openai.com/index/introducing-openai-london",
+      "date": "Wed, 28 Jun 2023 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "7252ea39070257a59f240deb4fb3cd7a",
+      "title": "Faster physics in Python",
+      "description": "We’re open-sourcing a high-performance Python library for robotic simulation using the MuJoCo engine, developed over our past year of robotics research.",
+      "link": "https://openai.com/index/faster-physics-in-python",
+      "date": "Wed, 28 Jun 2017 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "8cc87888c880780bd6f8ecbbf4d4171e",
+      "title": "Introducing Triton: Open-source GPU programming for neural networks",
+      "description": "We’re releasing Triton 1.0, an open-source Python-like programming language which enables researchers with no CUDA experience to write highly efficient GPU code—most of the time on par with what an expert would be able to produce.",
+      "link": "https://openai.com/index/triton",
+      "date": "Wed, 28 Jul 2021 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "3d003fd3de3adaa8eb571f6a54724169",
+      "title": "OpenAI’s comment to the NTIA on open model weights",
+      "description": "OpenAI’s comment to the NTIA on open model weights\n\nThis comment was submitted by OpenAI in response to NTIA’s March 2024 Request for Information on Dual-Use Foundation Models with Widely Available Weights.",
+      "link": "https://openai.com/global-affairs/openai-s-comment-to-the-ntia-on-open-model-weights",
+      "date": "Wed, 27 Mar 2024 00:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "26b9c9021262a3d2762f0eea04994699",
+      "title": "OpenAI Gym Beta",
+      "description": "We’re releasing the public beta of OpenAI Gym, a toolkit for developing and comparing reinforcement learning (RL) algorithms. It consists of a growing suite of environments (from simulated robots to Atari games), and a site for comparing and reproducing results.",
+      "link": "https://openai.com/index/openai-gym-beta",
+      "date": "Wed, 27 Apr 2016 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:45"
+    },
+    {
+      "id": "468fa4462bfc6416930375ddad960ed2",
+      "title": "Security on the path to AGI",
+      "description": "At OpenAI, we proactively adapt, including by building comprehensive security measures directly into our infrastructure and models.",
+      "link": "https://openai.com/index/security-on-the-path-to-agi",
+      "date": "Wed, 26 Mar 2025 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
     },
     {
       "id": "d89efe6d53d53bdb6e471b1b560b6f0f",
@@ -94,10 +336,131 @@
       "description": "Generative AI",
       "link": "https://research.google/blog/rich-human-feedback-for-text-to-image-generation/",
       "date": "Wed, 26 Jun 2024 12:57:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "8806b45d148ec29c2f0e734ed4302cb3",
+      "title": "Frontier Model Forum",
+      "description": "We’re forming a new industry body to promote the safe and responsible development of frontier AI systems: advancing AI safety research, identifying best practices and standards, and facilitating information sharing among policymakers and industry.",
+      "link": "https://openai.com/index/frontier-model-forum",
+      "date": "Wed, 26 Jul 2023 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "14dc25f25e74c4d5076856d264f493cd",
+      "title": "Frontier Model Forum updates",
+      "description": "Together with Anthropic, Google, and Microsoft, we’re announcing the new Executive Director of the Frontier Model Forum and a new $10 million AI Safety Fund.",
+      "link": "https://openai.com/index/frontier-model-forum-updates",
+      "date": "Wed, 25 Oct 2023 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "a3ea46394480c1142f76125e202c4608",
+      "title": "Adversarial training methods for semi-supervised text classification",
+      "description": "",
+      "link": "https://openai.com/index/adversarial-training-methods-for-semi-supervised-text-classification",
+      "date": "Wed, 25 May 2016 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:45"
+    },
+    {
+      "id": "d483456b56ddc7766a8bf1b86a03e8fe",
+      "title": "Team update",
+      "description": "We’d like to welcome the latest set of team members to OpenAI (and we’re still hiring!)",
+      "link": "https://openai.com/index/team-update",
+      "date": "Wed, 25 May 2016 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:45"
+    },
+    {
+      "id": "0509d69412f8bdf67d1b5f55bb4a3953",
+      "title": "OpenAI Scholars 2018: Meet our Scholars",
+      "description": "Our first class of OpenAI Scholars is underway, and you can now follow along as this group of experienced software developers becomes machine learning practitioners.",
+      "link": "https://openai.com/index/openai-scholars-2018-meet-our-scholars",
+      "date": "Wed, 25 Jul 2018 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "1b1fb86839f51446dada25aa5c0912f9",
+      "title": "OpenAI Baselines: DQN",
+      "description": "We’re open-sourcing OpenAI Baselines, our internal effort to reproduce reinforcement learning algorithms with performance on par with published results. We’ll release the algorithms over upcoming months; today’s release includes DQN and three of its variants.",
+      "link": "https://openai.com/index/openai-baselines-dqn",
+      "date": "Wed, 24 May 2017 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "53e2a34cfcb0a899b572ac7a9b680832",
+      "title": "Improving Model Safety Behavior with Rule-Based Rewards",
+      "description": "We've developed and applied a new method leveraging Rule-Based Rewards (RBRs) that aligns models to behave safely without extensive human data collection.",
+      "link": "https://openai.com/index/improving-model-safety-behavior-with-rule-based-rewards",
+      "date": "Wed, 24 Jul 2024 09:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "54b4653a0002ebb944b07687fcd40c91",
+      "title": "Our approach to alignment research",
+      "description": "We are improving our AI systems’ ability to learn from human feedback and to assist humans at evaluating AI. Our goal is to build a sufficiently aligned AI system that can help us solve all other alignment problems.",
+      "link": "https://openai.com/index/our-approach-to-alignment-research",
+      "date": "Wed, 24 Aug 2022 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "84e2e8cb8d3cc1a26a04a27b24edad89",
+      "title": "Introducing ChatGPT and Whisper APIs",
+      "description": "Developers can now integrate ChatGPT and Whisper models into their apps and products through our API.",
+      "link": "https://openai.com/index/introducing-chatgpt-and-whisper-apis",
+      "date": "Wed, 24 Apr 2024 00:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "6653783502af54e8c8ef0e73b1f89965",
+      "title": "GPT-4 API general availability and deprecation of older models in the Completions API",
+      "description": "GPT-3.5 Turbo, DALL·E and Whisper APIs are also generally available, and we are releasing a deprecation plan for older models of the Completions API, which will retire at the beginning of 2024.",
+      "link": "https://openai.com/index/gpt-4-api-general-availability",
+      "date": "Wed, 24 Apr 2024 00:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "3bf23c411d7688638210580f53ee5580",
+      "title": "Accelerating the development of life-saving treatments",
+      "description": "Accelerating the development of life-saving treatments.",
+      "link": "https://openai.com/index/moderna",
+      "date": "Wed, 24 Apr 2024 00:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
     },
     {
       "id": "3b817e30fb2fe412735e5266b14c5e62",
@@ -105,10 +468,21 @@
       "description": "Algorithms & Theory",
       "link": "https://research.google/blog/scalable-self-improvement-for-compiler-optimization/",
       "date": "Wed, 23 Oct 2024 16:26:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "d4f457e3d59d35d8ffdfa75049910a21",
+      "title": "Simplifying, stabilizing, and scaling continuous-time consistency models",
+      "description": "We’ve simplified, stabilized, and scaled continuous-time consistency models, achieving comparable sample quality to leading diffusion models, while using only two sampling steps.",
+      "link": "https://openai.com/index/simplifying-stabilizing-and-scaling-continuous-time-consistency-models",
+      "date": "Wed, 23 Oct 2024 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
     },
     {
       "id": "78f1e588b28742b6641ca775e52097b4",
@@ -116,10 +490,32 @@
       "description": "Algorithms & Theory",
       "link": "https://research.google/blog/introducing-mobility-ai-advancing-urban-transportation/",
       "date": "Wed, 23 Apr 2025 12:11:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "ead4658c2abc6a5d01e5a28ec860bc50",
+      "title": "Introducing our latest image generation model in the API",
+      "description": "Our latest image generation model is now available in the API via ‘gpt-image-1’—enabling developers and businesses to build professional-grade, customizable visuals directly into their own tools and platforms.",
+      "link": "https://openai.com/index/image-generation-api",
+      "date": "Wed, 23 Apr 2025 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
+    },
+    {
+      "id": "8002d7a7b77adad3ff02969c2980bb4b",
+      "title": "A landmark multi-year global partnership with News Corp",
+      "description": "Companies Join Forces to Enrich OpenAI’s Generative AI Products and Platforms with Premium Journalism",
+      "link": "https://openai.com/index/news-corp-and-openai-sign-landmark-multi-year-global-partnership",
+      "date": "Wed, 22 May 2024 13:15:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
     },
     {
       "id": "d3035dba791bf88ce53507de6cc1f106",
@@ -127,10 +523,32 @@
       "description": "Machine Intelligence",
       "link": "https://research.google/blog/lanistr-multimodal-learning-from-structured-and-unstructured-data/",
       "date": "Wed, 22 May 2024 01:06:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "b64c7c3082fbfdd1e02710452a02baea",
+      "title": "Bertelsmann powers creativity and productivity with OpenAI",
+      "description": "Bertelsmann, the global media, services, and education company headquartered in Germany, will integrate OpenAI’s technology across multiple brands around the world.",
+      "link": "https://openai.com/index/bertelsmann-powers-creativity-and-productivity-with-openai",
+      "date": "Wed, 22 Jan 2025 17:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
+    },
+    {
+      "id": "35ef9a6cf50e80a0888737ac896dd9bd",
+      "title": "Trading inference-time compute for adversarial robustness",
+      "description": "Trading Inference-Time Compute for Adversarial Robustness",
+      "link": "https://openai.com/index/trading-inference-time-compute-for-adversarial-robustness",
+      "date": "Wed, 22 Jan 2025 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
     },
     {
       "id": "febaed1ccc4b7ff8733165b9ef162c2e",
@@ -138,10 +556,76 @@
       "description": "Distributed Systems & Parallel Computing",
       "link": "https://research.google/blog/parfait-enabling-private-ai-with-research-tools/",
       "date": "Wed, 22 Jan 2025 09:27:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "a6b0e7cd0725456521f65248436ae393",
+      "title": "Introducing Whisper",
+      "description": "We’ve trained and are open-sourcing a neural net called Whisper that approaches human level robustness and accuracy on English speech recognition.",
+      "link": "https://openai.com/index/whisper",
+      "date": "Wed, 21 Sep 2022 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "90a63b3736763458f61271cf2c7692ea",
+      "title": "Integrate Amazon Bedrock Agents with Slack",
+      "description": "In this post, we present a solution to incorporate Amazon Bedrock Agents in your Slack workspace. We guide you through configuring a Slack workspace, deploying integration components in Amazon Web Services, and using this solution.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/integrate-amazon-bedrock-agents-with-slack/",
+      "date": "Wed, 21 May 2025 19:54:03 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-05-30 01:07:04"
+    },
+    {
+      "id": "746d561bfbd540824c56516f97040a5c",
+      "title": "Secure distributed logging in scalable multi-account deployments using Amazon Bedrock and LangChain",
+      "description": "In this post, we present a solution for securing distributed logging multi-account deployments using Amazon Bedrock and LangChain.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/secure-distributed-logging-in-scalable-multi-account-deployments-using-amazon-bedrock-and-langchain/",
+      "date": "Wed, 21 May 2025 16:46:26 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-05-30 01:07:04"
+    },
+    {
+      "id": "2ba94dc2dae187af50a903c0fbf1c9ec",
+      "title": "New tools and features in the Responses API",
+      "description": "New features in the Responses API: Remote MCP, image gen, Code Interpreter, and more. Powering faster, smarter agents with GPT-4o & o-series models, plus new features for reliability and efficiency.",
+      "link": "https://openai.com/index/new-tools-and-features-in-the-responses-api",
+      "date": "Wed, 21 May 2025 08:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
+    },
+    {
+      "id": "3ecaceda886630cabf0bd13ac446f1bf",
+      "title": "Sam & Jony introduce io",
+      "description": "Building a family of AI products for everyone.",
+      "link": "https://openai.com/sam-and-jony",
+      "date": "Wed, 21 May 2025 00:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
+    },
+    {
+      "id": "800d45ac81532a9173be92336e4c3e76",
+      "title": "Faulty reward functions in the wild",
+      "description": "Reinforcement learning algorithms can break in surprising, counterintuitive ways. In this post we’ll explore one failure mode, which is where you misspecify your reward function.",
+      "link": "https://openai.com/index/faulty-reward-functions",
+      "date": "Wed, 21 Dec 2016 08:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
     },
     {
       "id": "f2647167238edaf61f8b208d4cd31afd",
@@ -149,10 +633,10 @@
       "description": "Human-Computer Interaction and Visualization",
       "link": "https://research.google/blog/restoring-speaker-voices-with-zero-shot-cross-lingual-voice-transfer-for-tts/",
       "date": "Wed, 21 Aug 2024 22:37:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
     },
     {
       "id": "2824d7e0a627ecaf3ac4bbabfa44068a",
@@ -160,10 +644,21 @@
       "description": "Generative AI",
       "link": "https://research.google/blog/speculative-rag-enhancing-retrieval-augmented-generation-through-drafting/",
       "date": "Wed, 21 Aug 2024 17:45:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "dbdd108814e25f6e863b6eff018060a4",
+      "title": " Building smarter maps with GPT-4o vision fine-tuning",
+      "description": "Building smarter maps with GPT-4o vision fine-tuning",
+      "link": "https://openai.com/index/grab",
+      "date": "Wed, 20 Nov 2024 17:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
     },
     {
       "id": "742531b15e82e6c45dc31d0e5f374459",
@@ -171,10 +666,32 @@
       "description": "Generative AI",
       "link": "https://research.google/blog/scaling-wearable-foundation-models/",
       "date": "Wed, 20 Nov 2024 14:34:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "42cc09126859fa59038a7cc966d5087b",
+      "title": "DALL·E now available in beta",
+      "description": "We’ll invite 1 million people from our waitlist over the coming weeks. Users can create with DALL·E using free credits that refill every month, and buy additional credits in 115-generation increments for $15.",
+      "link": "https://openai.com/index/dall-e-now-available-in-beta",
+      "date": "Wed, 20 Jul 2022 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "0c083cd62804faa3a28e9f8a13373baf",
+      "title": "Scaling laws for reward model overoptimization",
+      "description": "",
+      "link": "https://openai.com/index/scaling-laws-for-reward-model-overoptimization",
+      "date": "Wed, 19 Oct 2022 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
     },
     {
       "id": "680ea40aab6dcbac26f840140fb5526c",
@@ -182,10 +699,21 @@
       "description": "Generative AI",
       "link": "https://research.google/blog/accelerating-scientific-breakthroughs-with-an-ai-co-scientist/",
       "date": "Wed, 19 Feb 2025 06:00:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "f753646a17b09eb591c12d406f1f3a7f",
+      "title": "OpenAI Fellows Summer 2018: Final projects",
+      "description": "Our first cohort of OpenAI Fellows has concluded, with each Fellow going from a machine learning beginner to core OpenAI contributor in the course of a 6-month apprenticeship.",
+      "link": "https://openai.com/index/openai-summer-fellows-2018",
+      "date": "Wed, 19 Dec 2018 08:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
     },
     {
       "id": "ca3e487bfea4de2b5fba25e2ea1112b9",
@@ -193,10 +721,65 @@
       "description": "Climate & Sustainability",
       "link": "https://research.google/blog/whistles-songs-boings-and-biotwangs-recognizing-whale-vocalizations-with-ai/",
       "date": "Wed, 18 Sep 2024 15:05:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "1aeda24263feb69b6ed4166464b28a29",
+      "title": "Asymmetric actor critic for image-based robot learning",
+      "description": "",
+      "link": "https://openai.com/index/asymmetric-actor-critic-for-image-based-robot-learning",
+      "date": "Wed, 18 Oct 2017 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "74790de97e93dbb7f4ba1a5d22926fbf",
+      "title": "Sim-to-real transfer of robotic control with dynamics randomization",
+      "description": "",
+      "link": "https://openai.com/index/sim-to-real-transfer-of-robotic-control-with-dynamics-randomization",
+      "date": "Wed, 18 Oct 2017 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "1b28d82ccb411353a94b2db966ac01b1",
+      "title": "DALL·E 2 research preview update",
+      "description": "Early users have created over 3 million images to date and helped us improve our safety processes. We’re excited to begin adding up to 1,000 new users from our waitlist each week.",
+      "link": "https://openai.com/index/dall-e-2-update",
+      "date": "Wed, 18 May 2022 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "b42b60651d4193b90b4dabc774e1a895",
+      "title": "OpenAI Five Benchmark",
+      "description": "The OpenAI Five Benchmark match is now over!",
+      "link": "https://openai.com/index/openai-five-benchmark",
+      "date": "Wed, 18 Jul 2018 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "0da02d16c13cc46a97898bfd166b7857",
+      "title": "Evolved Policy Gradients",
+      "description": "We’re releasing an experimental metalearning approach called Evolved Policy Gradients, a method that evolves the loss function of learning agents, which can enable fast training on novel tasks. Agents trained with EPG can succeed at basic tasks at test time that were outside their training regime, like learning to navigate to an object on a different side of the room from where it was placed during training.",
+      "link": "https://openai.com/index/evolved-policy-gradients",
+      "date": "Wed, 18 Apr 2018 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
     },
     {
       "id": "49443c7737ff10b06c67473d75b778dd",
@@ -204,10 +787,32 @@
       "description": "Our research study, in collaboration with CrowdDNA, aims to understand people's relationship with social media ads across different social media platforms.",
       "link": "https://research.facebook.com/blog/2023/5/how-generational-differences-affect-consumer-attitudes-towards-ads/",
       "date": "Wed, 17 May 2023 10:52:00",
-      "company": "metaairesearch",
+      "company": "meta",
       "source": "Meta AI Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "ad07ba94c6767e49a32711a0965312d7",
+      "title": "Image GPT",
+      "description": "We find that, just as a large transformer model trained on language can generate coherent text, the same exact model trained on pixel sequences can generate coherent image completions and samples. By establishing a correlation between sample quality and image classification accuracy, we show that our best generative model also contains features competitive with top convolutional nets in the unsupervised setting.",
+      "link": "https://openai.com/index/image-gpt",
+      "date": "Wed, 17 Jun 2020 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "a5e4ee49090e28ba3f04fa4e187f1467",
+      "title": "Prover-Verifier Games improve legibility of language model outputs",
+      "description": "desc",
+      "link": "https://openai.com/index/prover-verifier-games-improve-legibility",
+      "date": "Wed, 17 Jul 2024 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
     },
     {
       "id": "f852e7f58e38dafd47831ae81aade2b2",
@@ -215,10 +820,98 @@
       "description": "Machine Perception",
       "link": "https://research.google/blog/hdr-photo-editing-with-machine-learning/",
       "date": "Wed, 16 Oct 2024 11:39:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "c1b54d6765712601a18ab55c32dd36b4",
+      "title": "AI and compute",
+      "description": "We’re releasing an analysis showing that since 2012, the amount of compute used in the largest AI training runs has been increasing exponentially with a 3.4-month doubling time (by comparison, Moore’s Law had a 2-year doubling period)[^footnote-correction]. Since 2012, this metric has grown by more than 300,000x (a 2-year doubling period would yield only a 7x increase). Improvements in compute have been a key component of AI progress, so as long as this trend continues, it’s worth preparing for the implications of systems far outside today’s capabilities.",
+      "link": "https://openai.com/index/ai-and-compute",
+      "date": "Wed, 16 May 2018 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "0be526fda33413e06f789689787a1dfa",
+      "title": "OpenAI acquires Global Illumination",
+      "description": "The entire team has joined OpenAI.",
+      "link": "https://openai.com/index/openai-acquires-global-illumination",
+      "date": "Wed, 16 Aug 2023 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "ed6e6d47189a9f218ecfb7f6050bd809",
+      "title": "More on Dota 2",
+      "description": "Our Dota 2 result shows that self-play can catapult the performance of machine learning systems from far below human level to superhuman, given sufficient compute. In the span of a month, our system went from barely matching a high-ranked player to beating the top pros and has continued to improve since then. Supervised deep learning systems can only be as good as their training datasets, but in self-play systems, the available data improves automatically as the agent gets better.",
+      "link": "https://openai.com/index/more-on-dota-2",
+      "date": "Wed, 16 Aug 2017 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "0d97873fa4702d5c4ad3fc9160a9fed4",
+      "title": "Thinking with images",
+      "description": "OpenAI o3 and o4-mini represent a significant breakthrough in visual perception by reasoning with images in their chain of thought.",
+      "link": "https://openai.com/index/thinking-with-images",
+      "date": "Wed, 16 Apr 2025 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
+    },
+    {
+      "id": "ff131a0cb2c988b80e2feb85c7334527",
+      "title": "Introducing OpenAI o3 and o4-mini",
+      "description": "Our smartest and most capable models to date with full tool access",
+      "link": "https://openai.com/index/introducing-o3-and-o4-mini",
+      "date": "Wed, 16 Apr 2025 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
+    },
+    {
+      "id": "7a5a8bcf66edabd8ee4faa3bd4393e07",
+      "title": "OpenAI o3 and o4-mini System Card",
+      "description": "OpenAI o3 and OpenAI o4-mini combine state-of-the-art reasoning with full tool capabilities—web browsing, Python, image and file analysis, image generation, canvas, automations, file search, and memory.",
+      "link": "https://openai.com/index/o3-o4-mini-system-card",
+      "date": "Wed, 16 Apr 2025 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
+    },
+    {
+      "id": "80efa388a1c4470b40ec86c0526c6229",
+      "title": "Emergence of grounded compositional language in multi-agent populations",
+      "description": "",
+      "link": "https://openai.com/index/emergence-of-grounded-compositional-language-in-multi-agent-populations",
+      "date": "Wed, 15 Mar 2017 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "f48dae46279f0c6cc73299c2cc1287e8",
+      "title": "Partnering with Axios expands OpenAI’s work with the news industry",
+      "description": "Publishers representing hundreds of newsrooms and content brands are using OpenAI partnerships and grant programs to adopt AI tools and strengthen the news ecosystem, while ChatGPT users gain access to information from leading, reliable publications.",
+      "link": "https://openai.com/index/partnering-with-axios-expands-openai-work-with-the-news-industry",
+      "date": "Wed, 15 Jan 2025 03:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
     },
     {
       "id": "4c4020667bcf8d58ef7a13f8af5f578a",
@@ -226,10 +919,65 @@
       "description": "Data Mining & Modeling",
       "link": "https://research.google/blog/deeper-insights-into-retrieval-augmented-generation-the-role-of-sufficient-context/",
       "date": "Wed, 14 May 2025 13:23:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
+    },
+    {
+      "id": "9df247e1b3b6a5afddb6d4c6778e9071",
+      "title": "AI powers Expedia’s marketing evolution",
+      "description": "A conversation with Jochen Koedijk, Chief Marketing Officer of Expedia Group.",
+      "link": "https://openai.com/index/expedia-jochen-koedijk",
+      "date": "Wed, 14 May 2025 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
+    },
+    {
+      "id": "d7f308119ee1dba074d555a44f2b0661",
+      "title": "Disrupting malicious uses of AI by state-affiliated threat actors",
+      "description": "We terminated accounts associated with state-affiliated threat actors. Our findings show our models offer only limited, incremental capabilities for malicious cybersecurity tasks.",
+      "link": "https://openai.com/index/disrupting-malicious-uses-of-ai-by-state-affiliated-threat-actors",
+      "date": "Wed, 14 Feb 2024 08:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "5082de7457bd62458540e98497b2013a",
+      "title": "Awakening Sleeping Beauties at The Met",
+      "description": "AI can enrich lives through beauty and creativity, and its artistic potential shines in \"Sleeping Beauties: Reawakening Fashion,\" a collaborative exhibit from The Met's Costume Institute.",
+      "link": "https://openai.com/index/the-met-museum",
+      "date": "Wed, 14 Aug 2024 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "8691b473c5061cdec4cb55e5abbd9e5c",
+      "title": "Introducing OpenAI Dublin",
+      "description": "We’re growing our presence in Europe with an office in Dublin, Ireland.",
+      "link": "https://openai.com/index/introducing-openai-dublin",
+      "date": "Wed, 13 Sep 2023 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "9494fb4e948f268cf09d46957ec4af04",
+      "title": "Learning with opponent-learning awareness",
+      "description": "",
+      "link": "https://openai.com/index/learning-with-opponent-learning-awareness",
+      "date": "Wed, 13 Sep 2017 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
     },
     {
       "id": "7d2a568bfced53c6abf4ceab9791dc68",
@@ -237,10 +985,10 @@
       "description": "Algorithms & Theory",
       "link": "https://research.google/blog/can-algorithms-make-sports-tournament-cheating-obsolete/",
       "date": "Wed, 13 Nov 2024 14:55:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
     },
     {
       "id": "33079585600fd36fa529fc133835f722",
@@ -248,871 +996,121 @@
       "description": "Data Mining & Modeling",
       "link": "https://research.google/blog/mapping-the-ionosphere-with-the-power-of-android/",
       "date": "Wed, 13 Nov 2024 14:04:00 +0000",
-      "company": "googleresearch",
+      "company": "google",
       "source": "Google Research",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-05-30 01:07:03"
     },
     {
-      "id": "37f602799e582ba8c8f69a5c2276c59b",
-      "title": "Smart Paste for context-aware adjustments to pasted code",
-      "description": "Machine Intelligence",
-      "link": "https://research.google/blog/smart-paste-for-context-aware-adjustments-to-pasted-code/",
-      "date": "Wed, 12 Jun 2024 05:47:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
+      "id": "a9dedff45be5308e9bba03d6f02227ba",
+      "title": "A Student’s Guide to Writing with ChatGPT",
+      "description": "A Student’s Guide to Writing with ChatGPT",
+      "link": "https://openai.com/chatgpt/use-cases/student-writing-guide",
+      "date": "Wed, 13 Nov 2024 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
       "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "created_at": "2025-06-03 01:50:42"
     },
     {
-      "id": "cb4658ea8aee148e59424bcbfffe0fa4",
-      "title": "How the metaverse can transform education",
+      "id": "733cf7617609abe6de9e8846767c6f6e",
+      "title": "Data-driven beauty and creativity with ChatGPT",
+      "description": "Data-driven beauty: How The Estée Lauder Companies unlocks insights with ChatGPT",
+      "link": "https://openai.com/index/estee-lauder",
+      "date": "Wed, 13 Nov 2024 00:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:42"
+    },
+    {
+      "id": "79748e849f9844fbf2becb0ec4ff1229",
+      "title": "Saving lives with AI health coaching",
+      "description": "Healthify collaborates with OpenAI to improve millions of lives with sustainable weight loss.",
+      "link": "https://openai.com/index/healthify",
+      "date": "Wed, 13 Mar 2024 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "9244d7d2f5330568f106ca1532cf2b93",
+      "title": "Global news partnerships: Le Monde and Prisa Media",
+      "description": "We have partnered with international news organizations Le Monde and Prisa Media to bring French and Spanish news content to ChatGPT.",
+      "link": "https://openai.com/index/global-news-partnerships-le-monde-and-prisa-media",
+      "date": "Wed, 13 Mar 2024 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "05ea1f7ecadad40bd18a9899f98b9463",
+      "title": "OpenAI Scholars 2019: Meet our Scholars",
+      "description": "Our class of eight scholars (out of 550 applicants) brings together collective expertise in literature, philosophy, cell biology, statistics, economics, quantum physics, and business innovation.",
+      "link": "https://openai.com/index/openai-scholars-2019-meet-our-scholars",
+      "date": "Wed, 13 Mar 2019 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:44"
+    },
+    {
+      "id": "8b64d8d168702e6fa506a93bba93dc65",
+      "title": "Online math tutoring service uses AI to help boost students’ skills and confidence",
+      "description": "The post Online math tutoring service uses AI to help boost students’ skills and confidence appeared first on The AI Blog.",
+      "link": "https://blogs.microsoft.com/ai/eedi-online-math-quiz/",
+      "date": "Wed, 13 Jul 2022 12:59:50 +0000",
+      "company": "microsoft",
+      "source": "Microsoft AI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:45"
+    },
+    {
+      "id": "8617694ae9d5958a232f90f490c887b2",
+      "title": "Partnership with Axel Springer to deepen beneficial use of AI in journalism",
+      "description": "Axel Springer is the first publishing house globally to partner with us on a deeper integration of journalism in AI technologies.",
+      "link": "https://openai.com/index/axel-springer-partnership",
+      "date": "Wed, 13 Dec 2023 08:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "b4721ca0c422e059d198827880ddf8c8",
+      "title": "Measuring Goodhart’s law",
+      "description": "Goodhart’s law famously says: “When a measure becomes a target, it ceases to be a good measure.” Although originally from economics, it’s something we have to grapple with at OpenAI when figuring out how to optimize objectives that are difficult or costly to measure.",
+      "link": "https://openai.com/index/measuring-goodharts-law",
+      "date": "Wed, 13 Apr 2022 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
+    },
+    {
+      "id": "8a4fdcf63511356ce715b9c7246d24f1",
+      "title": "Hierarchical text-conditional image generation with CLIP latents",
       "description": "",
-      "link": "https://about.fb.com/news/2023/04/how-the-metaverse-can-transform-education/",
-      "date": "Wed, 12 Apr 2023 01:00:00",
-      "company": "metaairesearch",
-      "source": "Meta AI Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "c5b35f8234a8295a503609d26808bc5d",
-      "title": "Tx-LLM: Supporting therapeutic development with large language models",
-      "description": "Health & Bioscience",
-      "link": "https://research.google/blog/tx-llm-supporting-therapeutic-development-with-large-language-models/",
-      "date": "Wed, 09 Oct 2024 15:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "72a933e166d921f489572b3e59fad818",
-      "title": "A new light on neural connections",
-      "description": "General Science",
-      "link": "https://research.google/blog/a-new-light-on-neural-connections/",
-      "date": "Wed, 07 May 2025 23:49:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "06b9b6f998c8a71e5669cdca58fb41a7",
-      "title": "Using generative AI to investigate medical imagery models and datasets",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/using-generative-ai-to-investigate-medical-imagery-models-and-datasets/",
-      "date": "Wed, 05 Jun 2024 16:55:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "e2d063b58529ce862313aa0fc61b46ba",
-      "title": "Announcing the 2023 Meta Research PhD Fellowship award winners",
-      "description": "...",
-      "link": "https://research.facebook.com/blog/2023/4/announcing-the-2023-meta-research-phd-fellowship-award-winners/",
-      "date": "Wed, 05 Apr 2023 09:30:00",
-      "company": "metaairesearch",
-      "source": "Meta AI Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "60914c844c3accc61f73d0a4a8944a26",
-      "title": "Introducing Segment Anything: Working toward the first foundation model for image segmentation",
-      "description": "",
-      "link": "https://ai.facebook.com/blog/segment-anything-foundation-model-image-segmentation/",
-      "date": "Wed, 05 Apr 2023 01:00:00",
-      "company": "metaairesearch",
-      "source": "Meta AI Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "fae37a2da3d32bbfd0d42ab80c9c1b62",
-      "title": "Extending video masked autoencoders to 128 frames",
-      "description": "Machine Intelligence",
-      "link": "https://research.google/blog/extending-video-masked-autoencoders-to-128-frames/",
-      "date": "Wed, 04 Dec 2024 10:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "4f3659b868dabaaa2d899c47be1874e4",
-      "title": "ECLeKTic: A novel benchmark for evaluating cross-lingual knowledge transfer in LLMs",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/eclektic-a-novel-benchmark-for-evaluating-cross-lingual-knowledge-transfer-in-llms/",
-      "date": "Wed, 02 Apr 2025 11:21:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "3225a64a6012df727c9f3a7a53856cf1",
-      "title": "USER-LLM: Efficient LLM contextualization with user embeddings",
-      "description": "Human-Computer Interaction and Visualization",
-      "link": "https://research.google/blog/user-llm-efficient-llm-contextualization-with-user-embeddings/",
-      "date": "Tue, 28 May 2024 17:11:48 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "4683222dd3d2254579c56361589071c7",
-      "title": "New Amazon Bedrock Data Automation capabilities streamline video and audio analysis",
-      "description": "Amazon Bedrock Data Automation helps organizations streamline development and boost efficiency through customizable, multimodal analytics. It eliminates the heavy lifting of unstructured content processing at scale, whether for video or audio. The new capabilities make it faster to extract tailored, generative AI-powered insights like scene summaries, key topics, and customer intents from video and audio. This unlocks the value of unstructured content for use cases such as improving sales productivity and enhancing customer experience.",
-      "link": "https://aws.amazon.com/blogs/machine-learning/new-amazon-bedrock-data-automation-capabilities-streamline-video-and-audio-analysis/",
-      "date": "Tue, 27 May 2025 20:22:24 +0000",
-      "company": "awsmachinelearning",
-      "source": "AWS Machine Learning",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "cc406992b4dbcb4da811e3b259f4aa3c",
-      "title": "Efficient data generation for source-grounded information-seeking dialogs: A use case for meeting transcripts",
-      "description": "Machine Intelligence",
-      "link": "https://research.google/blog/efficient-data-generation-for-source-grounded-information-seeking-dialogs-a-use-case-for-meeting-transcripts/",
-      "date": "Tue, 25 Jun 2024 15:17:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "34209b78c5a95b5029edc5b623d21219",
-      "title": "Learning DeepVariant's hidden powers",
-      "description": "Health & Bioscience",
-      "link": "https://research.google/blog/learning-deepvariants-hidden-powers/",
-      "date": "Tue, 22 Oct 2024 12:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "3db0f145cb8f42eb4217aa1d0b40567f",
-      "title": "Scalable learning of segment-level traffic congestion functions",
-      "description": "Climate & Sustainability",
-      "link": "https://research.google/blog/scalable-learning-of-segment-level-traffic-congestion-functions/",
-      "date": "Tue, 19 Nov 2024 15:23:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "b21700a9285182457828d95404ef5064",
-      "title": "SpeakFaster: Revolutionizing communication for people with severe motor impairments",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/speakfaster-revolutionizing-communication-for-people-with-severe-motor-impairments/",
-      "date": "Tue, 19 Nov 2024 15:17:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "3eea629a89b23a7aa2e1a4a12e50ca21",
-      "title": "Generating synthetic data with differentially private LLM inference",
-      "description": "Machine Intelligence",
-      "link": "https://research.google/blog/generating-synthetic-data-with-differentially-private-llm-inference/",
-      "date": "Tue, 18 Mar 2025 17:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "f1cc06e2184f524ab45629142e49bfc8",
-      "title": "Dynamics of magnetization at infinite temperature in a Heisenberg spin chain",
-      "description": "General Science",
-      "link": "https://research.google/blog/dynamics-of-magnetization-at-infinite-temperature-in-a-heisenberg-spin-chain/",
-      "date": "Tue, 18 Jun 2024 16:59:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "8fad2c96be6513a0793451546b7693a3",
-      "title": "FireBench: Using high-performance computing to advance machine learning and wildfire research",
-      "description": "Climate & Sustainability",
-      "link": "https://research.google/blog/firebench-using-high-performance-computing-to-advance-machine-learning-and-wildfire-research/",
-      "date": "Tue, 16 Jul 2024 15:05:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "6e028597e5064ba39dc527fffb90684c",
-      "title": "Differential privacy on trust graphs",
-      "description": "Algorithms & Theory",
-      "link": "https://research.google/blog/differential-privacy-on-trust-graphs/",
-      "date": "Tue, 13 May 2025 11:41:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "349635607f11a782ce3b41390a001ecc",
-      "title": "Towards a unified model for predicting human responses to diverse visual content",
-      "description": "Human-Computer Interaction and Visualization",
-      "link": "https://research.google/blog/towards-a-unified-model-for-predicting-human-responses-to-diverse-visual-content/",
-      "date": "Tue, 12 Nov 2024 00:13:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "f6fe5a2ca5e18bbf3ba90d3d3c2fe754",
-      "title": "Advancing personal health and wellness insights with AI",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/advancing-personal-health-and-wellness-insights-with-ai/",
-      "date": "Tue, 11 Jun 2024 10:07:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "7e787bcd003289c97ae5ff19c7d04240",
-      "title": "Advancing AMIE towards specialist care and real-world validation",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/advancing-amie-towards-specialist-care-and-real-world-validation/",
-      "date": "Tue, 10 Dec 2024 10:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "b07df599d998c547da1497b661a3f5ea",
-      "title": "Assessing ASR performance with meaning preservation",
-      "description": "Responsible AI",
-      "link": "https://research.google/blog/assessing-asr-performance-with-meaning-preservation/",
-      "date": "Tue, 09 Jul 2024 10:23:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "827fd9927cee96f1689e11aeb59a5e57",
-      "title": "Geospatial Reasoning: Unlocking insights with generative AI and multiple foundation models",
-      "description": "Climate & Sustainability",
-      "link": "https://research.google/blog/geospatial-reasoning-unlocking-insights-with-generative-ai-and-multiple-foundation-models/",
-      "date": "Tue, 08 Apr 2025 15:40:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "618cbb3779609ea38e95f8fc7b28da2a",
-      "title": "Making complex text understandable: Minimally-lossy text simplification with Gemini",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/making-complex-text-understandable-minimally-lossy-text-simplification-with-gemini/",
-      "date": "Tue, 06 May 2025 10:13:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "0f1a0c553d7c7f409a77ab163f1f1218",
-      "title": "Discovering new words with confidential federated analytics",
-      "description": "Mobile Systems",
-      "link": "https://research.google/blog/discovering-new-words-with-confidential-federated-analytics/",
-      "date": "Tue, 04 Mar 2025 10:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "703dcbee7744dec87034be580bade8e6",
-      "title": "Heuristics on the high seas: Mathematical optimization for cargo ships",
-      "description": "Algorithms & Theory",
-      "link": "https://research.google/blog/heuristics-on-the-high-seas-mathematical-optimization-for-cargo-ships/",
-      "date": "Tue, 04 Jun 2024 18:43:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "5509d6026587d84f05f272cad88d139d",
-      "title": "Augmented object intelligence with XR-Objects",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/augmented-object-intelligence-with-xr-objects/",
-      "date": "Tue, 01 Oct 2024 23:17:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "27f37ed27af1a079f8595f1bce348279",
-      "title": "CodecLM: Aligning language models with tailored synthetic data",
-      "description": "Conferences & Events",
-      "link": "https://research.google/blog/codeclm-aligning-language-models-with-tailored-synthetic-data/",
-      "date": "Thu, 30 May 2024 12:02:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "2c1168d7b0df50ece5901f5247c0fe26",
-      "title": "Few-shot tool-use doesn’t really work (yet)",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/few-shot-tool-use-doesnt-really-work-yet/",
-      "date": "Thu, 30 May 2024 10:22:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "0c3b2c6e9741113395f1ad98eacb5d13",
-      "title": "Revolutionizing earth observation with geospatial foundation models on AWS",
-      "description": "In this post, we explore how a leading GeoFM (Clay Foundation’s Clay foundation model available on Hugging Face) can be deployed for large-scale inference and fine-tuning on Amazon SageMaker.",
-      "link": "https://aws.amazon.com/blogs/machine-learning/revolutionizing-earth-observation-with-geospatial-foundation-models-on-aws/",
-      "date": "Thu, 29 May 2025 21:16:44 +0000",
-      "company": "awsmachinelearning",
-      "source": "AWS Machine Learning",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "513597601e48995b8ee96237ed2a42e7",
-      "title": "Create an agentic RAG application for advanced knowledge discovery with LlamaIndex, and Mistral in Amazon Bedrock",
-      "description": "In this post, we demonstrate an example of building an agentic RAG application using the LlamaIndex framework. LlamaIndex is a framework that connects FMs with external data sources. It helps ingest, structure, and retrieve information from databases, APIs, PDFs, and more, enabling the agent and RAG for AI applications. This application serves as a research tool, using the Mistral Large 2 FM on Amazon Bedrock generate responses for the agent flow.",
-      "link": "https://aws.amazon.com/blogs/machine-learning/create-an-agentic-rag-application-for-advanced-knowledge-discovery-with-llamaindex-and-mistral-in-amazon-bedrock/",
-      "date": "Thu, 29 May 2025 20:10:51 +0000",
-      "company": "awsmachinelearning",
-      "source": "AWS Machine Learning",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "8ecdc163dd9c7f3b0692625a408887e7",
-      "title": "Text-to-image basics with Amazon Nova Canvas",
-      "description": "In this post, we focus on the Amazon Nova Canvas image generation model. We then provide an overview of the image generation process (diffusion) and dive deep into the input parameters for text-to-image generation with Amazon Nova Canvas.",
-      "link": "https://aws.amazon.com/blogs/machine-learning/text-to-image-basics-with-amazon-nova-canvas/",
-      "date": "Thu, 29 May 2025 19:29:49 +0000",
-      "company": "awsmachinelearning",
-      "source": "AWS Machine Learning",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "f44c0207f1a10871246ded9d30582edd",
-      "title": "Real-world applications of Amazon Nova Canvas for interior design and product photography",
-      "description": "In this post, we explore how Amazon Nova Canvas can solve real-world business challenges through advanced image generation techniques. We focus on two specific use cases that demonstrate the power and flexibility of this technology: interior design and product photography.",
-      "link": "https://aws.amazon.com/blogs/machine-learning/real-world-applications-of-amazon-nova-canvas-for-interior-design-and-product-photography/",
-      "date": "Thu, 29 May 2025 19:26:14 +0000",
-      "company": "awsmachinelearning",
-      "source": "AWS Machine Learning",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "92101d5844282c0476543a65e02fb02e",
-      "title": "A step towards making heart health screening accessible for billions with PPG signals",
-      "description": "Health & Bioscience",
-      "link": "https://research.google/blog/a-step-towards-making-heart-health-screening-accessible-for-billions-with-ppg-signals/",
-      "date": "Thu, 25 Jul 2024 15:25:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "d4561499ee294c50eef3d5d99ee386e3",
-      "title": "What does electrodermal sensing reveal? Insights from the Pixel Watch & Fitbit Sense 2",
-      "description": "Health & Bioscience",
-      "link": "https://research.google/blog/what-does-electrodermal-sensing-reveal-insights-from-the-pixel-watch-fitbit-sense-2/",
-      "date": "Thu, 24 Oct 2024 12:57:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "fb5e484c39bf9cb12a34117dffce7494",
-      "title": "Improving brain models with ZAPBench",
-      "description": "General Science",
-      "link": "https://research.google/blog/improving-brain-models-with-zapbench/",
-      "date": "Thu, 24 Apr 2025 17:05:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "c5d9ead0d592e02008fed58c3ba5a825",
-      "title": "Chain of Agents: Large language models collaborating on long-context tasks",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/chain-of-agents-large-language-models-collaborating-on-long-context-tasks/",
-      "date": "Thu, 23 Jan 2025 20:26:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "d60c602419cd260a792ef2cc881f4f10",
-      "title": "Google Research at Google I/O 2025",
-      "description": "Climate & Sustainability",
-      "link": "https://research.google/blog/google-research-at-google-io-2025/",
-      "date": "Thu, 22 May 2025 20:35:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "39c9495de1ecac5141feab46fb0f3695",
-      "title": "Unlocking 7B+ language models in your browser: A deep dive with Google AI Edge's MediaPipe",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/unlocking-7b-language-models-in-your-browser-a-deep-dive-with-google-ai-edges-mediapipe/",
-      "date": "Thu, 22 Aug 2024 09:48:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "66e1adf018f992f1088ea92afe399cea",
-      "title": "Re-Invoke: Tool invocation rewriting for zero-shot tool retrieval",
-      "description": "Machine Intelligence",
-      "link": "https://research.google/blog/re-invoke-tool-invocation-rewriting-for-zero-shot-tool-retrieval/",
-      "date": "Thu, 21 Nov 2024 22:14:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "0901495f2c1a8c2c157d0a3d18d8f119",
-      "title": "Load balancing with random job arrivals",
-      "description": "Algorithms & Theory",
-      "link": "https://research.google/blog/load-balancing-with-random-job-arrivals/",
-      "date": "Thu, 20 Mar 2025 20:54:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "cfa2fa10f8af662da1e706e41deabd82",
-      "title": "Loss of Pulse Detection on the Google Pixel Watch 3",
-      "description": "Health & Bioscience",
-      "link": "https://research.google/blog/loss-of-pulse-detection-on-the-google-pixel-watch-3/",
-      "date": "Thu, 20 Mar 2025 13:20:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "cfc297a2d6f345eac0835b6a47b58bd5",
-      "title": "Open Buildings 2.5D Temporal dataset tracks building changes across the Global South",
-      "description": "Climate & Sustainability",
-      "link": "https://research.google/blog/open-buildings-25d-temporal-dataset-tracks-building-changes-across-the-global-south/",
-      "date": "Thu, 19 Sep 2024 06:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "ec8d97e8265ee99009735b31952b8285",
-      "title": "Google Research 2024: Breakthroughs for impact at every scale",
-      "description": "Algorithms & Theory",
-      "link": "https://research.google/blog/google-research-2024-breakthroughs-for-impact-at-every-scale/",
-      "date": "Thu, 19 Dec 2024 14:04:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "0df991c1baab85509d080d8e8149aecd",
-      "title": "Harnessing hidden genetic information in clinical data with REGLE",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/harnessing-hidden-genetic-information-in-clinical-data-with-regle/",
-      "date": "Thu, 18 Jul 2024 16:07:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "c70331ef42a191e1d5446fa86421bc69",
-      "title": "Accelerating code migrations with AI",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/accelerating-code-migrations-with-ai/",
-      "date": "Thu, 18 Jul 2024 13:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "81d2374d614810ca7032bb4cec572c3b",
-      "title": "Teaching machines the language of biology: Scaling large language models for next-generation single-cell analysis",
-      "description": "Health & Bioscience",
-      "link": "https://research.google/blog/teaching-machines-the-language-of-biology-scaling-large-language-models-for-next-generation-single-cell-analysis/",
-      "date": "Thu, 17 Apr 2025 14:36:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "3a49ad87f855855fed165d1367a20bce",
-      "title": "Zero-shot mono-to-binaural speech synthesis",
-      "description": "Sound & Accoustics",
-      "link": "https://research.google/blog/zero-shot-mono-to-binaural-speech-synthesis/",
-      "date": "Thu, 16 Jan 2025 11:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "3c1c3cf25620c760346dd67aab80f3f8",
-      "title": "Insights into population dynamics: A foundation model for geospatial inference",
-      "description": "Economics & Electronic Commerce",
-      "link": "https://research.google/blog/insights-into-population-dynamics-a-foundation-model-for-geospatial-inference/",
-      "date": "Thu, 14 Nov 2024 12:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "52fa9a5566e8012a0fa07e2896bed187",
-      "title": "Mechanism design for large language models",
-      "description": "Algorithms & Theory",
-      "link": "https://research.google/blog/mechanism-design-for-large-language-models/",
-      "date": "Thu, 13 Feb 2025 14:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "2b9026aa4be7cc4e684f711eb14d9faa",
-      "title": "Building AI for the pluralistic society",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/building-ai-for-the-pluralistic-society/",
-      "date": "Thu, 13 Feb 2025 09:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "17f27d66ba55086b29827b107e8a07a5",
-      "title": "A new, unique AI dataset for animating amateur drawings",
-      "description": "",
-      "link": "https://ai.facebook.com/blog/ai-dataset-animation-drawings/",
-      "date": "Thu, 13 Apr 2023 07:00:00",
-      "company": "metaairesearch",
-      "source": "Meta AI Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "e72260fef2d12d4a912b50451554a673",
-      "title": "Grounding AI in reality with a little help from Data Commons",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/grounding-ai-in-reality-with-a-little-help-from-data-commons/",
-      "date": "Thu, 12 Sep 2024 06:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "2383a85b0a1c618972c2956897cf2452",
-      "title": "Satellite powered estimation of global solar potential",
-      "description": "Climate & Sustainability",
-      "link": "https://research.google/blog/satellite-powered-estimation-of-global-solar-potential/",
-      "date": "Thu, 12 Dec 2024 11:16:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "06d843763744e85310fc0b0551bf8285",
-      "title": "Validating random circuit sampling as a benchmark for measuring quantum progress",
-      "description": "Algorithms & Theory",
-      "link": "https://research.google/blog/validating-random-circuit-sampling-as-a-benchmark-for-measuring-quantum-progress/",
-      "date": "Thu, 10 Oct 2024 17:10:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "0f9f1e5da0e40d73d685688bdc8d7665",
-      "title": "Relationships are complicated! An analysis of relationships between datasets on the Web",
-      "description": "Data Mining & Modeling",
-      "link": "https://research.google/blog/relationships-are-complicated-an-analysis-of-relationships-between-datasets-on-the-web/",
-      "date": "Thu, 07 Nov 2024 09:55:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "6f338364675a3ece2be3f8046abee1bb",
-      "title": "From diagnosis to treatment: Advancing AMIE for longitudinal disease management",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/from-diagnosis-to-treatment-advancing-amie-for-longitudinal-disease-management/",
-      "date": "Thu, 06 Mar 2025 11:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "3e4a4f3d647c60617330893b709333cb",
-      "title": "AI in software engineering at Google: Progress and the path ahead",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/ai-in-software-engineering-at-google-progress-and-the-path-ahead/",
-      "date": "Thu, 06 Jun 2024 10:55:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "927a2d5375cf890bd52b97e18b912f33",
-      "title": "Build faster with Buck2: Our open source build system",
-      "description": "",
-      "link": "https://engineering.fb.com/2023/04/06/open-source/buck2-open-source-large-scale-build-system/",
-      "date": "Thu, 06 Apr 2023 01:00:00",
-      "company": "metaairesearch",
-      "source": "Meta AI Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "ab96f81853b7d45b3ec5ae30372a1cb3",
-      "title": "Evaluating progress of LLMs on scientific problem-solving",
-      "description": "General Science",
-      "link": "https://research.google/blog/evaluating-progress-of-llms-on-scientific-problem-solving/",
-      "date": "Thu, 03 Apr 2025 21:43:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "8822a6657ce570b6cb02bef1ba5d3925",
-      "title": "AMIE gains vision: A research AI agent for multimodal diagnostic dialogue",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/amie-gains-vision-a-research-ai-agent-for-multi-modal-diagnostic-dialogue/",
-      "date": "Thu, 01 May 2025 02:39:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "6b5def37b4e89f48e86d080cde0d21b7",
-      "title": "The evolution of graph learning",
-      "description": "Algorithms & Theory",
-      "link": "https://research.google/blog/the-evolution-of-graph-learning/",
-      "date": "Mon, 31 Mar 2025 12:29:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "a5d974742d91caa57f60f58be5a746be",
-      "title": "A return to hand-written notes by learning to read & write",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/a-return-to-hand-written-notes-by-learning-to-read-write/",
-      "date": "Mon, 28 Oct 2024 20:27:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "0d551e9a636d398c819c7225fb01cc47",
-      "title": "Announcing the winners of the 2022 Foundational Integrity Research request for proposals",
-      "description": "In September, Meta launched the Foundational Integrity Research request for proposals. Today, we announce the winners of this award.",
-      "link": "https://research.facebook.com/blog/2023/3/announcing-the-winners-of-the-2022-foundational-integrity-research-request-for-proposals-/",
-      "date": "Mon, 27 Mar 2023 04:35:00",
-      "company": "metaairesearch",
-      "source": "Meta AI Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "722d316608324e66e9c6011f8d4de27e",
-      "title": "Unlocking the power of time-series data with multimodal models",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/unlocking-the-power-of-time-series-data-with-multimodal-models/",
-      "date": "Mon, 25 Nov 2024 21:50:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "246974fa01a69c11e912ff3f63444e4d",
-      "title": "Helping everyone build AI for healthcare applications with open foundation models",
-      "description": "Health & Bioscience",
-      "link": "https://research.google/blog/helping-everyone-build-ai-for-healthcare-applications-with-open-foundation-models/",
-      "date": "Mon, 25 Nov 2024 14:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "d785bc0bd4c4af47f34656f44c46abb5",
-      "title": "Bridging the gap in differentially private model training",
-      "description": "Algorithms & Theory",
-      "link": "https://research.google/blog/bridging-the-gap-in-differentially-private-model-training/",
-      "date": "Mon, 25 Nov 2024 12:17:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "4c86622c9baf5eb892df4564330ea85c",
-      "title": "Fast, accurate climate modeling with NeuralGCM",
-      "description": "Climate & Sustainability",
-      "link": "https://research.google/blog/fast-accurate-climate-modeling-with-neuralgcm/",
-      "date": "Mon, 22 Jul 2024 19:46:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "2d513122b17090f84f9bc183ea04e182",
-      "title": "Taking medical imaging embeddings 3D",
-      "description": "Health & Bioscience",
-      "link": "https://research.google/blog/taking-medical-imaging-embeddings-3d/",
-      "date": "Mon, 21 Oct 2024 15:57:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "1da05da16f5ba360e4b404a6eeb286dd",
-      "title": "Evaluating and enhancing probabilistic reasoning in language models",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/evaluating-and-enhancing-probabilistic-reasoning-in-language-models/",
-      "date": "Mon, 21 Oct 2024 13:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "3958fd3984c0c84e0db1e982c8d18685",
-      "title": "A new hybrid platform for quantum simulation of magnetism",
-      "description": "Quantum",
-      "link": "https://research.google/blog/a-new-hybrid-platform-for-quantum-simulation-of-magnetism/",
-      "date": "Mon, 21 Apr 2025 17:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "8e75905c0dfe519521f0d07c0b7d4efd",
-      "title": "Every tree counts",
-      "description": "Meta set a goal to reach net zero emissions by 2030. We are developing technology to mitigate our carbon footprint and making these openly available.",
-      "link": "https://research.facebook.com/blog/2023/4/every-tree-counts-large-scale-mapping-of-canopy-height-at-the-resolution-of-individual-trees/",
-      "date": "Mon, 17 Apr 2023 01:00:00",
-      "company": "metaairesearch",
-      "source": "Meta AI Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "35e36361564c81e67effc81f88d1c6bd",
-      "title": "Neptune: The long orbit to benchmarking long video understanding",
-      "description": "Machine Intelligence",
-      "link": "https://research.google/blog/neptune-the-long-orbit-to-benchmarking-long-video-understanding/",
-      "date": "Mon, 16 Sep 2024 15:54:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "d607fc536c16bfe10d65b7fc34798931",
-      "title": "Bringing 3D shoppable products online with generative AI",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/bringing-3d-shoppable-products-online-with-generative-ai/",
-      "date": "Mon, 12 May 2025 11:44:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "420beb29602091c2b0afb5610c95ed1d",
-      "title": "Generating zero-shot personalized portraits",
-      "description": "Generative AI",
-      "link": "https://research.google/blog/generating-zero-shot-personalized-portraits/",
-      "date": "Mon, 11 Nov 2024 12:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
-    },
-    {
-      "id": "d9128a06c6a151142b1f38d37019b02b",
-      "title": "An improved flood forecasting AI model, trained and evaluated globally",
-      "description": "Climate & Sustainability",
-      "link": "https://research.google/blog/a-flood-forecasting-ai-model-trained-and-evaluated-globally/",
-      "date": "Mon, 11 Nov 2024 07:00:00 +0000",
-      "company": "googleresearch",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-06-03 00:45:55"
+      "link": "https://openai.com/index/hierarchical-text-conditional-image-generation-with-clip-latents",
+      "date": "Wed, 13 Apr 2022 07:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-03 01:50:43"
     }
   ],
   "stats": {
-    "total": 270,
-    "anthropic": 21,
-    "arxiv": 18,
-    "awsmachinelearning": 20,
+    "total": 894,
+    "anthropic": 26,
+    "arxiv": 13,
+    "aws": 29,
     "deepmind": 16,
-    "google": 20,
-    "googleresearch": 100,
-    "meta": 26,
-    "metaairesearch": 10,
-    "microsoft": 10,
-    "openai": 29
+    "google": 120,
+    "meta": 45,
+    "microsoft": 20,
+    "openai": 625
   },
-  "lastUpdated": "2025-06-03T00:47:01.246Z"
+  "lastUpdated": "2025-06-03T04:18:11.214Z"
 }
