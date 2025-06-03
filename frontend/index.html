@@ -1166,7 +1166,7 @@
 
     <script>
         // Configuration
-        const API_BASE_URL = './data/updates.json'; // Use static JSON for GitHub Pages
+        const API_BASE_URL = 'data/updates.json'; // Use static JSON for GitHub Pages
         
         // Data storage
         let updates = [];
@@ -1244,18 +1244,10 @@
             updateSidebar();
         }
 
-        // Fetch statistics
+        // Fetch statistics (disabled for static data - stats calculated locally)
         async function fetchStats() {
-            try {
-                const response = await fetch(`${API_BASE_URL}/stats`);
-                if (!response.ok) throw new Error('Failed to fetch stats');
-                
-                const data = await response.json();
-                stats = data.stats || {};
-                updateSidebar();
-            } catch (error) {
-                console.error('Error fetching stats:', error);
-            }
+            // Stats are calculated locally for static data
+            calculateLocalStats();
         }
 
         // Trigger manual update fetch (disabled for static data)
