@@ -83,26 +83,10 @@ jobs:
         echo "Debug mode: ${{ inputs.debug_mode }}"
         echo ""
         
-        if [ -f ai_updates.db ]; then
-          node -e "
-            import { open } from 'sqlite';
-            import sqlite3 from 'sqlite3';
-            const db = await open({ filename: 'ai_updates.db', driver: sqlite3.Database });
-            const total = await db.get('SELECT COUNT(*) as count FROM updates');
-            console.log('Total updates before:', total.count);
-            
-            if ('${{ inputs.company }}' !== 'all') {
-              const companyCount = await db.get('SELECT COUNT(*) as count FROM updates WHERE company = ?', ['${{ inputs.company }}']);
-              console.log('Updates for ${{ inputs.company }}:', companyCount.count);
-            }
-            
-            const companies = await db.all('SELECT company, COUNT(*) as count FROM updates GROUP BY company ORDER BY count DESC');
-            console.log('By company:');
-            companies.forEach(c => console.log('  ' + c.company + ':', c.count));
-            await db.close();
-          "
+        if [ -f "scripts/utils/showStats.js" ]; then
+          node scripts/utils/showStats.js
         else
-          echo "No database file found - this will be the first run"
+          echo "Stats script not found, skipping..."
         fi
         
     - name: 🔄 Run targeted update
@@ -124,26 +108,10 @@ jobs:
       run: |
         echo "=== DATABASE STATS AFTER MANUAL UPDATE ==="
         
-        if [ -f ai_updates.db ]; then
-          node -e "
-            import { open } from 'sqlite';
-            import sqlite3 from 'sqlite3';
-            const db = await open({ filename: 'ai_updates.db', driver: sqlite3.Database });
-            const total = await db.get('SELECT COUNT(*) as count FROM updates');
-            const recent = await db.get('SELECT COUNT(*) as count FROM updates WHERE datetime(created_at) > datetime(\"now\", \"-1 hour\")');
-            console.log('Total updates after:', total.count);
-            console.log('New updates (last hour):', recent.count);
-            
-            if ('${{ inputs.company }}' !== 'all') {
-              const companyCount = await db.get('SELECT COUNT(*) as count FROM updates WHERE company = ?', ['${{ inputs.company }}']);
-              console.log('Total for ${{ inputs.company }}:', companyCount.count);
-            }
-            
-            const companies = await db.all('SELECT company, COUNT(*) as count FROM updates GROUP BY company ORDER BY count DESC');
-            console.log('Updated distribution:');
-            companies.forEach(c => console.log('  ' + c.company + ':', c.count));
-            await db.close();
-          "
+        if [ -f "scripts/utils/showStats.js" ]; then
+          node scripts/utils/showStats.js
+        else
+          echo "Stats script not found, skipping..."
         fi
         
     - name: 🎯 Check for changes
