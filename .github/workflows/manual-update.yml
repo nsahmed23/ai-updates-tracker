@@ -1,0 +1,366 @@
+name: 🎯 Manual Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      company:
+        description: 'Company to update (or "all" for everything)'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - 'all'
+          - 'openai'
+          - 'google'
+          - 'meta'
+          - 'aws'
+          - 'microsoft'
+          - 'anthropic'
+          - 'deepmind'
+          - 'arxiv'
+      force_update:
+        description: 'Force update even if no changes detected'
+        type: boolean
+        default: false
+      debug_mode:
+        description: 'Enable detailed debugging output'
+        type: boolean
+        default: false
+      skip_commit:
+        description: 'Skip committing changes (for testing)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  manual-update:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: 🔧 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
+        
+    - name: 📦 Install dependencies
+      working-directory: backend
+      run: npm ci
+      
+    - name: 🐛 Debug information
+      if: inputs.debug_mode == true
+      working-directory: backend
+      run: |
+        echo "=== DEBUG INFORMATION ==="
+        echo "Node.js version: $(node --version)"
+        echo "NPM version: $(npm --version)"
+        echo "Working directory: $(pwd)"
+        echo "Files in directory:"
+        ls -la
+        echo "Git status:"
+        git status
+        echo "Environment variables:"
+        env | grep -E "(GITHUB|NODE|npm)" | sort
+        echo "Package.json:"
+        cat package.json
+        echo "=========================="
+        
+    - name: 📊 Show database stats before update
+      working-directory: backend
+      run: |
+        echo "=== DATABASE STATS BEFORE MANUAL UPDATE ==="
+        echo "Company filter: ${{ inputs.company }}"
+        echo "Force update: ${{ inputs.force_update }}"
+        echo "Debug mode: ${{ inputs.debug_mode }}"
+        echo ""
+        
+        if [ -f ai_updates.db ]; then
+          node -e "
+            import { open } from 'sqlite';
+            import sqlite3 from 'sqlite3';
+            const db = await open({ filename: 'ai_updates.db', driver: sqlite3.Database });
+            const total = await db.get('SELECT COUNT(*) as count FROM updates');
+            console.log('Total updates before:', total.count);
+            
+            if ('${{ inputs.company }}' !== 'all') {
+              const companyCount = await db.get('SELECT COUNT(*) as count FROM updates WHERE company = ?', ['${{ inputs.company }}']);
+              console.log('Updates for ${{ inputs.company }}:', companyCount.count);
+            }
+            
+            const companies = await db.all('SELECT company, COUNT(*) as count FROM updates GROUP BY company ORDER BY count DESC');
+            console.log('By company:');
+            companies.forEach(c => console.log('  ' + c.company + ':', c.count));
+            await db.close();
+          "
+        else
+          echo "No database file found - this will be the first run"
+        fi
+        
+    - name: 🔄 Run targeted update
+      working-directory: backend
+      run: |
+        echo "Starting manual update for: ${{ inputs.company }}"
+        
+        if [ "${{ inputs.company }}" = "all" ]; then
+          echo "Running full update for all sources..."
+          node scripts/fetchUpdates.js
+        else
+          echo "Running targeted update for ${{ inputs.company }}..."
+          
+          # Create a targeted update script
+          cat > targeted_update.js << 'EOF'
+          import { RSSTracker } from './scripts/trackers/rss.js';
+          import { ArxivTracker } from './scripts/trackers/arxiv.js';
+          import { UniversalScraper } from './scripts/scrapers/universal.js';
+          import { initializeDatabase, saveUpdates } from './scripts/utils/database.js';
+          import fs from 'fs/promises';
+          
+          const company = process.argv[2];
+          
+          async function runTargetedUpdate() {
+            try {
+              await initializeDatabase();
+              
+              const sourcesContent = await fs.readFile('config/sources.json', 'utf8');
+              const sources = JSON.parse(sourcesContent);
+              
+              let allUpdates = [];
+              
+              console.log(`Targeting company: ${company}`);
+              
+              // Handle RSS feeds
+              for (const [key, feed] of Object.entries(sources.rss_feeds)) {
+                if (!feed.active) continue;
+                
+                const feedCompany = feed.name.toLowerCase().includes('openai') ? 'openai' :
+                                   feed.name.toLowerCase().includes('google') ? 'google' :
+                                   feed.name.toLowerCase().includes('meta') ? 'meta' :
+                                   feed.name.toLowerCase().includes('aws') ? 'aws' :
+                                   feed.name.toLowerCase().includes('microsoft') ? 'microsoft' :
+                                   key;
+                
+                if (company === 'all' || feedCompany === company || feedCompany.includes(company)) {
+                  console.log(`Fetching RSS: ${feed.name}`);
+                  const rssTracker = new RSSTracker();
+                  const updates = await rssTracker.fetchFeed(feed.url, feed.name);
+                  allUpdates.push(...updates);
+                }
+              }
+              
+              // Handle scrapers
+              for (const [key, target] of Object.entries(sources.scraping_targets)) {
+                if (company === 'all' || key === company || target.name.toLowerCase().includes(company)) {
+                  console.log(`Scraping: ${target.name}`);
+                  const scraper = new UniversalScraper();
+                  const updates = await scraper.scrape(target.url, target.name, target.selectors);
+                  allUpdates.push(...updates);
+                }
+              }
+              
+              // Handle ArXiv
+              if (company === 'all' || company === 'arxiv') {
+                console.log('Fetching ArXiv papers...');
+                const arxivTracker = new ArxivTracker();
+                const papers = await arxivTracker.fetchPapers(sources.arxiv_queries);
+                allUpdates.push(...papers);
+              }
+              
+              console.log(`Found ${allUpdates.length} total updates`);
+              
+              if (allUpdates.length > 0) {
+                const saved = await saveUpdates(allUpdates);
+                console.log(`Saved ${saved} new updates`);
+                return { total: allUpdates.length, saved };
+              } else {
+                console.log('No updates found');
+                return { total: 0, saved: 0 };
+              }
+              
+            } catch (error) {
+              console.error('Targeted update failed:', error);
+              throw error;
+            }
+          }
+          
+          runTargetedUpdate().then(result => {
+            console.log('Update complete:', result);
+          }).catch(error => {
+            console.error('Update failed:', error);
+            process.exit(1);
+          });
+          EOF
+          
+          node targeted_update.js "${{ inputs.company }}"
+        fi
+        
+    - name: 📈 Show database stats after update
+      working-directory: backend
+      run: |
+        echo "=== DATABASE STATS AFTER MANUAL UPDATE ==="
+        
+        if [ -f ai_updates.db ]; then
+          node -e "
+            import { open } from 'sqlite';
+            import sqlite3 from 'sqlite3';
+            const db = await open({ filename: 'ai_updates.db', driver: sqlite3.Database });
+            const total = await db.get('SELECT COUNT(*) as count FROM updates');
+            const recent = await db.get('SELECT COUNT(*) as count FROM updates WHERE datetime(created_at) > datetime(\"now\", \"-1 hour\")');
+            console.log('Total updates after:', total.count);
+            console.log('New updates (last hour):', recent.count);
+            
+            if ('${{ inputs.company }}' !== 'all') {
+              const companyCount = await db.get('SELECT COUNT(*) as count FROM updates WHERE company = ?', ['${{ inputs.company }}']);
+              console.log('Total for ${{ inputs.company }}:', companyCount.count);
+            }
+            
+            const companies = await db.all('SELECT company, COUNT(*) as count FROM updates GROUP BY company ORDER BY count DESC');
+            console.log('Updated distribution:');
+            companies.forEach(c => console.log('  ' + c.company + ':', c.count));
+            await db.close();
+          "
+        fi
+        
+    - name: 🎯 Check for changes
+      id: changes
+      working-directory: backend
+      run: |
+        if git diff --quiet ai_updates.db; then
+          echo "No database changes detected"
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+          
+          if [ "${{ inputs.force_update }}" = "true" ]; then
+            echo "Force update enabled - will commit anyway"
+            echo "force_commit=true" >> $GITHUB_OUTPUT
+          fi
+        else
+          echo "Database changes detected"
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+          
+          # Get detailed change info
+          BEFORE_SIZE=$(git show HEAD:backend/ai_updates.db | wc -c 2>/dev/null || echo "0")
+          AFTER_SIZE=$(wc -c < ai_updates.db)
+          SIZE_DIFF=$((AFTER_SIZE - BEFORE_SIZE))
+          echo "Database size change: ${SIZE_DIFF} bytes"
+          echo "size_change=${SIZE_DIFF}" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: 📝 Configure git
+      if: (steps.changes.outputs.has_changes == 'true' || inputs.force_update == true) && inputs.skip_commit == false
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action Bot"
+        
+    - name: 💾 Commit and push changes
+      if: (steps.changes.outputs.has_changes == 'true' || inputs.force_update == true) && inputs.skip_commit == false
+      working-directory: backend
+      run: |
+        git add ai_updates.db
+        
+        # Create detailed commit message
+        TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M UTC')
+        SIZE_CHANGE="${{ steps.changes.outputs.size_change }}"
+        COMPANY="${{ inputs.company }}"
+        
+        if [ "${{ inputs.force_update }}" = "true" ]; then
+          COMMIT_MSG="🎯 Manual force update: ${COMPANY} - ${TIMESTAMP} [skip ci]"
+        elif [ "${COMPANY}" = "all" ]; then
+          COMMIT_MSG="🎯 Manual update: All sources - ${TIMESTAMP} (+${SIZE_CHANGE} bytes) [skip ci]"
+        else
+          COMMIT_MSG="🎯 Manual update: ${COMPANY} - ${TIMESTAMP} (+${SIZE_CHANGE} bytes) [skip ci]"
+        fi
+        
+        git commit -m "${COMMIT_MSG}"
+        git push
+        
+    - name: 📊 Generate detailed summary
+      working-directory: backend
+      run: |
+        echo "## 🎯 Manual Update Summary" >> $GITHUB_STEP_SUMMARY
+        echo "**Company:** ${{ inputs.company }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Timestamp:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+        echo "**Force Update:** ${{ inputs.force_update }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Debug Mode:** ${{ inputs.debug_mode }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Skip Commit:** ${{ inputs.skip_commit }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ "${{ steps.changes.outputs.has_changes }}" = "true" ]; then
+          echo "**Result:** ✅ Changes detected and committed" >> $GITHUB_STEP_SUMMARY
+          echo "**Database size change:** ${{ steps.changes.outputs.size_change }} bytes" >> $GITHUB_STEP_SUMMARY
+        elif [ "${{ inputs.force_update }}" = "true" ]; then
+          echo "**Result:** 🔄 Force update completed" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "**Result:** ℹ️ No changes detected" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### System Status" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        node scripts/status.js >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        
+    - name: ⚠️ No changes notification
+      if: steps.changes.outputs.has_changes == 'false' && inputs.force_update == false
+      run: |
+        echo "::notice title=No Changes::No new updates found for ${{ inputs.company }}. This could mean:"
+        echo "::notice::1. No new content has been published"
+        echo "::notice::2. RSS feeds might be down"
+        echo "::notice::3. The target company filter didn't match any sources"
+        echo "::notice::Consider using the health check workflow to verify feed status"
+        
+    - name: 🚨 Create issue on failure
+      if: failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const title = `🚨 Manual update failed for ${{ inputs.company }}`;
+          const body = `
+          ## Manual Update Failure Report
+          
+          **Time:** ${new Date().toISOString()}
+          **Company:** ${{ inputs.company }}
+          **Force Update:** ${{ inputs.force_update }}
+          **Debug Mode:** ${{ inputs.debug_mode }}
+          **Run:** ${{ github.run_id }}
+          
+          ### Error Details
+          The manual update workflow has failed. Please check the [workflow logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.
+          
+          ### Possible Causes
+          - RSS feed endpoints are down for the target company
+          - Network connectivity issues
+          - Invalid company filter
+          - Database issues
+          - Script errors
+          
+          ### Debugging Steps
+          1. Check the workflow logs for error messages
+          2. Run the health check workflow
+          3. Try updating a different company
+          4. Use debug mode for more detailed output
+          
+          ### Next Steps
+          1. Identify the root cause from the logs
+          2. Fix any configuration issues
+          3. Re-run the manual update
+          4. Close this issue once resolved
+          
+          ---
+          *This issue was automatically created by the Manual Update workflow*
+          `;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: title,
+            body: body,
+            labels: ['bug', 'manual-update', 'automation']
+          });

@@ -1,13 +1,8 @@
 {
   "rss_feeds": {
-    "cohere": {
-      "url": "https://txt.cohere.ai/rss/",
-      "name": "Cohere",
-      "active": true
-    },
-    "stability": {
-      "url": "https://stability.ai/blog?format=rss",
-      "name": "Stability AI",
+    "openai": {
+      "url": "https://openai.com/blog/rss.xml",
+      "name": "OpenAI",
       "active": true
     },
     "google_research": {
@@ -24,6 +19,21 @@
       "url": "https://aws.amazon.com/blogs/machine-learning/feed",
       "name": "AWS Machine Learning",
       "active": true
+    },
+    "microsoft_ai": {
+      "url": "https://blogs.microsoft.com/ai/feed/",
+      "name": "Microsoft AI",
+      "active": true
+    },
+    "cohere": {
+      "url": "https://txt.cohere.ai/rss/",
+      "name": "Cohere",
+      "active": false
+    },
+    "stability": {
+      "url": "https://stability.ai/blog?format=rss",
+      "name": "Stability AI",
+      "active": false
     }
   },
   "scraping_targets": {
@@ -35,16 +45,6 @@
         "title": "h2, h3",
         "date": "time, span[class*='date']",
         "link": "a[href*='/news/']"
-      }
-    },
-    "openai": {
-      "url": "https://openai.com/blog",
-      "name": "OpenAI",
-      "selectors": {
-        "container": "article, div[class*='post']",
-        "title": "h2, h3",
-        "date": "time",
-        "link": "a[href*='/blog/']"
       }
     },
     "deepmind": {

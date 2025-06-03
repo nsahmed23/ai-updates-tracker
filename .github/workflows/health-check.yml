@@ -1,0 +1,292 @@
+name: 🏥 RSS Health Check
+
+on:
+  schedule:
+    # Run daily at 9:00 AM UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: 🔧 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
+        
+    - name: 📦 Install dependencies
+      working-directory: backend
+      run: npm ci
+      
+    - name: 🔍 Test RSS feeds
+      working-directory: backend
+      id: health_check
+      run: |
+        echo "=== RSS FEED HEALTH CHECK ===" | tee health_report.txt
+        echo "Timestamp: $(date -u '+%Y-%m-%d %H:%M UTC')" | tee -a health_report.txt
+        echo "" | tee -a health_report.txt
+        
+        # Create a comprehensive RSS health check script
+        cat > health_check.js << 'EOF'
+        import fetch from 'node-fetch';
+        import Parser from 'rss-parser';
+        import fs from 'fs/promises';
+        
+        const parser = new Parser();
+        
+        async function testFeeds() {
+          try {
+            const sourcesContent = await fs.readFile('config/sources.json', 'utf8');
+            const sources = JSON.parse(sourcesContent);
+            
+            const results = {
+              working: [],
+              failed: [],
+              total: 0,
+              errors: []
+            };
+            
+            console.log('Testing RSS feeds...\n');
+            
+            for (const [key, feed] of Object.entries(sources.rss_feeds)) {
+              if (!feed.active) {
+                console.log(`⏸️  ${feed.name}: SKIPPED (disabled)`);
+                continue;
+              }
+              
+              results.total++;
+              const startTime = Date.now();
+              
+              try {
+                console.log(`🔍 Testing ${feed.name}: ${feed.url}`);
+                
+                // Test HTTP response
+                const response = await fetch(feed.url, {
+                  headers: {
+                    'User-Agent': 'Mozilla/5.0 (compatible; AI-Updates-Tracker-HealthCheck/1.0)',
+                    'Accept': 'application/rss+xml, application/xml, text/xml'
+                  },
+                  timeout: 30000
+                });
+                
+                if (!response.ok) {
+                  throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                // Test RSS parsing
+                const feedData = await parser.parseURL(feed.url);
+                const itemCount = feedData.items ? feedData.items.length : 0;
+                const responseTime = Date.now() - startTime;
+                
+                console.log(`✅ ${feed.name}: OK (${itemCount} items, ${responseTime}ms)`);
+                
+                results.working.push({
+                  name: feed.name,
+                  url: feed.url,
+                  items: itemCount,
+                  responseTime: responseTime,
+                  latestItem: itemCount > 0 ? feedData.items[0].title?.substring(0, 60) + '...' : 'No items'
+                });
+                
+              } catch (error) {
+                const responseTime = Date.now() - startTime;
+                console.log(`❌ ${feed.name}: FAILED (${error.message})`);
+                
+                results.failed.push({
+                  name: feed.name,
+                  url: feed.url,
+                  error: error.message,
+                  responseTime: responseTime
+                });
+                
+                results.errors.push(`${feed.name}: ${error.message}`);
+              }
+            }
+            
+            // Generate summary
+            console.log('\n=== HEALTH CHECK SUMMARY ===');
+            console.log(`Total feeds tested: ${results.total}`);
+            console.log(`Working feeds: ${results.working.length}`);
+            console.log(`Failed feeds: ${results.failed.length}`);
+            console.log(`Success rate: ${results.total > 0 ? ((results.working.length / results.total) * 100).toFixed(1) : 0}%`);
+            
+            if (results.working.length > 0) {
+              console.log('\n✅ Working feeds:');
+              results.working.forEach(feed => {
+                console.log(`  ${feed.name}: ${feed.items} items (${feed.responseTime}ms)`);
+                console.log(`    Latest: ${feed.latestItem}`);
+              });
+            }
+            
+            if (results.failed.length > 0) {
+              console.log('\n❌ Failed feeds:');
+              results.failed.forEach(feed => {
+                console.log(`  ${feed.name}: ${feed.error}`);
+              });
+            }
+            
+            // Set GitHub outputs
+            const hasFailures = results.failed.length > 0;
+            const criticalFailures = results.working.length === 0;
+            
+            console.log(`\n::set-output name=has_failures::${hasFailures}`);
+            console.log(`::set-output name=critical_failures::${criticalFailures}`);
+            console.log(`::set-output name=working_count::${results.working.length}`);
+            console.log(`::set-output name=failed_count::${results.failed.length}`);
+            console.log(`::set-output name=success_rate::${results.total > 0 ? ((results.working.length / results.total) * 100).toFixed(1) : 0}`);
+            
+            if (hasFailures) {
+              console.log(`::set-output name=failed_feeds::${results.errors.join('; ')}`);
+            }
+            
+            return results;
+            
+          } catch (error) {
+            console.error('Health check script failed:', error);
+            console.log('::set-output name=script_error::true');
+            process.exit(1);
+          }
+        }
+        
+        testFeeds().catch(console.error);
+        EOF
+        
+        # Run the health check
+        node health_check.js 2>&1 | tee -a health_report.txt
+        
+        # Extract outputs for GitHub Actions
+        WORKING_COUNT=$(grep "Working feeds:" health_report.txt | grep -o '[0-9]\+' | tail -1 || echo "0")
+        FAILED_COUNT=$(grep "Failed feeds:" health_report.txt | grep -o '[0-9]\+' | tail -1 || echo "0")
+        
+        echo "working_count=${WORKING_COUNT}" >> $GITHUB_OUTPUT
+        echo "failed_count=${FAILED_COUNT}" >> $GITHUB_OUTPUT
+        
+        if [ "${FAILED_COUNT}" -gt "0" ]; then
+          echo "has_failures=true" >> $GITHUB_OUTPUT
+        else
+          echo "has_failures=false" >> $GITHUB_OUTPUT
+        fi
+        
+        if [ "${WORKING_COUNT}" -eq "0" ]; then
+          echo "critical_failures=true" >> $GITHUB_OUTPUT
+        else
+          echo "critical_failures=false" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: 📋 Upload health report
+      uses: actions/upload-artifact@v4
+      with:
+        name: rss-health-report-${{ github.run_number }}
+        path: backend/health_report.txt
+        retention-days: 30
+        
+    - name: 📊 Add to job summary
+      working-directory: backend
+      run: |
+        echo "## 🏥 RSS Health Check Report" >> $GITHUB_STEP_SUMMARY
+        echo "**Timestamp:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+        echo "**Working Feeds:** ${{ steps.health_check.outputs.working_count }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Failed Feeds:** ${{ steps.health_check.outputs.failed_count }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        cat health_report.txt >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        
+    - name: 🚨 Create issue for feed failures
+      if: steps.health_check.outputs.has_failures == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const workingCount = '${{ steps.health_check.outputs.working_count }}';
+          const failedCount = '${{ steps.health_check.outputs.failed_count }}';
+          const isCritical = '${{ steps.health_check.outputs.critical_failures }}' === 'true';
+          
+          const title = isCritical ? 
+            '🚨 CRITICAL: All RSS feeds are down!' : 
+            `⚠️ RSS Feed Health Issues (${failedCount} feeds down)`;
+            
+          const priority = isCritical ? 'critical' : 'high';
+          
+          const body = `
+          ## RSS Feed Health Check Report
+          
+          **Time:** ${new Date().toISOString()}
+          **Status:** ${isCritical ? '🚨 CRITICAL FAILURE' : '⚠️ PARTIAL FAILURE'}
+          **Working Feeds:** ${workingCount}
+          **Failed Feeds:** ${failedCount}
+          
+          ### Issue Details
+          ${isCritical ? 
+            'All RSS feeds are currently down. This means no new AI updates can be fetched automatically.' :
+            'Some RSS feeds are experiencing issues. Updates from affected sources will be missed.'
+          }
+          
+          ### Action Required
+          1. Check the [health check logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          2. Test failed feeds manually
+          3. Contact feed providers if issues persist
+          4. Consider using alternative sources
+          5. Close this issue once resolved
+          
+          ### Feed Status Details
+          See the workflow artifacts for the complete health report.
+          
+          ---
+          *This issue was automatically created by the RSS Health Check workflow*
+          `;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: title,
+            body: body,
+            labels: ['rss-health', 'automation', priority]
+          });
+          
+    - name: 🚨 Create issue for script errors
+      if: steps.health_check.outputs.script_error == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const title = '🔧 Health Check Script Error';
+          const body = `
+          ## Health Check Script Failure
+          
+          **Time:** ${new Date().toISOString()}
+          **Issue:** The RSS health check script itself failed to run
+          **Run:** ${{ github.run_id }}
+          
+          ### Error Details
+          The health check script encountered an error and could not complete. This could indicate:
+          - Dependency issues
+          - Configuration problems
+          - Script bugs
+          
+          ### Action Required
+          1. Check the [workflow logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          2. Fix any script errors
+          3. Test the health check locally
+          4. Re-run the workflow
+          
+          ---
+          *This issue was automatically created by GitHub Actions*
+          `;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: title,
+            body: body,
+            labels: ['bug', 'health-check', 'automation']
+          });

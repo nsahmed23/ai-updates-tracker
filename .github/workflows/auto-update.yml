@@ -1,0 +1,182 @@
+name: 🤖 Auto-Update AI Feeds
+
+on:
+  schedule:
+    # Run every 2 hours at 5 minutes past the hour
+    - cron: '5 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      force_update:
+        description: 'Force update even if no changes'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  update-feeds:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: 🔧 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
+        
+    - name: 📦 Install dependencies
+      working-directory: backend
+      run: npm ci
+      
+    - name: 📊 Show database stats before update
+      working-directory: backend
+      run: |
+        echo "=== DATABASE STATS BEFORE UPDATE ==="
+        if [ -f ai_updates.db ]; then
+          node -e "
+            import { open } from 'sqlite';
+            import sqlite3 from 'sqlite3';
+            const db = await open({ filename: 'ai_updates.db', driver: sqlite3.Database });
+            const total = await db.get('SELECT COUNT(*) as count FROM updates');
+            const companies = await db.all('SELECT company, COUNT(*) as count FROM updates GROUP BY company ORDER BY count DESC');
+            console.log('Total updates:', total.count);
+            console.log('By company:');
+            companies.forEach(c => console.log('  ' + c.company + ':', c.count));
+            await db.close();
+          "
+        else
+          echo "No database file found - this will be the first run"
+        fi
+        
+    - name: 🔄 Fetch latest AI updates
+      working-directory: backend
+      run: |
+        echo "Starting AI updates fetch..."
+        node scripts/fetchUpdates.js
+        
+    - name: 📈 Show database stats after update
+      working-directory: backend
+      run: |
+        echo "=== DATABASE STATS AFTER UPDATE ==="
+        if [ -f ai_updates.db ]; then
+          node -e "
+            import { open } from 'sqlite';
+            import sqlite3 from 'sqlite3';
+            const db = await open({ filename: 'ai_updates.db', driver: sqlite3.Database });
+            const total = await db.get('SELECT COUNT(*) as count FROM updates');
+            const recent = await db.get('SELECT COUNT(*) as count FROM updates WHERE datetime(created_at) > datetime(\"now\", \"-2 hours\")');
+            const companies = await db.all('SELECT company, COUNT(*) as count FROM updates GROUP BY company ORDER BY count DESC');
+            console.log('Total updates:', total.count);
+            console.log('New updates (last 2h):', recent.count);
+            console.log('By company:');
+            companies.forEach(c => console.log('  ' + c.company + ':', c.count));
+            await db.close();
+          "
+        fi
+        
+    - name: 🎯 Check for changes
+      id: changes
+      working-directory: backend
+      run: |
+        if git diff --quiet ai_updates.db; then
+          echo "No database changes detected"
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+        else
+          echo "Database changes detected"
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+          
+          # Get change summary
+          BEFORE_SIZE=$(git show HEAD:backend/ai_updates.db | wc -c)
+          AFTER_SIZE=$(wc -c < ai_updates.db)
+          SIZE_DIFF=$((AFTER_SIZE - BEFORE_SIZE))
+          echo "Database size change: ${SIZE_DIFF} bytes"
+          echo "size_change=${SIZE_DIFF}" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: 📝 Configure git
+      if: steps.changes.outputs.has_changes == 'true' || inputs.force_update == true
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action Bot"
+        
+    - name: 💾 Commit and push changes
+      if: steps.changes.outputs.has_changes == 'true' || inputs.force_update == true
+      working-directory: backend
+      run: |
+        git add ai_updates.db
+        
+        # Create detailed commit message
+        TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M UTC')
+        SIZE_CHANGE="${{ steps.changes.outputs.size_change }}"
+        
+        if [ "${{ inputs.force_update }}" == "true" ]; then
+          COMMIT_MSG="🤖 Manual force update: AI feeds - ${TIMESTAMP} [skip ci]"
+        else
+          COMMIT_MSG="🤖 Auto-update: AI feeds - ${TIMESTAMP} (+${SIZE_CHANGE} bytes) [skip ci]"
+        fi
+        
+        git commit -m "${COMMIT_MSG}"
+        git push
+        
+    - name: 📊 Generate update summary
+      if: steps.changes.outputs.has_changes == 'true'
+      working-directory: backend
+      run: |
+        echo "=== UPDATE SUMMARY ===" >> $GITHUB_STEP_SUMMARY
+        echo "**Timestamp:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+        echo "**Database size change:** ${{ steps.changes.outputs.size_change }} bytes" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Show latest status
+        node scripts/status.js >> status_output.txt
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        cat status_output.txt >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        
+    - name: 🚨 Create issue on failure
+      if: failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const title = '🚨 Auto-update workflow failed';
+          const body = `
+          ## Auto-update Failure Report
+          
+          **Time:** ${new Date().toISOString()}
+          **Workflow:** Auto-update AI feeds
+          **Run:** ${{ github.run_id }}
+          
+          ### Error Details
+          The automated AI feeds update workflow has failed. Please check the [workflow logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.
+          
+          ### Possible Causes
+          - RSS feed endpoints are down
+          - Network connectivity issues
+          - Database corruption
+          - Dependency issues
+          
+          ### Next Steps
+          1. Check the workflow logs
+          2. Test RSS feeds manually
+          3. Run the manual update workflow if needed
+          4. Close this issue once resolved
+          
+          ---
+          *This issue was automatically created by GitHub Actions*
+          `;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: title,
+            body: body,
+            labels: ['bug', 'automation', 'high-priority']
+          });

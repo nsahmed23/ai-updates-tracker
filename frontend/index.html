@@ -211,7 +211,7 @@
         }
 
         /* Buttons */
-        .refresh-btn, .theme-toggle {
+        .refresh-btn, .theme-toggle, .status-btn {
             width: 44px;
             height: 44px;
             min-width: 44px;
@@ -230,7 +230,7 @@
             margin-right: var(--space-12);
         }
 
-        .refresh-btn:hover, .theme-toggle:hover {
+        .refresh-btn:hover, .theme-toggle:hover, .status-btn:hover {
             background: var(--accent-openai);
             color: white;
         }
@@ -948,6 +948,93 @@
         .summary-content li {
             margin-bottom: var(--space-4);
         }
+
+        /* Status Modal Styles */
+        .status-section {
+            margin: var(--space-24) 0;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-16);
+            margin-top: var(--space-12);
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-12);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+        }
+        
+        .status-label {
+            color: var(--text-secondary);
+        }
+        
+        .status-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .company-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-8);
+            margin-top: var(--space-12);
+        }
+        
+        .company-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-8) var(--space-12);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-sm);
+        }
+        
+        .company-name {
+            text-transform: capitalize;
+        }
+        
+        .company-count {
+            font-weight: 600;
+            color: var(--accent-openai);
+        }
+        
+        .feed-status {
+            margin-top: var(--space-12);
+        }
+        
+        .feed-item {
+            padding: var(--space-8) var(--space-12);
+            margin: var(--space-4) 0;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-sm);
+        }
+        
+        .status-actions {
+            display: flex;
+            gap: var(--space-12);
+            margin-top: var(--space-24);
+            flex-wrap: wrap;
+        }
+        
+        .status-action-btn {
+            padding: var(--space-12) var(--space-20);
+            background: var(--accent-openai);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .status-action-btn:hover {
+            background: var(--accent-anthropic);
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body>
@@ -985,6 +1072,12 @@
                 <line x1="21" y1="12" x2="23" y2="12"/>
                 <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+        </button>
+        
+        <button class="status-btn" id="statusBtn" title="View system status" aria-label="Status">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
         </button>
         
@@ -1051,6 +1144,19 @@
             <button class="detail-close" id="closeModal" aria-label="Close modal">×</button>
             <div id="modalContent">
                 <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Modal -->
+    <div class="detail-modal" id="statusModal" role="dialog" aria-modal="true" aria-labelledby="statusModalTitle">
+        <div class="detail-content">
+            <button class="detail-close" id="closeStatusModal" aria-label="Close status modal">×</button>
+            <div id="statusModalContent">
+                <h2 id="statusModalTitle">System Status</h2>
+                <div id="statusContent">
+                    <div class="loading">Loading status...</div>
+                </div>
             </div>
         </div>
     </div>
@@ -1265,90 +1371,70 @@
             });
         }
 
-        // Filter updates
-        function filterUpdates() {
-            console.log(`Starting filter with currentFilter: "${currentFilter}"`);
-            let filtered = [...updates];
+        // Override the company filter logic - Enhanced version
+        const originalFilterFunction = window.filterUpdates || filterUpdates;
 
-            if (currentFilter !== 'all') {
-                filtered = filtered.filter(update => {
-                    const updateCompany = (update.company || '').toLowerCase().trim();
-                    const filterCompany = currentFilter.toLowerCase().trim();
-                    
-                    // Create a comprehensive mapping of filter names to possible data names
-                    const companyMappings = {
-                        'openai': ['openai', 'open ai', 'open-ai'],
-                        'anthropic': ['anthropic'],
-                        'google': ['google', 'alphabet', 'deepmind', 'googleresearch'],
-                        'googleresearch': ['googleresearch', 'google research', 'google-research'],
-                        'microsoft': ['microsoft', 'msft', 'ms', 'awsmachinelearning'],
-                        'awsmachinelearning': ['awsmachinelearning', 'aws machine learning', 'aws'],
-                        'meta': ['meta', 'facebook', 'meta platforms', 'metaairesearch'],
-                        'metaairesearch': ['metaairesearch', 'meta ai research', 'meta-ai-research'],
-                        'amazon': ['amazon', 'aws', 'awsmachinelearning'],
-                        'arxiv': ['arxiv', 'arxiv.org'],
-                        'deepseek': ['deepseek', 'deep-seek'],
-                        'cohere': ['cohere'],
-                        'stabilityai': ['stability ai', 'stabilityai', 'stability'],
-                        'deepmind': ['deepmind', 'google deepmind']
-                    };
-                    
-                    // Direct match first
-                    if (updateCompany === filterCompany) {
-                        return true;
-                    }
-                    
-                    // Check mappings
-                    const possibleNames = companyMappings[filterCompany] || [filterCompany];
-                    const isMatch = possibleNames.some(name => {
-                        const nameNormalized = name.toLowerCase().trim();
-                        return updateCompany === nameNormalized || 
-                               updateCompany.includes(nameNormalized) || 
-                               nameNormalized.includes(updateCompany);
-                    });
-                    
-                    return isMatch;
-                });
-                
-                console.log(`Company filter "${currentFilter}" matched ${filtered.length} updates`);
-                
-                // Enhanced debugging
-                if (filtered.length === 0) {
-                    const companiesInData = [...new Set(updates.map(u => u.company))];
-                    console.warn(`❌ No matches for "${currentFilter}"`);
-                    console.log('📊 Available companies in data:', companiesInData);
-                    
-                    // Show potential matches
-                    const potentialMatches = companiesInData.filter(company => 
-                        company.toLowerCase().includes(currentFilter.toLowerCase()) ||
-                        currentFilter.toLowerCase().includes(company.toLowerCase())
-                    );
-                    if (potentialMatches.length > 0) {
-                        console.log('🔍 Potential matches found:', potentialMatches);
-                    }
-                }
-            }
-
-            // Apply other filters (search, date range) - keep existing logic
-            if (searchQuery) {
-                const query = searchQuery.toLowerCase();
-                filtered = filtered.filter(update =>
-                    update.title.toLowerCase().includes(query) ||
-                    update.description.toLowerCase().includes(query)
-                );
-            }
-
-            if (dateRange < 365) {
-                const cutoffDate = new Date();
-                cutoffDate.setDate(cutoffDate.getDate() - dateRange);
-                filtered = filtered.filter(update =>
-                    new Date(update.date) >= cutoffDate
-                );
-            }
-
-            filteredUpdates = filtered;
-            console.log(`Total filtered results: ${filteredUpdates.length} out of ${updates.length} total updates`);
+        window.filterUpdates = function() {
+          console.log(`Starting filter with currentFilter: "${currentFilter}"`);
+          
+          if (!updates || updates.length === 0) {
+            filteredUpdates = [];
             renderCards();
+            return;
+          }
+          
+          // Start with all updates
+          filteredUpdates = [...updates];
+          
+          // Company filter - now using normalized company names
+          if (currentFilter && currentFilter !== 'all') {
+            filteredUpdates = filteredUpdates.filter(update => {
+              const company = (update.company || '').toLowerCase();
+              return company === currentFilter.toLowerCase();
+            });
+            
+            console.log(`Company filter "${currentFilter}" matched ${filteredUpdates.length} updates`);
+            
+            if (filteredUpdates.length === 0) {
+              console.warn(`❌ No matches for "${currentFilter}"`);
+              const available = [...new Set(updates.map(u => u.company || u.source))];
+              console.log('📊 Available companies in data:', available);
+            }
+          }
+          
+          // Date filter - CHECK IF THIS IS THE ISSUE
+          if (dateRange && dateRange > 0 && dateRange < 365) {
+            const beforeDateFilter = filteredUpdates.length;
+            const cutoffDate = new Date();
+            cutoffDate.setDate(cutoffDate.getDate() - dateRange);
+            
+            filteredUpdates = filteredUpdates.filter(update => {
+              const updateDate = new Date(update.date || update.createdAt || update.publishedAt);
+              return !isNaN(updateDate) && updateDate >= cutoffDate;
+            });
+            
+            const removed = beforeDateFilter - filteredUpdates.length;
+            if (removed > 0) {
+              console.log(`⚠️ Date filter removed ${removed} updates older than ${dateRange} days`);
+            }
+          }
+          
+          // Search filter
+          if (searchQuery && searchQuery.trim()) {
+            const search = searchQuery.toLowerCase();
+            filteredUpdates = filteredUpdates.filter(update =>
+              (update.title || '').toLowerCase().includes(search) ||
+              (update.description || '').toLowerCase().includes(search)
+            );
+          }
+          
+          console.log(`Total filtered results: ${filteredUpdates.length} out of ${updates.length} total updates`);
+          renderCards();
+        };
+
+        // Alias for backward compatibility
+        function filterUpdates() {
+            window.filterUpdates();
         }
 
         // Debug company names
@@ -1762,6 +1848,14 @@
             
             // Refresh button
             document.getElementById('refreshBtn').addEventListener('click', triggerFetch);
+            
+            // Status button
+            document.getElementById('statusBtn').addEventListener('click', showSystemStatus);
+            
+            // Status modal close button
+            document.getElementById('closeStatusModal').addEventListener('click', () => {
+                document.getElementById('statusModal').classList.remove('active');
+            });
         }
 
         // Theme toggle functionality
@@ -1962,14 +2056,136 @@
             console.groupEnd();
         }
 
+        // Show system status
+        async function showSystemStatus() {
+            const modal = document.getElementById('statusModal');
+            const content = document.getElementById('statusContent');
+            
+            modal.classList.add('active');
+            content.innerHTML = '<div class="loading">Loading status...</div>';
+            
+            try {
+                // Get local status info
+                const companyCounts = {};
+                updates.forEach(update => {
+                    companyCounts[update.company] = (companyCounts[update.company] || 0) + 1;
+                });
+                
+                const totalUpdates = updates.length;
+                const latestUpdate = updates.length > 0 ? 
+                    new Date(Math.max(...updates.map(u => new Date(u.date)))).toLocaleDateString() : 'None';
+                
+                // Build status HTML
+                const statusHTML = `
+                    <div class="status-section">
+                        <h3>📊 Database Status</h3>
+                        <div class="status-grid">
+                            <div class="status-item">
+                                <span class="status-label">Total Updates:</span>
+                                <span class="status-value">${totalUpdates}</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">Latest Update:</span>
+                                <span class="status-value">${latestUpdate}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-section">
+                        <h3>🏢 Company Distribution</h3>
+                        <div class="company-stats">
+                            ${Object.entries(companyCounts)
+                                .sort(([,a], [,b]) => b - a)
+                                .map(([company, count]) => 
+                                    `<div class="company-stat">
+                                        <span class="company-name">${company}</span>
+                                        <span class="company-count">${count}</span>
+                                    </div>`
+                                ).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="status-section">
+                        <h3>📡 RSS Feeds</h3>
+                        <div class="feed-status">
+                            <div class="feed-item">✅ OpenAI: Active</div>
+                            <div class="feed-item">✅ Google Research: Active</div>
+                            <div class="feed-item">✅ Meta AI: Active</div>
+                            <div class="feed-item">✅ AWS ML: Active</div>
+                            <div class="feed-item">✅ Microsoft AI: Active</div>
+                            <div class="feed-item">⏸️ Cohere: Disabled</div>
+                            <div class="feed-item">⏸️ Stability AI: Disabled</div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-actions">
+                        <button onclick="triggerFetch()" class="status-action-btn">
+                            🔄 Refresh All Feeds
+                        </button>
+                        <button onclick="debugFiltering()" class="status-action-btn">
+                            🐛 Debug Filtering
+                        </button>
+                    </div>
+                `;
+                
+                content.innerHTML = statusHTML;
+                
+            } catch (error) {
+                content.innerHTML = `<div class="error">Failed to load status: ${error.message}</div>`;
+            }
+        }
+
         // Add to window for easy access in console
         window.debugFiltering = debugFiltering;
         window.exportUpdates = exportUpdates;
         window.saveUserPreferences = saveUserPreferences;
         window.loadUserPreferences = loadUserPreferences;
 
+        // Enhanced sidebar update with real data counts
+        function updateSidebarWithCounts() {
+            setTimeout(() => {
+                if (updates && updates.length > 0) {
+                    const counts = {};
+                    updates.forEach(update => {
+                        const company = update.company || update.source;
+                        counts[company] = (counts[company] || 0) + 1;
+                    });
+                    
+                    console.log('Company distribution:', counts);
+                    
+                    // Update sidebar buttons with counts
+                    document.querySelectorAll('.nav-link[data-company]').forEach(btn => {
+                        const filter = btn.dataset.company;
+                        let count = 0;
+                        
+                        // Direct mapping since company names are now normalized
+                        count = counts[filter] || 0;
+                        
+                        // Find existing count span or create new one
+                        let countSpan = btn.querySelector('.nav-count');
+                        if (!countSpan) {
+                            countSpan = document.createElement('span');
+                            countSpan.className = 'nav-count';
+                            btn.appendChild(countSpan);
+                        }
+                        
+                        countSpan.textContent = `(${count})`;
+                        
+                        if (count === 0) {
+                            btn.style.opacity = '0.5';
+                        } else {
+                            btn.style.opacity = '1';
+                        }
+                    });
+                }
+            }, 1000);
+        }
+
         // Start app when DOM is ready
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+            updateSidebarWithCounts();
+        });
     </script>
 </body>
 </html>

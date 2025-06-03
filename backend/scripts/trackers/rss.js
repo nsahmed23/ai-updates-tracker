@@ -16,13 +16,28 @@ export class RSSTracker {
       console.log(`Fetching RSS feed: ${sourceName}`);
       const feed = await this.parser.parseURL(feedUrl);
       
+      // Normalize company names
+      const companyMap = {
+        'openai': 'openai',
+        'google research': 'google',
+        'meta ai research': 'meta',
+        'aws machine learning': 'aws',
+        'microsoft ai': 'microsoft',
+        'anthropic': 'anthropic',
+        'deepmind': 'deepmind',
+        'cohere': 'cohere',
+        'stability ai': 'stability'
+      };
+      
+      const normalizedCompany = companyMap[sourceName.toLowerCase()] || sourceName.toLowerCase().replace(/\s+/g, '');
+      
       return feed.items.map(item => ({
         id: crypto.createHash('md5').update(`${item.title}${item.link}`).digest('hex'),
         title: item.title,
         description: item.contentSnippet || item.content || '',
         link: item.link,
         date: item.pubDate || item.isoDate || new Date().toISOString(),
-        company: sourceName.toLowerCase().replace(/\s+/g, ''),
+        company: normalizedCompany,
         source: sourceName,
         type: 'blog'
       }));
