@@ -1166,7 +1166,7 @@
 
     <script>
         // Configuration
-        const API_BASE_URL = 'https://backend-bice-two-51.vercel.app/api';
+        const API_BASE_URL = './data/updates.json'; // Use static JSON for GitHub Pages
         
         // Data storage
         let updates = [];
@@ -1196,78 +1196,30 @@
         let dateRange = 30;
         let filteredUpdates = [...updates];
 
-        // Fetch updates from API with fallback to local data.json
+        // Fetch updates from static JSON
         async function fetchUpdates() {
             try {
                 showLoading(true);
-                let dataSource = 'api';
-                let data;
                 
-                try {
-                    // First try to fetch from Vercel API
-                    const params = new URLSearchParams({
-                        company: currentFilter,
-                        dateRange: dateRange,
-                        search: searchQuery
-                    });
-                    
-                    const response = await fetch(`${API_BASE_URL}/updates?${params}`);
-                    if (!response.ok) throw new Error('API returned non-OK status');
-                    
-                    data = await response.json();
-                    console.log('Successfully fetched data from Vercel API');
-                    showToast('Updates loaded from live API', 'success');
-                    
-                } catch (apiError) {
-                    // If API fails (CORS, network error, etc.), fall back to local data.json
-                    console.warn('API fetch failed, falling back to local data.json:', apiError);
-                    dataSource = 'local';
-                    
-                    try {
-                        const localResponse = await fetch('./data.json');
-                        if (!localResponse.ok) throw new Error('Failed to fetch local data');
-                        
-                        const localData = await localResponse.json();
-                        
-                        // Transform local data to match API response format
-                        data = {
-                            updates: localData.updates || []
-                        };
-                        
-                        // DON'T pre-filter local data - let filterUpdates handle it
-                        console.log(`Loaded ${data.updates.length} total updates from data.json`);
-                        
-                        console.log('Successfully loaded data from local data.json');
-                        showToast('Updates loaded from local cache (API unavailable)', 'info');
-                        
-                    } catch (localError) {
-                        console.error('Failed to load local data:', localError);
-                        throw new Error('Failed to load data from both API and local source');
-                    }
-                }
+                // Always use static JSON for GitHub Pages
+                const response = await fetch(API_BASE_URL);
+                if (!response.ok) throw new Error('Failed to fetch updates');
                 
-                // Process the data regardless of source
+                const data = await response.json();
                 updates = data.updates || [];
                 
                 // Sort by date (newest first)
                 updates.sort((a, b) => new Date(b.date) - new Date(a.date));
                 
-                // Log which source was used
-                console.log(`Data source used: ${dataSource}, loaded ${updates.length} updates`);
+                console.log(`Loaded ${updates.length} updates from static data`);
+                showToast(`Loaded ${updates.length} AI updates`, 'success');
                 
                 filterUpdates();
-                
-                // Only fetch stats from API if we're using the API data source
-                if (dataSource === 'api') {
-                    await fetchStats();
-                } else {
-                    // Calculate stats locally when using local data
-                    calculateLocalStats();
-                }
+                calculateLocalStats();
                 
             } catch (error) {
-                console.error('Error in fetchUpdates:', error);
-                showToast('Failed to load updates from any source', 'error');
+                console.error('Error fetching updates:', error);
+                showToast('Failed to load updates', 'error');
             } finally {
                 showLoading(false);
             }
@@ -1306,30 +1258,11 @@
             }
         }
 
-        // Trigger manual update fetch
+        // Trigger manual update fetch (disabled for static data)
         async function triggerFetch() {
-            try {
-                const btn = document.getElementById('refreshBtn');
-                btn.classList.add('loading');
-                showToast('Fetching new updates...', 'info');
-                
-                const response = await fetch(`${API_BASE_URL}/fetch-updates`, {
-                    method: 'POST'
-                });
-                
-                if (!response.ok) throw new Error('Failed to trigger fetch');
-                
-                const result = await response.json();
-                showToast(`Fetched ${result.saved} new updates!`, 'success');
-                
-                // Refresh the display
-                await fetchUpdates();
-            } catch (error) {
-                console.error('Error triggering fetch:', error);
-                showToast('Failed to fetch new updates', 'error');
-            } finally {
-                document.getElementById('refreshBtn').classList.remove('loading');
-            }
+            showToast('Using static data - refresh not available', 'info');
+            // Just reload the data
+            await fetchUpdates();
         }
 
         // Update sidebar with company counts
@@ -1371,147 +1304,49 @@
             });
         }
 
-        // Override the company filter logic - Enhanced version
-        const originalFilterFunction = window.filterUpdates || filterUpdates;
-
-        window.filterUpdates = function() {
-          console.log(`Starting filter with currentFilter: "${currentFilter}"`);
-          
-          if (!updates || updates.length === 0) {
-            filteredUpdates = [];
-            renderCards();
-            return;
-          }
-          
-          // Start with all updates
-          filteredUpdates = [...updates];
-          
-          // Company filter - now using normalized company names
-          if (currentFilter && currentFilter !== 'all') {
-            filteredUpdates = filteredUpdates.filter(update => {
-              const company = (update.company || '').toLowerCase();
-              return company === currentFilter.toLowerCase();
-            });
-            
-            console.log(`Company filter "${currentFilter}" matched ${filteredUpdates.length} updates`);
-            
-            if (filteredUpdates.length === 0) {
-              console.warn(`❌ No matches for "${currentFilter}"`);
-              const available = [...new Set(updates.map(u => u.company || u.source))];
-              console.log('📊 Available companies in data:', available);
-            }
-          }
-          
-          // Date filter - CHECK IF THIS IS THE ISSUE
-          if (dateRange && dateRange > 0 && dateRange < 365) {
-            const beforeDateFilter = filteredUpdates.length;
-            const cutoffDate = new Date();
-            cutoffDate.setDate(cutoffDate.getDate() - dateRange);
-            
-            filteredUpdates = filteredUpdates.filter(update => {
-              const updateDate = new Date(update.date || update.createdAt || update.publishedAt);
-              return !isNaN(updateDate) && updateDate >= cutoffDate;
-            });
-            
-            const removed = beforeDateFilter - filteredUpdates.length;
-            if (removed > 0) {
-              console.log(`⚠️ Date filter removed ${removed} updates older than ${dateRange} days`);
-            }
-          }
-          
-          // Search filter
-          if (searchQuery && searchQuery.trim()) {
-            const search = searchQuery.toLowerCase();
-            filteredUpdates = filteredUpdates.filter(update =>
-              (update.title || '').toLowerCase().includes(search) ||
-              (update.description || '').toLowerCase().includes(search)
-            );
-          }
-          
-          console.log(`Total filtered results: ${filteredUpdates.length} out of ${updates.length} total updates`);
-          renderCards();
-        };
-
-        // Alias for backward compatibility
+        // Filter updates based on current settings
         function filterUpdates() {
-            window.filterUpdates();
+            if (!updates || updates.length === 0) {
+                filteredUpdates = [];
+                renderCards();
+                return;
+            }
+            
+            // Start with all updates
+            filteredUpdates = [...updates];
+            
+            // Company filter
+            if (currentFilter && currentFilter !== 'all') {
+                filteredUpdates = filteredUpdates.filter(update => {
+                    return update.company === currentFilter;
+                });
+            }
+            
+            // Date filter
+            if (dateRange < 365) {
+                const cutoffDate = new Date();
+                cutoffDate.setDate(cutoffDate.getDate() - dateRange);
+                
+                filteredUpdates = filteredUpdates.filter(update => {
+                    const updateDate = new Date(update.date);
+                    return updateDate >= cutoffDate;
+                });
+            }
+            
+            // Search filter
+            if (searchQuery && searchQuery.trim()) {
+                const search = searchQuery.toLowerCase();
+                filteredUpdates = filteredUpdates.filter(update =>
+                    (update.title || '').toLowerCase().includes(search) ||
+                    (update.description || '').toLowerCase().includes(search) ||
+                    (update.authors || '').toLowerCase().includes(search)
+                );
+            }
+            
+            console.log(`Filtered ${filteredUpdates.length} out of ${updates.length} updates`);
+            renderCards();
         }
 
-        // Debug company names
-        function debugCompanyNames() {
-            const companyCounts = {};
-            updates.forEach(update => {
-                companyCounts[update.company] = (companyCounts[update.company] || 0) + 1;
-            });
-            
-            console.log('=== Company Names Debug ===');
-            console.log('Total updates:', updates.length);
-            console.log('Unique companies and counts:');
-            Object.entries(companyCounts).forEach(([company, count]) => {
-                console.log(`  "${company}": ${count}`);
-            });
-            
-            // Check which filter buttons would map to actual data
-            console.log('\n=== Filter Button Mapping Check ===');
-            const filterButtons = ['openai', 'anthropic', 'google', 'microsoft', 'meta', 'arxiv'];
-            
-            filterButtons.forEach(filterName => {
-                console.log(`\nFilter button: "${filterName}"`);
-                const matchingUpdates = updates.filter(update => {
-                    const updateCompany = (update.company || '').toLowerCase().trim();
-                    const filterCompany = filterName.toLowerCase().trim();
-                    
-                    // Use the same mapping logic as filterUpdates
-                    const companyMappings = {
-                        'openai': ['openai', 'open ai', 'open-ai'],
-                        'anthropic': ['anthropic'],
-                        'google': ['google', 'alphabet', 'deepmind', 'googleresearch'],
-                        'googleresearch': ['googleresearch', 'google research', 'google-research'],
-                        'microsoft': ['microsoft', 'msft', 'ms', 'awsmachinelearning'],
-                        'awsmachinelearning': ['awsmachinelearning', 'aws machine learning', 'aws'],
-                        'meta': ['meta', 'facebook', 'meta platforms', 'metaairesearch'],
-                        'metaairesearch': ['metaairesearch', 'meta ai research', 'meta-ai-research'],
-                        'amazon': ['amazon', 'aws', 'awsmachinelearning'],
-                        'arxiv': ['arxiv', 'arxiv.org'],
-                        'deepseek': ['deepseek', 'deep-seek'],
-                        'cohere': ['cohere'],
-                        'stabilityai': ['stability ai', 'stabilityai', 'stability'],
-                        'deepmind': ['deepmind', 'google deepmind']
-                    };
-                    
-                    // Direct match first
-                    if (updateCompany === filterCompany) {
-                        return true;
-                    }
-                    
-                    // Check mappings
-                    const possibleNames = companyMappings[filterCompany] || [filterCompany];
-                    return possibleNames.some(name => {
-                        const nameNormalized = name.toLowerCase().trim();
-                        return updateCompany === nameNormalized || 
-                               updateCompany.includes(nameNormalized) || 
-                               nameNormalized.includes(updateCompany);
-                    });
-                });
-                
-                console.log(`  Matches: ${matchingUpdates.length} updates`);
-                if (matchingUpdates.length > 0) {
-                    const companies = [...new Set(matchingUpdates.map(u => u.company))];
-                    console.log(`  Maps to companies: ${companies.join(', ')}`);
-                } else {
-                    console.log(`  ❌ NO MATCHES - This filter won't show any results!`);
-                }
-            });
-            
-            console.log('\n=== Recommendation ===');
-            console.log('Based on your data, these companies exist:');
-            Object.entries(companyCounts).forEach(([company, count]) => {
-                console.log(`  - ${company} (${count} updates)`);
-            });
-            
-            return companyCounts;
-        }
-        window.debugCompanyNames = debugCompanyNames;
 
         // Render cards
         function renderCards() {
@@ -1833,7 +1668,7 @@
                 clearTimeout(searchTimeout);
                 searchTimeout = setTimeout(() => {
                     searchQuery = e.target.value;
-                    fetchUpdates();
+                    filterUpdates(); // Just filter, don't refetch
                 }, 300);
             });
             
@@ -1843,7 +1678,7 @@
             slider.addEventListener('input', (e) => {
                 dateRange = parseInt(e.target.value);
                 label.textContent = dateRange === 1 ? '1 day' : `${dateRange} days`;
-                fetchUpdates();
+                filterUpdates(); // Just filter, don't refetch
             });
             
             // Refresh button
