@@ -133,6 +133,17 @@
       "created_at": "2025-06-03 01:50:43"
     },
     {
+      "id": "f40a451313d584218592c07498d926c9",
+      "title": "Automating customer support agents",
+      "description": "MavenAGI is a new software company for the AI era. They recently launched an AI customer service agent, built on the flexibility of GPT-4, which a number of companies like Tripadvisor, Clickup and Rho are already using to save time and better serve their customers.",
+      "link": "https://openai.com/index/mavenagi",
+      "date": "Wed, 29 May 2024 09:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-04 18:34:13"
+    },
+    {
       "id": "b7b217d40d928c24a384c61798a487f3",
       "title": "Automating customer support agents",
       "description": "MavenAGI is a new software company for the AI era. They recently launched an AI customer service agent, built on the flexibility of GPT-4, which a number of companies like Tripadvisor, Clickup and Rho are already using to save time and better serve their customers.",
@@ -1088,21 +1099,10 @@
       "source": "OpenAI",
       "type": "blog",
       "created_at": "2025-06-03 01:50:43"
-    },
-    {
-      "id": "8a4fdcf63511356ce715b9c7246d24f1",
-      "title": "Hierarchical text-conditional image generation with CLIP latents",
-      "description": "",
-      "link": "https://openai.com/index/hierarchical-text-conditional-image-generation-with-clip-latents",
-      "date": "Wed, 13 Apr 2022 07:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:43"
     }
   ],
   "stats": {
-    "total": 973,
+    "total": 974,
     "anthropic": 36,
     "arxiv": 43,
     "aws": 34,
@@ -1110,7 +1110,7 @@
     "google": 122,
     "meta": 55,
     "microsoft": 20,
-    "openai": 646
+    "openai": 647
   },
-  "lastUpdated": "2025-06-04T16:13:17.039Z"
+  "lastUpdated": "2025-06-04T20:10:18.058Z"
 }
