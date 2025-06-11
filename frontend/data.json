@@ -1102,9 +1102,9 @@
     }
   ],
   "stats": {
-    "total": 1215,
+    "total": 1224,
     "anthropic": 48,
-    "arxiv": 145,
+    "arxiv": 154,
     "aws": 50,
     "deepmind": 19,
     "google": 126,
@@ -1112,5 +1112,5 @@
     "microsoft": 20,
     "openai": 716
   },
-  "lastUpdated": "2025-06-11T12:19:32.877Z"
+  "lastUpdated": "2025-06-11T16:16:36.815Z"
 }
