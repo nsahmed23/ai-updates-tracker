@@ -771,6 +771,28 @@
       "created_at": "2025-06-03 01:50:43"
     },
     {
+      "id": "f5fc11b2f644527419911ee5c82088c4",
+      "title": "Building a custom text-to-SQL agent using Amazon Bedrock and Converse API",
+      "description": "Developing robust text-to-SQL capabilities is a critical challenge in the field of natural language processing (NLP) and database management. The complexity of NLP and database management increases in this field, particularly while dealing with complex queries and database structures. In this post, we introduce a straightforward but powerful solution with accompanying code to text-to-SQL using a custom agent implementation along with Amazon Bedrock and Converse API.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/building-a-custom-text-to-sql-agent-using-amazon-bedrock-and-converse-api/",
+      "date": "Wed, 18 Jun 2025 16:10:16 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-06-18 16:12:04"
+    },
+    {
+      "id": "28439f7f8cb8353b57725fb7ffcbd45f",
+      "title": "Accelerate threat modeling with generative AI",
+      "description": "In this post, we explore how generative AI can revolutionize threat modeling practices by automating vulnerability identification, generating comprehensive attack scenarios, and providing contextual mitigation strategies.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/accelerate-threat-modeling-with-generative-ai/",
+      "date": "Wed, 18 Jun 2025 16:05:53 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-06-18 16:12:04"
+    },
+    {
       "id": "b42b60651d4193b90b4dabc774e1a895",
       "title": "OpenAI Five Benchmark",
       "description": "The OpenAI Five Benchmark match is now over!",
@@ -1077,40 +1099,18 @@
       "source": "Microsoft AI",
       "type": "blog",
       "created_at": "2025-06-03 01:50:45"
-    },
-    {
-      "id": "8617694ae9d5958a232f90f490c887b2",
-      "title": "Partnership with Axel Springer to deepen beneficial use of AI in journalism",
-      "description": "Axel Springer is the first publishing house globally to partner with us on a deeper integration of journalism in AI technologies.",
-      "link": "https://openai.com/index/axel-springer-partnership",
-      "date": "Wed, 13 Dec 2023 08:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:43"
-    },
-    {
-      "id": "b4721ca0c422e059d198827880ddf8c8",
-      "title": "Measuring Goodhart’s law",
-      "description": "Goodhart’s law famously says: “When a measure becomes a target, it ceases to be a good measure.” Although originally from economics, it’s something we have to grapple with at OpenAI when figuring out how to optimize objectives that are difficult or costly to measure.",
-      "link": "https://openai.com/index/measuring-goodharts-law",
-      "date": "Wed, 13 Apr 2022 07:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:43"
     }
   ],
   "stats": {
-    "total": 1474,
-    "anthropic": 56,
-    "arxiv": 273,
-    "aws": 67,
-    "deepmind": 20,
-    "google": 126,
-    "meta": 130,
-    "microsoft": 20,
-    "openai": 782
+    "total": 1604,
+    "anthropic": 74,
+    "arxiv": 293,
+    "aws": 69,
+    "deepmind": 33,
+    "google": 142,
+    "meta": 155,
+    "microsoft": 26,
+    "openai": 812
   },
-  "lastUpdated": "2025-06-18T12:19:32.701Z"
+  "lastUpdated": "2025-06-18T16:13:02.092Z"
 }
