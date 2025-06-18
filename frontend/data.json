@@ -771,6 +771,17 @@
       "created_at": "2025-06-03 01:50:43"
     },
     {
+      "id": "654debfd19bcb56772911f5852b935eb",
+      "title": "Meeting summarization and action item extraction with Amazon Nova",
+      "description": "In this post, we present a benchmark of different understanding models from the Amazon Nova family available on Amazon Bedrock, to provide insights on how you can choose the best model for a meeting summarization task.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/meeting-summarization-and-action-item-extraction-with-amazon-nova/",
+      "date": "Wed, 18 Jun 2025 16:13:36 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-06-18 16:31:46"
+    },
+    {
       "id": "f5fc11b2f644527419911ee5c82088c4",
       "title": "Building a custom text-to-SQL agent using Amazon Bedrock and Converse API",
       "description": "Developing robust text-to-SQL capabilities is a critical challenge in the field of natural language processing (NLP) and database management. The complexity of NLP and database management increases in this field, particularly while dealing with complex queries and database structures. In this post, we introduce a straightforward but powerful solution with accompanying code to text-to-SQL using a custom agent implementation along with Amazon Bedrock and Converse API.",
@@ -779,7 +790,7 @@
       "company": "aws",
       "source": "AWS Machine Learning",
       "type": "blog",
-      "created_at": "2025-06-18 16:12:04"
+      "created_at": "2025-06-18 16:31:46"
     },
     {
       "id": "28439f7f8cb8353b57725fb7ffcbd45f",
@@ -790,7 +801,29 @@
       "company": "aws",
       "source": "AWS Machine Learning",
       "type": "blog",
-      "created_at": "2025-06-18 16:12:04"
+      "created_at": "2025-06-18 16:31:46"
+    },
+    {
+      "id": "ca3e0c21d34dcf81c2656d2e0e5efb34",
+      "title": "Preparing for future AI risks in biology",
+      "description": "Advanced AI can transform biology and medicine—but also raises biosecurity risks. We’re proactively assessing capabilities and implementing safeguards to prevent misuse.",
+      "link": "https://openai.com/index/preparing-for-future-ai-capabilities-in-biology",
+      "date": "Wed, 18 Jun 2025 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-18 18:34:35"
+    },
+    {
+      "id": "1bff5104e56fd404e352444d332bcba7",
+      "title": "Toward understanding and preventing misalignment generalization",
+      "description": "We study how training on incorrect responses can cause broader misalignment in language models and identify an internal feature driving this behavior—one that can be reversed with minimal fine-tuning.",
+      "link": "https://openai.com/index/emergent-misalignment",
+      "date": "Wed, 18 Jun 2025 10:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-18 18:34:35"
     },
     {
       "id": "b42b60651d4193b90b4dabc774e1a895",
@@ -1066,51 +1099,18 @@
       "source": "OpenAI",
       "type": "blog",
       "created_at": "2025-06-03 01:50:43"
-    },
-    {
-      "id": "9244d7d2f5330568f106ca1532cf2b93",
-      "title": "Global news partnerships: Le Monde and Prisa Media",
-      "description": "We have partnered with international news organizations Le Monde and Prisa Media to bring French and Spanish news content to ChatGPT.",
-      "link": "https://openai.com/index/global-news-partnerships-le-monde-and-prisa-media",
-      "date": "Wed, 13 Mar 2024 07:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:43"
-    },
-    {
-      "id": "05ea1f7ecadad40bd18a9899f98b9463",
-      "title": "OpenAI Scholars 2019: Meet our Scholars",
-      "description": "Our class of eight scholars (out of 550 applicants) brings together collective expertise in literature, philosophy, cell biology, statistics, economics, quantum physics, and business innovation.",
-      "link": "https://openai.com/index/openai-scholars-2019-meet-our-scholars",
-      "date": "Wed, 13 Mar 2019 07:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:44"
-    },
-    {
-      "id": "8b64d8d168702e6fa506a93bba93dc65",
-      "title": "Online math tutoring service uses AI to help boost students’ skills and confidence",
-      "description": "The post Online math tutoring service uses AI to help boost students’ skills and confidence appeared first on The AI Blog.",
-      "link": "https://blogs.microsoft.com/ai/eedi-online-math-quiz/",
-      "date": "Wed, 13 Jul 2022 12:59:50 +0000",
-      "company": "microsoft",
-      "source": "Microsoft AI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:45"
     }
   ],
   "stats": {
-    "total": 1604,
-    "anthropic": 74,
+    "total": 1609,
+    "anthropic": 76,
     "arxiv": 293,
-    "aws": 69,
+    "aws": 70,
     "deepmind": 33,
     "google": 142,
     "meta": 155,
     "microsoft": 26,
-    "openai": 812
+    "openai": 814
   },
-  "lastUpdated": "2025-06-18T16:13:02.092Z"
+  "lastUpdated": "2025-06-18T20:12:58.803Z"
 }
