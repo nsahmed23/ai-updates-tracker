@@ -617,6 +617,17 @@
       "created_at": "2025-06-03 01:50:42"
     },
     {
+      "id": "20bf714bdbef2308e127b64ebeec5a65",
+      "title": "Sam & Jony",
+      "description": "Sam & Jony",
+      "link": "https://openai.com/sam-and-jony",
+      "date": "Wed, 21 May 2025 00:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-06-22 22:22:22"
+    },
+    {
       "id": "3ecaceda886630cabf0bd13ac446f1bf",
       "title": "Sam & Jony introduce io",
       "description": "Building a family of AI products for everyone.",
@@ -1088,29 +1099,18 @@
       "source": "OpenAI",
       "type": "blog",
       "created_at": "2025-06-03 01:50:42"
-    },
-    {
-      "id": "79748e849f9844fbf2becb0ec4ff1229",
-      "title": "Saving lives with AI health coaching",
-      "description": "Healthify collaborates with OpenAI to improve millions of lives with sustainable weight loss.",
-      "link": "https://openai.com/index/healthify",
-      "date": "Wed, 13 Mar 2024 07:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:43"
     }
   ],
   "stats": {
-    "total": 1645,
+    "total": 1647,
     "anthropic": 77,
-    "arxiv": 312,
+    "arxiv": 313,
     "aws": 74,
     "deepmind": 33,
     "google": 142,
     "meta": 159,
     "microsoft": 26,
-    "openai": 822
+    "openai": 823
   },
-  "lastUpdated": "2025-06-22T20:10:52.020Z"
+  "lastUpdated": "2025-06-23T00:50:51.627Z"
 }
