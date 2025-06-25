@@ -397,6 +397,39 @@
       "created_at": "2025-06-03 01:50:45"
     },
     {
+      "id": "f1ccac7913ebc06ae2441a17468b12a3",
+      "title": "Build an intelligent multi-agent business expert using Amazon Bedrock",
+      "description": "In this post, we demonstrate how to build a multi-agent system using multi-agent collaboration in Amazon Bedrock Agents to solve complex business questions in the biopharmaceutical industry. We show how specialized agents in research and development (R&D), legal, and finance domains can work together to provide comprehensive business insights by analyzing data from multiple sources.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/build-an-intelligent-multi-agent-business-expert-using-amazon-bedrock/",
+      "date": "Wed, 25 Jun 2025 16:53:54 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-06-25 18:35:58"
+    },
+    {
+      "id": "3935247ee9ab3b5ca32ef81e3f8c40a9",
+      "title": "Driving cost-efficiency and speed in claims data processing with Amazon Nova Micro and Amazon Nova Lite",
+      "description": "In this post, we shared how an internal technology team at Amazon evaluated Amazon Nova models, resulting in notable improvements in inference speed and cost-efficiency.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/driving-cost-efficiency-and-speed-in-claims-data-processing-with-amazon-nova-micro-and-amazon-nova-lite/",
+      "date": "Wed, 25 Jun 2025 16:50:00 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-06-25 18:35:58"
+    },
+    {
+      "id": "39719050b90840641f857886574e4340",
+      "title": "MUVERA: Making multi-vector retrieval as fast as single-vector search",
+      "description": "Algorithms & Theory",
+      "link": "https://research.google/blog/muvera-making-multi-vector-retrieval-as-fast-as-single-vector-search/",
+      "date": "Wed, 25 Jun 2025 13:22:00 +0000",
+      "company": "google",
+      "source": "Google Research",
+      "type": "blog",
+      "created_at": "2025-06-25 18:35:58"
+    },
+    {
       "id": "0509d69412f8bdf67d1b5f55bb4a3953",
       "title": "OpenAI Scholars 2018: Meet our Scholars",
       "description": "Our first class of OpenAI Scholars is underway, and you can now follow along as this group of experienced software developers becomes machine learning practitioners.",
@@ -1066,51 +1099,18 @@
       "source": "Google Research",
       "type": "blog",
       "created_at": "2025-05-30 01:07:03"
-    },
-    {
-      "id": "33079585600fd36fa529fc133835f722",
-      "title": "Mapping the ionosphere with the power of Android",
-      "description": "Data Mining & Modeling",
-      "link": "https://research.google/blog/mapping-the-ionosphere-with-the-power-of-android/",
-      "date": "Wed, 13 Nov 2024 14:04:00 +0000",
-      "company": "google",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-05-30 01:07:03"
-    },
-    {
-      "id": "a9dedff45be5308e9bba03d6f02227ba",
-      "title": "A Student’s Guide to Writing with ChatGPT",
-      "description": "A Student’s Guide to Writing with ChatGPT",
-      "link": "https://openai.com/chatgpt/use-cases/student-writing-guide",
-      "date": "Wed, 13 Nov 2024 10:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:42"
-    },
-    {
-      "id": "733cf7617609abe6de9e8846767c6f6e",
-      "title": "Data-driven beauty and creativity with ChatGPT",
-      "description": "Data-driven beauty: How The Estée Lauder Companies unlocks insights with ChatGPT",
-      "link": "https://openai.com/index/estee-lauder",
-      "date": "Wed, 13 Nov 2024 00:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:42"
     }
   ],
   "stats": {
-    "total": 1769,
-    "anthropic": 83,
+    "total": 1774,
+    "anthropic": 85,
     "arxiv": 356,
-    "aws": 80,
+    "aws": 82,
     "deepmind": 35,
-    "google": 147,
+    "google": 148,
     "meta": 181,
     "microsoft": 26,
     "openai": 861
   },
-  "lastUpdated": "2025-06-25T16:13:52.700Z"
+  "lastUpdated": "2025-06-25T20:12:34.105Z"
 }
