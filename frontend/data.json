@@ -1102,15 +1102,15 @@
     }
   ],
   "stats": {
-    "total": 1974,
+    "total": 1977,
     "anthropic": 93,
     "arxiv": 430,
     "aws": 97,
     "deepmind": 36,
     "google": 151,
-    "meta": 211,
+    "meta": 212,
     "microsoft": 26,
-    "openai": 930
+    "openai": 932
   },
-  "lastUpdated": "2025-07-03T20:10:27.478Z"
+  "lastUpdated": "2025-07-04T00:46:07.082Z"
 }
