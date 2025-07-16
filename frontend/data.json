@@ -947,6 +947,17 @@
       "created_at": "2025-06-03 01:50:44"
     },
     {
+      "id": "79c3643f10c14d615b57e252a5b0ff9e",
+      "title": "Deploy conversational agents with Vonage and Amazon Nova Sonic",
+      "description": "In this post, we explore how developers can integrate Amazon Nova Sonic with the Vonage communications service to build responsive, natural-sounding voice experiences in real time. By combining the Vonage Voice API with the low-latency and expressive speech capabilities of Amazon Nova Sonic, businesses can deploy AI voice agents that deliver more human-like interactions than traditional voice interfaces. These agents can be used as customer support, virtual assistants, and more.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/deploy-conversational-agents-with-vonage-and-amazon-nova-sonic/",
+      "date": "Wed, 16 Jul 2025 18:29:11 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-07-16 18:36:49"
+    },
+    {
       "id": "f752db198c349b7c5e10ba225ab0c5b0",
       "title": "Enabling customers to deliver production-ready AI agents at scale",
       "description": "Today, I’m excited to share how we’re bringing this vision to life with new capabilities that address the fundamental aspects of building and deploying agents at scale. These innovations will help you move beyond experiments to production-ready agent systems that can be trusted with your most critical business processes.",
@@ -955,7 +966,7 @@
       "company": "aws",
       "source": "AWS Machine Learning",
       "type": "blog",
-      "created_at": "2025-07-16 16:12:51"
+      "created_at": "2025-07-16 16:33:49"
     },
     {
       "id": "0be526fda33413e06f789689787a1dfa",
@@ -1088,29 +1099,18 @@
       "source": "OpenAI",
       "type": "blog",
       "created_at": "2025-06-03 01:50:43"
-    },
-    {
-      "id": "9494fb4e948f268cf09d46957ec4af04",
-      "title": "Learning with opponent-learning awareness",
-      "description": "",
-      "link": "https://openai.com/index/learning-with-opponent-learning-awareness",
-      "date": "Wed, 13 Sep 2017 07:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:44"
     }
   ],
   "stats": {
-    "total": 2318,
+    "total": 2319,
     "anthropic": 115,
     "arxiv": 570,
-    "aws": 143,
+    "aws": 144,
     "deepmind": 37,
     "google": 153,
     "meta": 250,
     "microsoft": 26,
     "openai": 1024
   },
-  "lastUpdated": "2025-07-16T16:13:46.990Z"
+  "lastUpdated": "2025-07-16T20:12:35.527Z"
 }
