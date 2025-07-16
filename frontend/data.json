@@ -947,6 +947,17 @@
       "created_at": "2025-06-03 01:50:44"
     },
     {
+      "id": "f752db198c349b7c5e10ba225ab0c5b0",
+      "title": "Enabling customers to deliver production-ready AI agents at scale",
+      "description": "Today, I’m excited to share how we’re bringing this vision to life with new capabilities that address the fundamental aspects of building and deploying agents at scale. These innovations will help you move beyond experiments to production-ready agent systems that can be trusted with your most critical business processes.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/enabling-customers-to-deliver-production-ready-ai-agents-at-scale/",
+      "date": "Wed, 16 Jul 2025 15:04:04 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-07-16 16:12:51"
+    },
+    {
       "id": "0be526fda33413e06f789689787a1dfa",
       "title": "OpenAI acquires Global Illumination",
       "description": "The entire team has joined OpenAI.",
@@ -1088,29 +1099,18 @@
       "source": "OpenAI",
       "type": "blog",
       "created_at": "2025-06-03 01:50:44"
-    },
-    {
-      "id": "7d2a568bfced53c6abf4ceab9791dc68",
-      "title": "Can algorithms make tournament cheating obsolete?",
-      "description": "Algorithms & Theory",
-      "link": "https://research.google/blog/can-algorithms-make-sports-tournament-cheating-obsolete/",
-      "date": "Wed, 13 Nov 2024 14:55:00 +0000",
-      "company": "google",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-05-30 01:07:03"
     }
   ],
   "stats": {
-    "total": 2317,
+    "total": 2318,
     "anthropic": 115,
     "arxiv": 570,
-    "aws": 142,
+    "aws": 143,
     "deepmind": 37,
     "google": 153,
     "meta": 250,
     "microsoft": 26,
     "openai": 1024
   },
-  "lastUpdated": "2025-07-16T12:20:14.175Z"
+  "lastUpdated": "2025-07-16T16:13:46.990Z"
 }
