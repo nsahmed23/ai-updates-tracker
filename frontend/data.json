@@ -947,6 +947,17 @@
       "created_at": "2025-06-03 01:50:44"
     },
     {
+      "id": "22a5962b7ca167326ca95a353dc1a431",
+      "title": "Accenture scales video analysis with Amazon Nova and Amazon Bedrock Agents",
+      "description": "This post was written with Ilan Geller, Kamal Mannar, Debasmita Ghosh, and Nakul Aggarwal of Accenture. Video highlights offer a powerful way to boost audience engagement and extend content value for content publishers. These short, high-impact clips capture key moments that drive viewer retention, amplify reach across social media, reinforce brand identity, and open new […]",
+      "link": "https://aws.amazon.com/blogs/machine-learning/accenture-scales-video-analysis-with-amazon-nova-and-amazon-bedrock-agents/",
+      "date": "Wed, 16 Jul 2025 22:32:42 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-07-17 00:48:47"
+    },
+    {
       "id": "79c3643f10c14d615b57e252a5b0ff9e",
       "title": "Deploy conversational agents with Vonage and Amazon Nova Sonic",
       "description": "In this post, we explore how developers can integrate Amazon Nova Sonic with the Vonage communications service to build responsive, natural-sounding voice experiences in real time. By combining the Vonage Voice API with the low-latency and expressive speech capabilities of Amazon Nova Sonic, businesses can deploy AI voice agents that deliver more human-like interactions than traditional voice interfaces. These agents can be used as customer support, virtual assistants, and more.",
@@ -1088,29 +1099,18 @@
       "source": "OpenAI",
       "type": "blog",
       "created_at": "2025-06-03 01:50:43"
-    },
-    {
-      "id": "8691b473c5061cdec4cb55e5abbd9e5c",
-      "title": "Introducing OpenAI Dublin",
-      "description": "We’re growing our presence in Europe with an office in Dublin, Ireland.",
-      "link": "https://openai.com/index/introducing-openai-dublin",
-      "date": "Wed, 13 Sep 2023 07:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:43"
     }
   ],
   "stats": {
-    "total": 2319,
+    "total": 2321,
     "anthropic": 115,
-    "arxiv": 570,
-    "aws": 144,
+    "arxiv": 571,
+    "aws": 145,
     "deepmind": 37,
     "google": 153,
     "meta": 250,
     "microsoft": 26,
     "openai": 1024
   },
-  "lastUpdated": "2025-07-16T20:12:35.527Z"
+  "lastUpdated": "2025-07-17T00:49:44.976Z"
 }
