@@ -529,6 +529,50 @@
       "created_at": "2025-06-03 01:50:42"
     },
     {
+      "id": "7ab01d284759b5f783d4a99769035064",
+      "title": "Customize Amazon Nova in Amazon SageMaker AI using Direct Preference Optimization",
+      "description": "At the AWS Summit in New York City, we introduced a comprehensive suite of model customization capabilities for Amazon Nova foundation models. Available as ready-to-use recipes on Amazon SageMaker AI, you can use them to adapt Nova Micro, Nova Lite, and Nova Pro across the model training lifecycle, including pre-training, supervised fine-tuning, and alignment. In this post, we present a streamlined approach to customize Nova Micro in SageMaker training jobs.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/customize-amazon-nova-in-amazon-sagemaker-ai-using-direct-preference-optimization/",
+      "date": "Wed, 23 Jul 2025 19:08:16 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-07-23 20:11:45"
+    },
+    {
+      "id": "e1c247c03e8a963ee0d0bc86a51f0df3",
+      "title": "Multi-tenant RAG implementation with Amazon Bedrock and Amazon OpenSearch Service for SaaS using JWT",
+      "description": "In this post, we introduce a solution that uses OpenSearch Service as a vector data store in multi-tenant RAG, achieving data isolation and routing using JWT and FGAC. This solution uses a combination of JWT and FGAC to implement strict tenant data access isolation and routing, necessitating the use of OpenSearch Service.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/multi-tenant-rag-implementation-with-amazon-bedrock-and-amazon-opensearch-service-for-saas-using-jwt/",
+      "date": "Wed, 23 Jul 2025 16:44:31 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-07-23 18:37:18"
+    },
+    {
+      "id": "1c26bb45d57f8922ca5857e73053fb16",
+      "title": "Enhance generative AI solutions using Amazon Q index with Model Context Protocol – Part 1",
+      "description": "In this post, we explore best practices and integration patterns for combining Amazon Q index and MCP, enabling enterprises to build secure, scalable, and actionable AI search-and-retrieval architectures.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/enhance-generative-ai-solutions-using-amazon-q-index-with-model-context-protocol-part-1/",
+      "date": "Wed, 23 Jul 2025 16:40:40 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-07-23 18:37:18"
+    },
+    {
+      "id": "7b9439c44383124a4d2b2f9a38771596",
+      "title": "Announcing OpenAI DevDay 2025",
+      "description": "OpenAI DevDay returns on October 6, 2025 in San Francisco—bringing together 1,500+ developers to preview new tools, hear from OpenAI leaders, and shape the future of AI.",
+      "link": "https://openai.com/index/announcing-devday-2025",
+      "date": "Wed, 23 Jul 2025 00:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-07-23 18:37:18"
+    },
+    {
       "id": "78f1e588b28742b6641ca775e52097b4",
       "title": "Introducing Mobility AI: Advancing urban transportation",
       "description": "Algorithms & Theory",
@@ -1055,62 +1099,18 @@
       "source": "OpenAI",
       "type": "blog",
       "created_at": "2025-06-03 01:50:42"
-    },
-    {
-      "id": "4c4020667bcf8d58ef7a13f8af5f578a",
-      "title": "Deeper insights into retrieval augmented generation: The role of sufficient context",
-      "description": "Data Mining & Modeling",
-      "link": "https://research.google/blog/deeper-insights-into-retrieval-augmented-generation-the-role-of-sufficient-context/",
-      "date": "Wed, 14 May 2025 13:23:00 +0000",
-      "company": "google",
-      "source": "Google Research",
-      "type": "blog",
-      "created_at": "2025-05-30 01:07:03"
-    },
-    {
-      "id": "9df247e1b3b6a5afddb6d4c6778e9071",
-      "title": "AI powers Expedia’s marketing evolution",
-      "description": "A conversation with Jochen Koedijk, Chief Marketing Officer of Expedia Group.",
-      "link": "https://openai.com/index/expedia-jochen-koedijk",
-      "date": "Wed, 14 May 2025 10:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:42"
-    },
-    {
-      "id": "d7f308119ee1dba074d555a44f2b0661",
-      "title": "Disrupting malicious uses of AI by state-affiliated threat actors",
-      "description": "We terminated accounts associated with state-affiliated threat actors. Our findings show our models offer only limited, incremental capabilities for malicious cybersecurity tasks.",
-      "link": "https://openai.com/index/disrupting-malicious-uses-of-ai-by-state-affiliated-threat-actors",
-      "date": "Wed, 14 Feb 2024 08:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:43"
-    },
-    {
-      "id": "5082de7457bd62458540e98497b2013a",
-      "title": "Awakening Sleeping Beauties at The Met",
-      "description": "AI can enrich lives through beauty and creativity, and its artistic potential shines in \"Sleeping Beauties: Reawakening Fashion,\" a collaborative exhibit from The Met's Costume Institute.",
-      "link": "https://openai.com/index/the-met-museum",
-      "date": "Wed, 14 Aug 2024 10:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:43"
     }
   ],
   "stats": {
-    "total": 2505,
-    "anthropic": 131,
+    "total": 2511,
+    "anthropic": 133,
     "arxiv": 648,
-    "aws": 157,
+    "aws": 160,
     "deepmind": 39,
     "google": 156,
     "meta": 278,
     "microsoft": 26,
-    "openai": 1070
+    "openai": 1071
   },
-  "lastUpdated": "2025-07-23T16:14:13.617Z"
+  "lastUpdated": "2025-07-23T20:12:41.460Z"
 }
