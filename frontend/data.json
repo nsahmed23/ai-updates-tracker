@@ -562,6 +562,17 @@
       "created_at": "2025-07-23 18:37:18"
     },
     {
+      "id": "8f522e406cfec7598afd7fc4b7396183",
+      "title": "Model ML is helping financial firms rebuild with AI from the ground up",
+      "description": "As part of our Executive Function series, Model ML CEO Chaz Englander discusses how AI-native infrastructure and autonomous agents are transforming financial services workflows.",
+      "link": "https://openai.com/index/model-ml-chaz-englander",
+      "date": "Wed, 23 Jul 2025 00:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-07-24 04:30:47"
+    },
+    {
       "id": "7b9439c44383124a4d2b2f9a38771596",
       "title": "Announcing OpenAI DevDay 2025",
       "description": "OpenAI DevDay returns on October 6, 2025 in San Francisco—bringing together 1,500+ developers to preview new tools, hear from OpenAI leaders, and shape the future of AI.",
@@ -1088,29 +1099,18 @@
       "source": "OpenAI",
       "type": "blog",
       "created_at": "2025-06-03 01:50:44"
-    },
-    {
-      "id": "f48dae46279f0c6cc73299c2cc1287e8",
-      "title": "Partnering with Axios expands OpenAI’s work with the news industry",
-      "description": "Publishers representing hundreds of newsrooms and content brands are using OpenAI partnerships and grant programs to adopt AI tools and strengthen the news ecosystem, while ChatGPT users gain access to information from leading, reliable publications.",
-      "link": "https://openai.com/index/partnering-with-axios-expands-openai-work-with-the-news-industry",
-      "date": "Wed, 15 Jan 2025 03:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:42"
     }
   ],
   "stats": {
-    "total": 2514,
+    "total": 2542,
     "anthropic": 133,
-    "arxiv": 650,
+    "arxiv": 664,
     "aws": 160,
     "deepmind": 40,
     "google": 156,
-    "meta": 278,
+    "meta": 283,
     "microsoft": 26,
-    "openai": 1071
+    "openai": 1080
   },
-  "lastUpdated": "2025-07-24T00:49:55.569Z"
+  "lastUpdated": "2025-07-24T04:31:43.830Z"
 }
