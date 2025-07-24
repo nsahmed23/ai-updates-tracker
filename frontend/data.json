@@ -537,7 +537,7 @@
       "company": "aws",
       "source": "AWS Machine Learning",
       "type": "blog",
-      "created_at": "2025-07-23 20:11:45"
+      "created_at": "2025-07-23 20:29:23"
     },
     {
       "id": "e1c247c03e8a963ee0d0bc86a51f0df3",
@@ -1102,15 +1102,15 @@
     }
   ],
   "stats": {
-    "total": 2511,
+    "total": 2514,
     "anthropic": 133,
-    "arxiv": 648,
+    "arxiv": 650,
     "aws": 160,
-    "deepmind": 39,
+    "deepmind": 40,
     "google": 156,
     "meta": 278,
     "microsoft": 26,
     "openai": 1071
   },
-  "lastUpdated": "2025-07-23T20:12:41.460Z"
+  "lastUpdated": "2025-07-24T00:49:55.569Z"
 }
