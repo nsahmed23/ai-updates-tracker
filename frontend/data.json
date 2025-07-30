@@ -89,6 +89,28 @@
       "created_at": "2025-06-03 01:50:44"
     },
     {
+      "id": "956f753e28ed1c75c3fd4093912fa00d",
+      "title": "Automate the creation of handout notes using Amazon Bedrock Data Automation",
+      "description": "In this post, we show how you can build an automated, serverless solution to transform webinar recordings into comprehensive handouts using Amazon Bedrock Data Automation for video analysis. We walk you through the implementation of Amazon Bedrock Data Automation to transcribe and detect slide changes, as well as the use of Amazon Bedrock foundation models (FMs) for transcription refinement, combined with custom AWS Lambda functions orchestrated by AWS Step Functions.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/automate-the-creation-of-handout-notes-using-amazon-bedrock-data-automation/",
+      "date": "Wed, 30 Jul 2025 16:22:27 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-07-30 16:32:22"
+    },
+    {
+      "id": "a05c50ac0fc976b4ffd7e5b5e3f64e7e",
+      "title": "Streamline GitHub workflows with generative AI using Amazon Bedrock and MCP",
+      "description": "This blog post explores how to create powerful agentic applications using the Amazon Bedrock FMs, LangGraph, and the Model Context Protocol (MCP), with a practical scenario of handling a GitHub workflow of issue analysis, code fixes, and pull request generation.",
+      "link": "https://aws.amazon.com/blogs/machine-learning/streamline-github-workflows-with-generative-ai-using-amazon-bedrock-and-mcp/",
+      "date": "Wed, 30 Jul 2025 16:16:30 +0000",
+      "company": "aws",
+      "source": "AWS Machine Learning",
+      "type": "blog",
+      "created_at": "2025-07-30 16:32:22"
+    },
+    {
       "id": "c12b33dc93cc0439463876826c801775",
       "title": "Benchmarking LLMs for global health",
       "description": "Generative AI",
@@ -1077,40 +1099,18 @@
       "source": "OpenAI",
       "type": "blog",
       "created_at": "2025-06-03 01:50:42"
-    },
-    {
-      "id": "7a5a8bcf66edabd8ee4faa3bd4393e07",
-      "title": "OpenAI o3 and o4-mini System Card",
-      "description": "OpenAI o3 and OpenAI o4-mini combine state-of-the-art reasoning with full tool capabilities—web browsing, Python, image and file analysis, image generation, canvas, automations, file search, and memory.",
-      "link": "https://openai.com/index/o3-o4-mini-system-card",
-      "date": "Wed, 16 Apr 2025 10:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:42"
-    },
-    {
-      "id": "80efa388a1c4470b40ec86c0526c6229",
-      "title": "Emergence of grounded compositional language in multi-agent populations",
-      "description": "",
-      "link": "https://openai.com/index/emergence-of-grounded-compositional-language-in-multi-agent-populations",
-      "date": "Wed, 15 Mar 2017 07:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:44"
     }
   ],
   "stats": {
-    "total": 2690,
-    "anthropic": 143,
+    "total": 2694,
+    "anthropic": 145,
     "arxiv": 723,
-    "aws": 172,
+    "aws": 174,
     "deepmind": 41,
     "google": 158,
     "meta": 305,
     "microsoft": 26,
     "openai": 1122
   },
-  "lastUpdated": "2025-07-30T16:14:12.231Z"
+  "lastUpdated": "2025-07-30T20:11:31.055Z"
 }
