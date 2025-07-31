@@ -111,6 +111,17 @@
       "created_at": "2025-07-30 16:32:22"
     },
     {
+      "id": "ea1b955d08213841e244ad646a6779a6",
+      "title": "Three lessons for creating a sustainable AI advantage",
+      "description": "Discover how Intercom built a scalable AI platform with 3 key lessons—from evaluations to architecture—to lead the future of customer support.",
+      "link": "https://openai.com/index/intercom",
+      "date": "Wed, 30 Jul 2025 00:00:00 GMT",
+      "company": "openai",
+      "source": "OpenAI",
+      "type": "blog",
+      "created_at": "2025-07-30 22:25:53"
+    },
+    {
       "id": "c12b33dc93cc0439463876826c801775",
       "title": "Benchmarking LLMs for global health",
       "description": "Generative AI",
@@ -1088,29 +1099,18 @@
       "source": "OpenAI",
       "type": "blog",
       "created_at": "2025-06-03 01:50:42"
-    },
-    {
-      "id": "ff131a0cb2c988b80e2feb85c7334527",
-      "title": "Introducing OpenAI o3 and o4-mini",
-      "description": "Our smartest and most capable models to date with full tool access",
-      "link": "https://openai.com/index/introducing-o3-and-o4-mini",
-      "date": "Wed, 16 Apr 2025 10:00:00 GMT",
-      "company": "openai",
-      "source": "OpenAI",
-      "type": "blog",
-      "created_at": "2025-06-03 01:50:42"
     }
   ],
   "stats": {
-    "total": 2694,
+    "total": 2698,
     "anthropic": 145,
-    "arxiv": 723,
+    "arxiv": 725,
     "aws": 174,
     "deepmind": 41,
     "google": 158,
     "meta": 305,
     "microsoft": 26,
-    "openai": 1122
+    "openai": 1124
   },
-  "lastUpdated": "2025-07-30T20:11:31.055Z"
+  "lastUpdated": "2025-07-31T00:51:14.356Z"
 }
